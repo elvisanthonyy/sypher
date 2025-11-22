@@ -5,7 +5,7 @@ import { Product } from "@/models/product";
 
 //getting one product
 const handler = async (
-  req: NextApiRequest,
+  req: Request,
   { params }: { params: { productId: string } }
 ) => {
   await dbConnect();

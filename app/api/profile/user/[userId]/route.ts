@@ -1,11 +1,10 @@
 import { NextResponse } from "next/server";
 import dbConnect from "@/libs/dbConnect";
 import { User } from "@/models/user";
-import { NextApiRequest } from "next";
 
 //get user for profile
 const handler = async (
-  req: NextApiRequest,
+  req: Request,
   {
     params,
   }: {
