@@ -11,8 +11,9 @@ const handler = async (
     params: { userId: string };
   }
 ) => {
-  await dbConnect();
   const { userId } = params;
+  await dbConnect();
+
   console.log("param", userId);
   try {
     const user = await User.findById(userId).select("-password");

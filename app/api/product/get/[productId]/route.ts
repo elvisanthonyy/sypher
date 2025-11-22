@@ -7,8 +7,9 @@ const handler = async (
   req: Request,
   { params }: { params: { productId: string } }
 ) => {
-  await dbConnect();
   const { productId } = params;
+  await dbConnect();
+
   console.log(productId);
   try {
     const product = await Product.findById(productId);
