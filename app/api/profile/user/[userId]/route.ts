@@ -5,11 +5,7 @@ import { User } from "@/models/user";
 //get user for profile
 const handler = async (
   req: Request,
-  {
-    params,
-  }: {
-    params: { userId: string };
-  }
+  { params }: { params: { userId: string } }
 ) => {
   const { userId } = params;
   await dbConnect();
