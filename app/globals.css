@@ -10,6 +10,11 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-sypher-light-compGray: #fff;
+  --color-sypher-light-border: #d4d4d4;
+  --color-sypher-light-darkBorder: #727272;
+  --color-sypher-navGray: #ececec;
+  --color-sypher-light-text: #313131;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,8 +24,39 @@
   }
 }
 
+@utility scrollbar {
+  scrollbar-width: thin;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: rgb(255, 255, 255);
+  color: black;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.helper {
+  color: #727272;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  height: 20px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: gray;
+  border-radius: 60px;
+  height: 5px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+.custom-scrollbar::-webkit-scrollbar-button {
+  position: relative;
+  display: block;
+  width: 4px;
+  height: px;
 }

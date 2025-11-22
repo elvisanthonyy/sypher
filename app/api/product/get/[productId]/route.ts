@@ -1,0 +1,33 @@
+import { NextResponse } from "next/server";
+import { NextApiRequest } from "next";
+import dbConnect from "@/libs/dbConnect";
+import { Product } from "@/models/product";
+
+//getting one product
+const handler = async (
+  req: NextApiRequest,
+  { params }: { params: { productId: string } }
+) => {
+  await dbConnect();
+  const { productId } = await params;
+  console.log(productId);
+  try {
+    const product = await Product.findById(productId);
+    if (!product) {
+      return NextResponse.json({
+        status: "error",
+        message: "product not found",
+      });
+    }
+
+    return NextResponse.json({ status: "okay", product });
+  } catch (error) {
+    console.error("error", error);
+    return NextResponse.json({
+      status: "error",
+      message: "something went wrong",
+    });
+  }
+};
+
+export { handler as GET };
