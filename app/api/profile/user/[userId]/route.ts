@@ -12,7 +12,7 @@ const handler = async (
   }
 ) => {
   await dbConnect();
-  const { userId } = await params;
+  const { userId } = params;
   console.log("param", userId);
   try {
     const user = await User.findById(userId).select("-password");

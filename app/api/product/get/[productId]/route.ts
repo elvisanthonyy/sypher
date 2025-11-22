@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { NextApiRequest } from "next";
 import dbConnect from "@/libs/dbConnect";
 import { Product } from "@/models/product";
 
@@ -9,7 +8,7 @@ const handler = async (
   { params }: { params: { productId: string } }
 ) => {
   await dbConnect();
-  const { productId } = await params;
+  const { productId } = params;
   console.log(productId);
   try {
     const product = await Product.findById(productId);
