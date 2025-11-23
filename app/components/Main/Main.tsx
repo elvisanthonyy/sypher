@@ -107,6 +107,25 @@ const Main = ({ session, products }: ChildProps) => {
             </div>
           ))}
       </div>
+      <div className="flex custom-scrollbar my-3  custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
+        {products
+          ?.filter((product: IProduct) =>
+            product.name.toLowerCase().includes("mac")
+          )
+          .map((product: IProduct, index) => (
+            <div
+              key={product._id}
+              className={`flex mx-1 ${
+                product.price >= mainRange.start &&
+                product.price <= mainRange.end
+                  ? "flex"
+                  : "hidden"
+              }`}
+            >
+              <ProductComponent mainRange={mainRange} product={product} />
+            </div>
+          ))}
+      </div>
       {acceptCookiesModal && (
         <div className="fixed flex-col justify-center items-center left-[50%] -translate-x-[50%] bottom-4 flex w-[90%] h-30 rounded-2xl bg-black">
           <div className="text-white">Do you want to accept cookies?</div>

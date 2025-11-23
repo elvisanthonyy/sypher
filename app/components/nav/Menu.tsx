@@ -72,6 +72,11 @@ const Menu = ({ name, userId }: ChildProps) => {
               <RiAdminLine className="mr-5" /> My Products
             </div>
           </Link>
+          <Link className={`w-full flex`} href={`/product/upload`}>
+            <div className="w-full shrink-0 py-8 h-10 flex items-center">
+              <RiAdminLine className="mr-5" /> Upload Product
+            </div>
+          </Link>
 
           <div
             onClick={() => signOut()}

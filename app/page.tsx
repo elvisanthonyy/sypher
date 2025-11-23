@@ -4,6 +4,7 @@ import { Session } from "next-auth";
 import Main from "./components/Main/Main";
 import Nav from "./components/nav/Nav";
 import dbConnect from "@/libs/dbConnect";
+import { car }
 
 const baseURL = process.env.BASE_URL;
 
