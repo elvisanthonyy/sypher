@@ -31,7 +31,7 @@ const ProfileMain = ({ user }: ChildProps) => {
       <ProfileItemComponent
         title="Date of birth"
         type="date"
-        bodyDate={user?.dateOfBirth.toString().split("T")[0]}
+        bodyDate={user?.dateOfBirth?.toString().split("T")[0]}
       />
       <button
         onClick={() => router.push(`/profile/${user?.name}/edit`)}

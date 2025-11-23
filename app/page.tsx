@@ -3,10 +3,12 @@ import { authOptions } from "./api/auth/[...nextauth]/route";
 import { Session } from "next-auth";
 import Main from "./components/Main/Main";
 import Nav from "./components/nav/Nav";
+import dbConnect from "@/libs/dbConnect";
 
 const baseURL = process.env.BASE_URL;
 
 export default async function Home() {
+  await dbConnect();
   const session: Session | null = await getServerSession(authOptions);
   //api call to get products
   const res = await fetch(`${baseURL}/api/product/get`);
