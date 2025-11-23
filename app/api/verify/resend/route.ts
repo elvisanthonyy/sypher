@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import dbConnect from "@/libs/dbConnect";
 import { User } from "@/models/user";
 import { generateOTP } from "@/libs/generateOTP";
+import { sendOTP } from "@/libs/sendOtp";
 
 interface ReqBody {
   email: string;
@@ -29,6 +30,7 @@ const handler = async (req: Request) => {
     user.otpExpires = Date.now() + 5 * 60 * 1000;
 
     await user.save();
+    await sendOTP(email, otp);
     return NextResponse.json({ status: "okay", message: "otp has been sent" });
   } catch (error) {
     return NextResponse.json({
