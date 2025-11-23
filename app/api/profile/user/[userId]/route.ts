@@ -5,9 +5,9 @@ import { User } from "@/models/user";
 //get user for profile
 const handler = async (
   req: Request,
-  { params }: { params: { userId: string } }
+  { params }: { params: Promise<{ userId: string }> }
 ) => {
-  const { userId } = params;
+  const { userId } = await params;
   await dbConnect();
 
   console.log("param", userId);

@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useProductContext } from "@/app/one/product/ProductContext";
+import { useProductContext } from "@/app/context/ProductContext";
 import { useCart } from "@/app/context/CartContext";
 
 // component to display product when clicked

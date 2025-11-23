@@ -5,12 +5,12 @@ import { Product } from "@/models/product";
 //getting one product
 const handler = async (
   req: Request,
-  { params }: { params: { productId: string } }
+  context: { params: Promise<{ productId: string }> }
 ) => {
-  const { productId } = params;
+  const { productId } = await context.params;
+  console.log(productId);
   await dbConnect();
 
-  console.log(productId);
   try {
     const product = await Product.findById(productId);
     if (!product) {

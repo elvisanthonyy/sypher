@@ -1,7 +1,7 @@
 "use client";
 import OneProduct from "./OneProduct";
 import { CartItem } from "@/app/context/CartContext";
-import { useProductContext } from "@/app/one/product/ProductContext";
+import { useProductContext } from "@/app/context/ProductContext";
 import { useEffect, useState } from "react";
 import api from "@/libs/api";
 import { IProduct } from "@/models/product";
@@ -17,7 +17,7 @@ const ProductMain = ({ productProp }: ChildProps) => {
   const getSimilarProducts = () => {
     api
       .post("/api/product/similar", {
-        _id: productProp._id,
+        _id: productProp?._id,
         name: productProp?.name,
       })
       .then((res) => {

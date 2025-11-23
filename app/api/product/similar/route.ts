@@ -13,7 +13,7 @@ const handler = async (req: Request) => {
   try {
     const similarProducts = await Product.find({
       _id: { $ne: _id },
-      name: { $regex: name.split(" ")[0] },
+      name: { $regex: name?.split(" ")[0] },
     });
     console.log(similarProducts);
     return NextResponse.json({ status: "okay", similarProducts });
