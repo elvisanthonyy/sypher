@@ -10,6 +10,7 @@ export interface IOrder extends Document {
   location: string;
   price: number;
   qty: number;
+  createdAt: Date;
 }
 
 const OrderSchema = new mongoose.Schema<IOrder>(

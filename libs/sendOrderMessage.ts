@@ -1,11 +1,7 @@
 import nodemailer from "nodemailer";
 import { IOrder } from "@/models/order";
 
-interface OrderMesssage extends IOrder {
-  createdAt: string;
-}
-
-export async function sendOrderMessage(order: OrderMesssage) {
+export async function sendOrderMessage(order: IOrder) {
   try {
     const transporter = nodemailer.createTransport({
       service: "gmail",
