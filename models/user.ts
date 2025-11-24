@@ -5,8 +5,9 @@ export interface IItem extends Document {
   name: string;
   type: string;
   category: string;
-  price: string;
+  price: number;
   qty: number;
+  unitsAvailable: number;
 }
 
 export interface IUser extends Document {

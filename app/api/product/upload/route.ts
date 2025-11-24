@@ -11,8 +11,8 @@ const handler = async (req: Request) => {
   const name = formData.get("name");
   const type = formData.get("type");
   const category = formData.get("category");
-  const price = formData.get("price");
-  const unitsAvailable = formData.get("unitsAvailable");
+  const price = Number(formData.get("price"));
+  const unitsAvailable = Number(formData.get("unitsAvailable"));
 
   try {
     if (!file) {
@@ -42,7 +42,7 @@ const handler = async (req: Request) => {
       price,
       unitsAvailable,
       image: {
-        filename: filename,
+        filenamename: filename,
         url: `/product-images/${filename}`,
       },
     });
