@@ -2,7 +2,8 @@ import { NextResponse } from "next/server";
 import dbConnect from "@/libs/dbConnect";
 import { Product } from "@/models/product";
 import fs from "fs";
-import path from "path";
+import path, { resolve } from "path";
+import cloudinary from "@/libs/cloudinary";
 
 const handler = async (req: Request) => {
   await dbConnect();
@@ -14,27 +15,30 @@ const handler = async (req: Request) => {
   const price = Number(formData.get("price"));
   const unitsAvailable = Number(formData.get("unitsAvailable"));
 
+  if (!file) {
+    const newProduct = new Product({
+      name,
+      type,
+      category,
+      price,
+      unitsAvailable,
+    });
+    await newProduct.save();
+    return NextResponse.json({
+      status: "okay",
+      message: "product created successfully without image",
+    });
+  }
+
   try {
-    if (!file) {
-      const newProduct = new Product({
-        name,
-        type,
-        category,
-        price,
-        unitsAvailable,
-      });
-      await newProduct.save();
-      return NextResponse.json({
-        status: "okay",
-        message: "product created successfully without image",
-      });
-    }
-    const uploadDir = path.join(process.cwd(), "/public/product-images");
-    if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
     const buffer = Buffer.from(await file.arrayBuffer());
-    const filename = Date.now() + "_" + file.name;
-    console.log(filename);
-    fs.writeFileSync(path.join(uploadDir, filename), buffer);
+
+    const base64 = `data:${file.type};base64,${buffer.toString("base64")}`;
+    const result = await cloudinary.uploader.upload(base64, {
+      folder: "products",
+      upload_preset: process.env.CLOUD_PRESET,
+    });
+    console.log(process.env.CLOUD_PRESET);
     const newProduct = new Product({
       name,
       type,
@@ -42,8 +46,8 @@ const handler = async (req: Request) => {
       price,
       unitsAvailable,
       image: {
-        filenamename: filename,
-        url: `/product-images/${filename}`,
+        filename: file.name,
+        url: result.secure_url,
       },
     });
     await newProduct.save();
@@ -51,10 +55,11 @@ const handler = async (req: Request) => {
       status: "okay",
       message: "product created successfully",
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error("error", error);
+
     return NextResponse.json({
-      statut: "error",
+      error: error.message,
       message: "something went wrong",
     });
   }
