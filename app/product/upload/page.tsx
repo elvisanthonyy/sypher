@@ -1,7 +1,15 @@
 import ProductUploadMain from "@/app/components/productUpload/ProductUploadMain";
 import ProfileNav from "@/app/components/profile/ProfileNav";
+import { getSession } from "@/app/utils/getSession";
+import dbConnect from "@/libs/dbConnect";
+import { redirect } from "next/navigation";
 
-const page = () => {
+const page = async () => {
+  await dbConnect();
+  const session = await getSession();
+  if (!session || session?.user?.role === "user") {
+    redirect("/auth/admin/redirect");
+  }
   return (
     <div className="w-full h-dvh pt-25">
       <ProfileNav />

@@ -22,16 +22,18 @@ export interface IUser extends Document {
   password: string;
   role: string;
   address: string;
-  country: number;
+  countryCode: number;
   number: number;
   gender: string;
   verified: boolean;
   dateOfBirth: Date;
   otp: string;
   otpExpires: Date;
+  resetToken: string;
+  resetTokenExpiry: Date;
 }
 
-const UserSchema = new mongoose.Schema(
+const UserSchema = new mongoose.Schema<IUser>(
   {
     email: {
       type: String,
@@ -77,6 +79,12 @@ const UserSchema = new mongoose.Schema(
       type: String,
     },
     otpExpires: {
+      type: Date,
+    },
+    resetToken: {
+      type: String,
+    },
+    resetTokenExpiry: {
       type: Date,
     },
   },

@@ -1,7 +1,7 @@
 "use client";
 
 import { useForm, SubmitHandler } from "react-hook-form";
-import { IProduct } from "@/models/product";
+import { toast } from "react-toastify";
 import api from "@/libs/api";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -39,7 +39,14 @@ const ProductUploadMain = () => {
     }
     api
       .post("/api/product/upload", formData)
-      .then((res) => {})
+      .then((res) => {
+        if (res.data.status === "okay") {
+          toast.success(res.data.message, {
+            theme: "dark",
+            position: "top-center",
+          });
+        }
+      })
       .catch((error) => {
         console.error("error", error);
       });
@@ -47,14 +54,14 @@ const ProductUploadMain = () => {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} className="w-full px-5">
-        <div className="w-70 h-40 overflow-hidden shrink-0 flex mx-auto mb-4 bg-sypher-light-border">
+        <div className="w-full md:w-50 h-40 rounded-2xl overflow-hidden shrink-0 flex mx-auto mb-4 bg-sypher-light-border">
           {preview && <img src={preview} alt="prev img" className="w-full" />}
         </div>
         <input
           {...register("image")}
           onChange={handleChange}
           type="file"
-          className="border px-4 my-3 text-center w-full h-12 rounded-sm"
+          className="border px-4 my-3 text-center w-40 mx-auto h-12 rounded-sm"
         />
 
         <input
