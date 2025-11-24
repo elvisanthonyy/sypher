@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import dbConnect from "@/libs/dbConnect";
 import { Product } from "@/models/product";
-import multer from "multer";
 import fs from "fs";
 import path from "path";
 

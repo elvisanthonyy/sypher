@@ -18,12 +18,12 @@ const VerifyMain = ({ email }: ChildProps) => {
   const [resendCount, setResendCount] = useState(60);
   const countDown = () => {};
   const resendOtp = () => {
+    setResendCount(60);
     api
       .post("/api/verify/resend", { email })
       .then((res) => {
         if (res.data.status === "okay") {
           alert(res.data.message);
-          setResendCount(60);
         }
 
         countDown();

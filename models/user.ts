@@ -11,6 +11,7 @@ export interface IItem extends Document {
   unitsAvailable: number;
   image: {
     url: string;
+    filename: string;
   };
 }
 
