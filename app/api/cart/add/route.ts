@@ -44,14 +44,14 @@ const handler = async (req: Request) => {
       existingItem.qty += qty;
     } else {
       cart.items.push({
-        productId,
-        name,
-        type,
-        category,
-        price,
-        qty,
-        unitsAvailable,
-      });
+        productId: productId,
+        name: name,
+        type: type,
+        category: category,
+        price: price,
+        qty: qty,
+        unitsAvailable: unitsAvailable,
+      } as any);
     }
 
     await cart.save();

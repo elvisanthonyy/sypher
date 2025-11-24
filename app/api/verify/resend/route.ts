@@ -27,7 +27,7 @@ const handler = async (req: Request) => {
     const otp = generateOTP();
 
     user.otp = otp;
-    user.otpExpires = Date.now() + 5 * 60 * 1000;
+    user.otpExpires = new Date(Date.now() + 5 * 60 * 1000);
 
     await user.save();
     await sendOTP(email, otp);

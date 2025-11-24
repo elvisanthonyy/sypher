@@ -22,7 +22,7 @@ const handler = async (req: Request) => {
         message: "user already vefried",
       });
     }
-    if (Date.now() > user.otpExpires) {
+    if (new Date(Date.now()) > user.otpExpires) {
       return NextResponse.json({ status: "error", message: "otp expired" });
     }
 

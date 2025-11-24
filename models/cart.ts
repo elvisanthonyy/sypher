@@ -1,6 +1,5 @@
 import mongoose, { Document, Schema, Model } from "mongoose";
 import { IItem } from "./user";
-import { Mode } from "fs";
 
 export interface ICart extends Document {
   _id: string;
@@ -9,10 +8,9 @@ export interface ICart extends Document {
   items: IItem[];
 }
 
-const CartItemSchema = new Schema({
+const CartItemSchema = new Schema<IItem>({
   productId: {
-    type: Schema.Types.ObjectId,
-    ref: "Product",
+    type: String,
     required: true,
   },
   name: {
@@ -40,9 +38,9 @@ const CartItemSchema = new Schema({
   },
 });
 
-const CartSchema = new mongoose.Schema({
+const CartSchema = new mongoose.Schema<ICart>({
   userId: {
-    type: Schema.Types.ObjectId,
+    type: String,
     ref: "User",
   },
   cartId: {

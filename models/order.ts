@@ -12,10 +12,10 @@ export interface IOrder extends Document {
   qty: number;
 }
 
-const OrderSchema = new mongoose.Schema(
+const OrderSchema = new mongoose.Schema<IOrder>(
   {
     userId: {
-      type: Schema.Types.ObjectId,
+      type: String,
       ref: "User",
       require: true,
     },
@@ -32,7 +32,7 @@ const OrderSchema = new mongoose.Schema(
       require: true,
     },
     productId: {
-      type: Schema.Types.ObjectId,
+      type: String,
       ref: "Product",
       require: true,
     },

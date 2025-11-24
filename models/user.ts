@@ -1,6 +1,7 @@
 import mongoose, { Document, models, Model } from "mongoose";
 
 export interface IItem extends Document {
+  _id: string;
   productId?: string;
   name: string;
   type: string;
@@ -8,6 +9,9 @@ export interface IItem extends Document {
   price: number;
   qty: number;
   unitsAvailable: number;
+  image: {
+    url: string;
+  };
 }
 
 export interface IUser extends Document {
