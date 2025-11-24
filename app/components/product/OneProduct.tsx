@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useProductContext } from "@/app/context/ProductContext";
 import { useCart } from "@/app/context/CartContext";
+import Image from "next/image";
 
 // component to display product when clicked
 const OneProduct = () => {
@@ -22,13 +23,23 @@ const OneProduct = () => {
     }
   }, [product, cart.length]);
   return (
-    <div className="flex w-full text-black border border-sypher-light-border my-2 justify-start py-4  items-center flex-col h-70 bg-sypher-light-compGray">
-      <div className="shrink-0 w-[90%] h-[50%] bg-gray-300"></div>
+    <div className="flex w-full text-black border border-sypher-light-border my-2 justify-start py-4  items-center flex-col h-90 bg-sypher-light-compGray">
+      <div className="shrink-0 overflow-hidden border-b border-b-sypher-light-border w-full h-50 bg-gray-300">
+        {product?.image?.url && (
+          <Image
+            height={300}
+            width={500}
+            alt="product image"
+            src={product?.image?.url}
+            className="w-full h-full object-cover"
+          />
+        )}
+      </div>
       <div className="flex text-sm my-5 flex-col h-[50%] px-1 w-[95%] ">
         <div>{product?.name}</div>
         <div>{product?.type}</div>
         <div>{product?.category}</div>
-        <div>{product?.price && `N${product?.price},00.00`}</div>
+        <div>{product?.price && `₦${product?.price}.00`}</div>
 
         {isInCart ? (
           <div className="fixed bottom-10 left-[50%] bg-white -translate-x-[50%] w-[95%] h-18 py-3 rounded-lg px-5 flex justify-between items-center ">

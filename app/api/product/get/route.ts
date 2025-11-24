@@ -9,6 +9,7 @@ const handler = async () => {
 
   try {
     const products = await Product.find();
+    console.log("TYPE", typeof Product);
     if (!products) {
       return NextResponse.json({ message: "no products found" });
     }

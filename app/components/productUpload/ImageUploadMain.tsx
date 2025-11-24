@@ -1,12 +1,15 @@
 "use client";
 import api from "@/libs/api";
 import { useState } from "react";
+import { useParams } from "next/navigation";
 
 const ImageUploadMain = () => {
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPrview] = useState<string | null>(null);
+  const { id } = useParams();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];
+
     if (f) {
       setFile(f);
       setPrview(URL.createObjectURL(f));
@@ -14,12 +17,18 @@ const ImageUploadMain = () => {
   };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    const formData = new FormData()
-    formData.append('image', file)
+    e.preventDefault();
+    const formData = new FormData();
 
-    api.post(`/api/product/image/upload/${}`)
-  }
+    formData.append("image", file);
+
+    api
+      .post(`/api/product/image/upload/${id}`, formData)
+      .then((res) => {})
+      .catch((error) => {
+        console.error("error", error);
+      });
+  };
   return (
     <div>
       <form onSubmit={handleSubmit}>

@@ -19,9 +19,10 @@ export interface MainRange {
 
 const Main = ({ session, products }: ChildProps) => {
   const [acceptCookiesModal, setAcceptCookiesModal] = useState(false);
+  const exclude = ["hp", "mac", "dell", "lenovo"];
   const [mainRange, setMainRange] = useState<MainRange>({
     start: 0,
-    end: 1000000,
+    end: 10000000000,
   });
 
   const acceptCookies = () => {
@@ -51,42 +52,44 @@ const Main = ({ session, products }: ChildProps) => {
     <main className="h-dvh pt-34 w-full top-0 left-0 relative">
       <FilterComponent mainRange={mainRange} setMainRange={setMainRange} />
       <div className="flex custom-scrollbar my-3 border-sypher-light-darkBorder border-t overflow-x-scroll justify-start items-center w-auto min-w-full ">
-        {products
-          ?.filter((product: IProduct) =>
-            product.name.toLowerCase().includes("hp")
-          )
-          .map((product: IProduct) => (
-            <div
-              key={product._id}
-              className={`flex mx-1 ${
-                product.price >= mainRange.start &&
-                product.price <= mainRange.end
-                  ? "flex"
-                  : "hidden"
-              }`}
-            >
-              <ProductComponent mainRange={mainRange} product={product} />
-            </div>
-          ))}
+        {products &&
+          products
+            ?.filter((product: IProduct) =>
+              product?.name.toLowerCase().includes("hp")
+            )
+            .map((product: IProduct) => (
+              <div
+                key={product._id}
+                className={`flex mx-1 ${
+                  Number(product.price) >= mainRange.start &&
+                  Number(product.price) <= mainRange.end
+                    ? "flex"
+                    : "hidden"
+                }`}
+              >
+                <ProductComponent mainRange={mainRange} product={product} />
+              </div>
+            ))}
       </div>
       <div className="flex custom-scrollbar my-3 custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
-        {products
-          ?.filter((product: IProduct) =>
-            product.name.toLowerCase().includes("dell")
-          )
-          .map((product: IProduct) => (
-            <div
-              key={product._id}
-              className={`flex mx-1 ${
-                product.price >= mainRange.start &&
-                product.price <= mainRange.end
-                  ? "flex"
-                  : "hidden"
-              }`}
-            >
-              <ProductComponent mainRange={mainRange} product={product} />
-            </div>
-          ))}
+        {products &&
+          products
+            ?.filter((product: IProduct) =>
+              product.name.toLowerCase().includes("dell")
+            )
+            .map((product: IProduct) => (
+              <div
+                key={product._id}
+                className={`flex mx-1 ${
+                  Number(product.price) >= mainRange.start &&
+                  Number(product.price) <= mainRange.end
+                    ? "flex"
+                    : "hidden"
+                }`}
+              >
+                <ProductComponent mainRange={mainRange} product={product} />
+              </div>
+            ))}
       </div>
       <div className="flex custom-scrollbar my-3  custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
         {products
@@ -97,8 +100,8 @@ const Main = ({ session, products }: ChildProps) => {
             <div
               key={product._id}
               className={`flex mx-1 ${
-                product.price >= mainRange.start &&
-                product.price <= mainRange.end
+                Number(product.price) >= mainRange.start &&
+                Number(product.price) <= mainRange.end
                   ? "flex"
                   : "hidden"
               }`}
@@ -116,8 +119,30 @@ const Main = ({ session, products }: ChildProps) => {
             <div
               key={product._id}
               className={`flex mx-1 ${
-                product.price >= mainRange.start &&
-                product.price <= mainRange.end
+                Number(product.price) >= mainRange.start &&
+                Number(product.price) <= mainRange.end
+                  ? "flex"
+                  : "hidden"
+              }`}
+            >
+              <ProductComponent mainRange={mainRange} product={product} />
+            </div>
+          ))}
+      </div>
+      <div className="flex custom-scrollbar my-3  custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
+        {products
+          ?.filter(
+            (product: IProduct) =>
+              !exclude.some((ex) =>
+                product.name.toLowerCase().includes(ex.toLowerCase())
+              )
+          )
+          .map((product: IProduct, index) => (
+            <div
+              key={product._id}
+              className={`flex mx-1 ${
+                Number(product.price) >= mainRange.start &&
+                Number(product.price) <= mainRange.end
                   ? "flex"
                   : "hidden"
               }`}

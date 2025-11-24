@@ -24,19 +24,19 @@ const FilterComponent = ({ setMainRange }: ChildProps) => {
         onChange={(e) => setRangeValues(e.target.value)}
         className="flex justify-center text-sm px-3 border w-40 h-8 rounded-lg"
       >
-        <option value="0-10000" className="text-black" defaultChecked>
+        <option value="0-10000000000" className="text-black" defaultChecked>
           none
         </option>
-        <option value="100-200" className="text-black">
+        <option value="100000-200000" className="text-black">
           N100k - N200k
         </option>
-        <option value="200-350" className="text-black">
+        <option value="200000-350000" className="text-black">
           N200k - N350k
         </option>
-        <option value="350-500" className="text-black">
+        <option value="350000-500000" className="text-black">
           N350k - N500k
         </option>
-        <option value="500-1000" className="text-black">
+        <option value="500000-1000000" className="text-black">
           N500k - 1M
         </option>
       </select>

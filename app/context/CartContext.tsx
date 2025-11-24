@@ -13,6 +13,10 @@ export interface CartItem {
   qty?: number | undefined;
   productId?: string | undefined;
   unitsAvailable?: number | undefined;
+  image: {
+    filename: string;
+    url: string;
+  };
 }
 
 interface CartContextType {
