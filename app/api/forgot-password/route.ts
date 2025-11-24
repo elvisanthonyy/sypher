@@ -4,7 +4,7 @@ import dbConnect from "@/libs/dbConnect";
 import { User } from "@/models/user";
 import { sendResetMessage } from "@/libs/sendResetMessage";
 
-const handler = async (req: Response) => {
+const handler = async (req: Request) => {
   await dbConnect();
   const { email } = await req.json();
   try {
