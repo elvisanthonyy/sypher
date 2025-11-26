@@ -31,8 +31,8 @@ const ResetPassMain = ({ token }: ChildProps) => {
             position: "top-center",
           });
           setTimeout(() => {
-            router.push("/auth/sigin");
-          }, 1000);
+            router.push("/auth/signin");
+          }, 2000);
         }
       })
       .catch((error) => {
