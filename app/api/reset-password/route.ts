@@ -8,7 +8,7 @@ interface ReqBody {
   password: string;
 }
 
-const handler = async (req: Response) => {
+const handler = async (req: Request) => {
   await dbConnect();
   const { token, password } = (await req.json()) as ReqBody;
   try {
