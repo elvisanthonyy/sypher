@@ -24,7 +24,7 @@ export const authOptions: NextAuthOptions = {
           throw new Error("field not complete");
         }
         const user = await User.findOne({ email: credentials.email });
-        console.log(user);
+
         if (!user) {
           console.log("user not found");
           throw new Error("user not found");
@@ -34,11 +34,6 @@ export const authOptions: NextAuthOptions = {
           user.password
         );
 
-        if (!isValid) {
-          console.log("invalid login");
-          throw new Error("invalid login");
-        }
-
         if (credentials.adminLogin === "true") {
           if (user.role !== "admin") {
             console.log("Not an admin");
@@ -46,10 +41,16 @@ export const authOptions: NextAuthOptions = {
           }
         }
 
+        if (!isValid) {
+          console.log("invalid login");
+          throw new Error("invalid login");
+        }
+
         if (!user.verified) {
           console.log("not verified");
           throw new Error("user not verified");
         }
+
         return {
           id: user._id.toString(),
           email: user.email,

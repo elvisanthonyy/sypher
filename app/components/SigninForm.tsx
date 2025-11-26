@@ -26,18 +26,10 @@ const SigninForm = () => {
       redirect: false,
       email: data.email,
       password: data.password,
+      adminLogin: false,
     });
 
-    if (result?.error === "invalid login") {
-      setLoading(false);
-      setMessage(result.error);
-    } else if (result?.error === "user not verified") {
-      setLoading(false);
-
-      setMessage(result.error);
-
-      router.push(`/verify/user/${encodeURIComponent(data.email)}`);
-    } else {
+    if (!result?.error) {
       setLoading(false);
       toast.success("Log in successfull", {
         theme: "dark",
@@ -46,6 +38,17 @@ const SigninForm = () => {
       setTimeout(() => {
         router.push("/");
       }, 1000);
+    } else if (result?.error === "user not verified") {
+      setLoading(false);
+      console.error(result?.error);
+      setMessage(result.error);
+      setTimeout(() => {
+        router.push(`/verify/user/${encodeURIComponent(data.email)}`);
+      }, 1000);
+    } else {
+      console.error("error", result?.error);
+      setLoading(false);
+      setMessage(result.error);
     }
   };
   return (

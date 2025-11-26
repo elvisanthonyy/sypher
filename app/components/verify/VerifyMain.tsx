@@ -15,7 +15,7 @@ interface ChildProps {
 
 const VerifyMain = ({ email }: ChildProps) => {
   const { register, handleSubmit } = useForm<FieldValues>();
-  const [resendCount, setResendCount] = useState(60);
+  const [resendCount, setResendCount] = useState(0);
   const countDown = () => {};
   const resendOtp = () => {
     setResendCount(60);

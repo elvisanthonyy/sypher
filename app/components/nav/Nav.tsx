@@ -6,6 +6,7 @@ import Link from "next/link";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
 import Menu from "./Menu";
 import { RiAdminFill } from "react-icons/ri";
+import { FaUser } from "react-icons/fa";
 
 interface ChildProps {
   name?: string;
@@ -33,8 +34,10 @@ const Nav = async ({ name }: ChildProps) => {
             )}
             {session.user.role === "admin" ? (
               <RiAdminFill className="mr-5 text-3xl p-[3px] rounded-full px-px border-[1.7px]" />
-            ) : (
+            ) : name === "profile" ? (
               <RiVerifiedBadgeFill className="text-lg" />
+            ) : (
+              <FaUser className="text-lg" />
             )}
           </div>
         </Link>
