@@ -4,7 +4,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { toast } from "react-toastify";
 import api from "@/libs/api";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { use, useState } from "react";
 import { FaCamera } from "react-icons/fa";
 import Loading from "../loading/Loading";
 
@@ -22,10 +22,12 @@ const ProductUploadMain = () => {
   const { register, handleSubmit } = useForm<FormFields>();
   const [preview, setPreview] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setPreview(URL.createObjectURL(file));
+    const files = e.target.files?.[0];
+    if (files) {
+      setPreview(URL.createObjectURL(files));
+      setFile(files);
     }
   };
 
@@ -38,8 +40,8 @@ const ProductUploadMain = () => {
     formData.append("unitsAvailable", data.unitsAvailable.toString());
     formData.append("price", data.price.toString());
 
-    if (data.image && data.image.length > 0) {
-      formData.append("image", data.image[0]);
+    if (file) {
+      formData.append("image", file);
     }
     api
       .post("/api/product/upload", formData)
@@ -76,15 +78,15 @@ const ProductUploadMain = () => {
             className="border-2 cursor-pointer text-white flex justify-center items-center border-white bg-black/50  absolute left-[50%] top-[50%] -translate-[50%]  text-center w-12 mx-auto h-12 rounded-full"
           >
             <FaCamera className="text-2lg" />
+            <input
+              {...register("image")}
+              onChange={handleChange}
+              placeholder="hello"
+              type="file"
+              id="file"
+              className="hidden"
+            />
           </label>
-          <input
-            {...register("image")}
-            onChange={handleChange}
-            placeholder="hello"
-            type="file"
-            id="file"
-            className="hidden"
-          />
         </div>
 
         <input
