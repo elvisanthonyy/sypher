@@ -43,7 +43,7 @@ const EditMain = ({ user }: ChildProps) => {
       })
       .catch((error) => {
         console.error("error", error);
-        toast.error(error.response.message, {
+        toast.error(error?.response?.message, {
           theme: "dark",
           position: "top-center",
         });

@@ -11,6 +11,7 @@ export async function sendOrderMessage(order: IOrder) {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
+      connectionTimeout: 10000,
       tls: {
         rejectUnauthorized: false,
       },

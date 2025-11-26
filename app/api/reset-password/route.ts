@@ -11,22 +11,25 @@ interface ReqBody {
 const handler = async (req: Request) => {
   await dbConnect();
   const { token, password } = (await req.json()) as ReqBody;
+  console.log(password);
   try {
-    const user = await User.findOne({ resetToken: token });
-
     if (!token) {
       return NextResponse.json(
-        { message: "something went wromg" },
-        { status: 401 }
+        { message: "token not present" },
+        { status: 402 }
+      );
+    }
+    const user = await User.findOne({ resetToken: token });
+
+    if (!user) {
+      return NextResponse.json(
+        { message: "user link expired" },
+        { status: 404 }
       );
     }
 
     if (new Date(Date.now()) > user.resetTokenExpiry) {
       return NextResponse.json({ message: "link expired" }, { status: 401 });
-    }
-
-    if (!user) {
-      return NextResponse.json({ message: "user not found" }, { status: 200 });
     }
 
     const hashPass = await bcrypt.hash(password, 10);
