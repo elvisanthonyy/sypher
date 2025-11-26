@@ -139,6 +139,14 @@ const ProfileMain = ({ user }: ChildProps) => {
           >
             {loading ? <Loading /> : "Change Password"}
           </button>
+          <div className="w-full flex justify-center items-center my-6">
+            <div
+              onClick={() => router.push("/user/forgot-password")}
+              className="text-blue-500"
+            >
+              Forgot Password
+            </div>
+          </div>
           <div
             onClick={() => setChangePass(false)}
             className="cursor-pointer h-10 mt-10 flex items-center"
