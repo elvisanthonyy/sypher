@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import dbConnect from "@/libs/dbConnect";
 import { Product } from "@/models/product";
-import fs from "fs";
-import path, { resolve } from "path";
 import cloudinary from "@/libs/cloudinary";
 
 const handler = async (req: Request) => {
@@ -26,7 +24,7 @@ const handler = async (req: Request) => {
     await newProduct.save();
     return NextResponse.json({
       status: "okay",
-      message: "product created successfully without image",
+      message: "product created successfully",
     });
   }
 

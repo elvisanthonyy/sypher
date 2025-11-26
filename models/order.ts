@@ -1,8 +1,8 @@
-import mongoose, { Document, models, Schema, Model } from "mongoose";
+import mongoose, { Document, models, Schema, Model, Types } from "mongoose";
 
 export interface IOrder extends Document {
   _id: string;
-  userId: string;
+  userId: Types.ObjectId;
   name: string;
   email: string;
   productId: string;
@@ -16,7 +16,7 @@ export interface IOrder extends Document {
 const OrderSchema = new mongoose.Schema<IOrder>(
   {
     userId: {
-      type: String,
+      type: Schema.Types.ObjectId,
       ref: "User",
       require: true,
     },

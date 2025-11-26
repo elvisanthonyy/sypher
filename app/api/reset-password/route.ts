@@ -36,7 +36,7 @@ const handler = async (req: Response) => {
     await user.save();
 
     return NextResponse.json(
-      { message: "password reset was successfull" },
+      { message: "password reset successfull" },
       { status: 200 }
     );
   } catch (error) {

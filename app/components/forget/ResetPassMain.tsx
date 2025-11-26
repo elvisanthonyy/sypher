@@ -36,6 +36,10 @@ const ResetPassMain = ({ token }: ChildProps) => {
       .catch((error) => {
         setLoading(false);
         console.error(error);
+        toast.error(error.response, {
+          theme: "dark",
+          position: "top-center",
+        });
       });
   };
   return (

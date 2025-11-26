@@ -23,7 +23,7 @@ const OneProduct = () => {
     }
   }, [product, cart.length]);
   return (
-    <div className="flex w-full text-black border border-sypher-light-border my-2 justify-start py-4  items-center flex-col h-90 bg-sypher-light-compGray">
+    <div className="flex w-full text-black border-b border-t border-sypher-light-border my-2 justify-start py-4  items-center flex-col h-120">
       <div className="shrink-0 overflow-hidden border-b border-b-sypher-light-border w-full h-50 bg-gray-300">
         {product?.image?.url && (
           <Image
@@ -31,15 +31,19 @@ const OneProduct = () => {
             width={500}
             alt="product image"
             src={product?.image?.url}
-            className="w-full h-full object-cover"
+            className="w-[105%] h-full object-cover"
           />
         )}
       </div>
       <div className="flex text-sm my-5 flex-col h-[50%] px-1 w-[95%] ">
         <div>{product?.name}</div>
-        <div>{product?.type}</div>
-        <div>{product?.category}</div>
-        <div>{product?.price && `₦${product?.price}.00`}</div>
+        <div className="text-lg font-semibold">
+          {product?.price && `₦${product?.price}.00`}
+        </div>
+        <div className="italic">{product?.category}</div>
+        <div className="w-full border-b border-b-sypher-light-border py-2">
+          Specs
+        </div>
 
         {isInCart ? (
           <div className="fixed bottom-10 left-[50%] bg-white -translate-x-[50%] w-[95%] h-18 py-3 rounded-lg px-5 flex justify-between items-center ">

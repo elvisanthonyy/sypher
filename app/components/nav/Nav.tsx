@@ -26,17 +26,13 @@ const Nav = async ({ name }: ChildProps) => {
         <div className="font-semibold">SYPHER</div>
       </Link>
       {session ? (
-        <Link
-          href={
-            session.user.role === "admin"
-              ? `/user/admin/${encodeURI(session?.user?.id)}`
-              : `/profile/${encodeURI(session?.user?.name)}`
-          }
-        >
-          <div className="flex  items-center min-w-20 ">
-            <div className="mr-2">{session?.user?.name}</div>
+        <Link href={`/profile/${encodeURI(session?.user?.name)}`}>
+          <div className="flex  items-center justify-center min-w-10  ">
+            {name === "profile" && (
+              <div className="mr-2">{session?.user?.name}</div>
+            )}
             {session.user.role === "admin" ? (
-              <RiAdminFill className="text-xl mb-1" />
+              <RiAdminFill className="mr-5 text-3xl p-[3px] rounded-full px-px border-[1.7px]" />
             ) : (
               <RiVerifiedBadgeFill className="text-lg" />
             )}

@@ -32,7 +32,7 @@ const ProductMain = ({ productProp }: ChildProps) => {
     getSimilarProducts();
   }, []);
   return (
-    <div className="w-full min-h-[80dvh] flex flex-col items-center pt-25">
+    <div className="w-full min-h-[80dvh] flex flex-col items-center pt-20">
       <OneProduct />
       <div className="flex my-3 custom-scrollbar border-black border-t overflow-x-scroll justify-start items-center w-full ">
         {products?.map((product: IProduct, index: number) => (

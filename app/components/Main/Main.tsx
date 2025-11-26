@@ -51,7 +51,7 @@ const Main = ({ session, products }: ChildProps) => {
   return (
     <main className="h-dvh pt-34 w-full top-0 left-0 relative">
       <FilterComponent mainRange={mainRange} setMainRange={setMainRange} />
-      <div className="flex custom-scrollbar my-3 border-sypher-light-darkBorder border-t overflow-x-scroll justify-start items-center w-auto min-w-full ">
+      <div className="flex custom-scrollbar my-3 border-sypher-light-border border-t overflow-x-scroll justify-start items-center w-auto min-w-full ">
         {products &&
           products
             ?.filter((product: IProduct) =>

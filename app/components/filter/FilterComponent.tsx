@@ -16,13 +16,13 @@ const FilterComponent = ({ setMainRange }: ChildProps) => {
     setMainRange((prev) => ({ ...prev, end: Number(e.split("-")[1]) }));
   };
   return (
-    <div className="w-full h-13 px-[10%] border-b border-b-sypher-light-darkBorder fixed flex text-sypher-light-text justify-between items-center top-20 left-0 z-20 bg-white">
+    <div className="w-full h-13 px-[10%] r fixed flex text-sypher-light-text justify-between items-center top-20 left-0 z-20 bg-white">
       <div className="">Filter by price </div>
       <div>-</div>
       <select
         value={range}
         onChange={(e) => setRangeValues(e.target.value)}
-        className="flex justify-center text-sm px-3 border w-40 h-8 rounded-lg"
+        className="flex justify-center focus:outline-0 text-sm px-3 bg-sypher-light-compGray border-sypher-light-border  w-40 h-8 rounded-lg"
       >
         <option value="0-10000000000" className="text-black" defaultChecked>
           none

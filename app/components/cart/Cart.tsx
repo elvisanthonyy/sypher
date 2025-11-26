@@ -11,7 +11,7 @@ const Cart = () => {
         <div>
           <MdShoppingCart className="text-2xl" />
         </div>
-        <div className="text-[10px] flex justify-center items-center rounded-full absolute right-0 top-0 w-4 h-4 bg-blue-500">
+        <div className="text-[10px] text-white flex justify-center items-center rounded-full absolute right-0 top-0 w-4 h-4 bg-blue-400">
           {cart?.length}
         </div>
       </div>

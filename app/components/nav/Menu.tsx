@@ -1,13 +1,15 @@
 "use client";
-import { FiMenu } from "react-icons/fi";
+import { FiMenu, FiShoppingBag } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
 import { useState } from "react";
 import { RiHomeLine } from "react-icons/ri";
 import { MdInventory } from "react-icons/md";
 import { RiAdminLine } from "react-icons/ri";
 import { MdOutlineLogout } from "react-icons/md";
+import { FaUser } from "react-icons/fa";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
+import { MdUpload } from "react-icons/md";
 
 interface ChildProps {
   name: string | undefined;
@@ -42,17 +44,17 @@ const Menu = ({ name, userId }: ChildProps) => {
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className={`bg-white w-[80%] h-full grid  place-items-start text-gray-900 gap-y-5 auto-rows-min px-6 py-20 `}
+          className={`bg-white w-[80%] h-full grid relative place-items-start text-gray-900 gap-y-5 auto-rows-min px-6 py-20 `}
         >
           <Link className="w-full" href={"/"}>
-            <div className="w-full shrink-0 py-8 border-t border-t-sypher-light-border h-10 flex items-center">
-              <RiHomeLine className="mr-5" /> Home
+            <div className="w-full shrink-0 py-5 pt-8 border-t border-t-sypher-light-border h-7 flex items-center">
+              <RiHomeLine className="mr-5 text-2xl" /> Home
             </div>
           </Link>
 
-          <Link className="w-full" href={"/product/order"}>
-            <div className="w-full shrink-0 py-8  h-10 flex items-center">
-              <MdInventory className="mr-5" /> Orders
+          <Link className="w-full" href={"/product/orders"}>
+            <div className="w-full shrink-0 py-5  h-10 flex items-center">
+              <MdInventory className="mr-5 text-2xl" /> Orders
             </div>
           </Link>
 
@@ -60,29 +62,35 @@ const Menu = ({ name, userId }: ChildProps) => {
             className={`w-full ${name === "admin" ? "hidden" : "block"}`}
             href={`/user/admin`}
           >
-            <div className="w-full shrink-0 py-8 h-10 flex items-center">
-              <RiAdminLine className="mr-5" /> Admin
+            <div className="w-full shrink-0 py-5 h-10 flex items-center">
+              <RiAdminLine className="mr-5 text-[22px] rounded-full px-px border-2" />{" "}
+              Admin
             </div>
           </Link>
           <Link
             className={`w-full ${name !== "admin" ? "hidden" : "block"}`}
             href={`/user/admin`}
           >
-            <div className="w-full shrink-0 py-8 h-10 flex items-center">
-              <RiAdminLine className="mr-5" /> My Products
+            <div className="w-full shrink-0 py-5 h-10 flex items-center">
+              <FiShoppingBag className="mr-5 text-2xl" /> My Products
             </div>
           </Link>
           <Link className={`w-full flex`} href={`/product/upload`}>
-            <div className="w-full shrink-0 py-8 h-10 flex items-center">
-              <RiAdminLine className="mr-5" /> Upload Product
+            <div className="w-full shrink-0 py-5 pb-8 border-b border-b-sypher-light-border h-10 flex items-center">
+              <MdUpload className="mr-5 border-2 rounded-sm text-xl text-sypher-light-text" />{" "}
+              Upload Product
             </div>
           </Link>
-
-          <div
-            onClick={() => signOut()}
-            className="w-full shrink-0 py-8 border-b border-b-sypher-light-border h-10 flex items-center"
-          >
-            <MdOutlineLogout className="mr-5" /> Log Out
+          <div className=" w-full px-6 absolute bottom-10">
+            <div className="w-full shrink-0 py-8 border-t border-t-sypher-light-border h-10 flex items-center">
+              <FaUser className="mr-5 text-lg" /> Contact
+            </div>
+            <div
+              onClick={() => signOut()}
+              className="w-full  shrink-0 py-8 border-b border-b-sypher-light-border h-10 flex items-center"
+            >
+              <MdOutlineLogout className="mr-5 text-xl" /> Log Out
+            </div>
           </div>
         </div>
       </div>
