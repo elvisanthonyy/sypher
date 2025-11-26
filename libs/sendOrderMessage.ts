@@ -4,7 +4,7 @@ import { IOrder } from "@/models/order";
 export async function sendOrderMessage(order: IOrder) {
   try {
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      service: "Gmail",
       port: 465,
       secure: true,
       auth: {

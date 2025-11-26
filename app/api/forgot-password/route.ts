@@ -19,7 +19,7 @@ const handler = async (req: Request) => {
     user.resetTokenExpiry = resetTokenExpiry;
     await user.save();
 
-    sendResetMessage(email, resetToken);
+    await sendResetMessage(email, resetToken);
     return NextResponse.json({ message: "Email sent" }, { status: 200 });
   } catch (error) {
     console.error("error", error);

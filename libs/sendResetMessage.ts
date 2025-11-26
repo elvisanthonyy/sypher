@@ -3,7 +3,7 @@ import nodemailer from "nodemailer";
 export async function sendResetMessage(email: string, resetToken: string) {
   try {
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      service: "Gmail",
       port: 465,
       secure: true,
       auth: {
