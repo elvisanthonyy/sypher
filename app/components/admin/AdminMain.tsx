@@ -38,7 +38,7 @@ const AdminMain = ({ details }: ChildProps) => {
             Upload Product
           </div>
         </Link>
-        <Link className={`w-full flex`} href={`/product/upload`}>
+        <Link className={`w-full flex`} href={`/user/admin/orders`}>
           <div className="w-full shrink-0 text-sypher-light-text py-5 my-1 h-15 flex items-center">
             <MdInventory className="mr-5 text-xl text-sypher-light-text" /> All
             Orders

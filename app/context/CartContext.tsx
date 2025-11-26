@@ -22,7 +22,10 @@ export interface CartItem {
 interface CartContextType {
   cart: CartItem[];
   addToCart: (item: CartItem) => void;
-  removeFromCart: (id: string | undefined) => void;
+  removeFromCart: (
+    id: string | undefined,
+    productId: string | undefined
+  ) => void;
   updateQuantity: (id: string, qty: number) => void;
   clearCart: () => void;
 }
@@ -58,6 +61,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
           category: item?.category,
           price: item.price,
           qty: item.qty,
+          imageURL: item?.image?.url,
         })
         .then()
         .catch((error) => {
@@ -66,7 +70,23 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const removeFromCart = (id: string | undefined) => {
+  // id for localstorage || productId for database
+  const removeFromCart = (
+    id: string | undefined,
+    productId: string | undefined
+  ) => {
+    if (cookie || session) {
+      api
+        .post("/api/cart/delete", {
+          userId: session?.user?.id,
+          cartId: cookie,
+          productId: productId,
+        })
+        .then((res) => {})
+        .catch((error) => {
+          console.error("error", error);
+        });
+    }
     setCart((prev) => prev.filter((i) => i._id !== id));
   };
 
@@ -75,13 +95,18 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   };
   const clearCart = () => setCart([]);
   useEffect(() => {
+    //return nothing if session is loading
     if (status === "loading") return;
+
+    //check for cookies
     const cookies = document.cookie;
     const match = cookies
       .split("; ")
       .find((row) => row.startsWith("cart_id"))
       ?.split("=")[1];
     setCookie(match ? match : undefined);
+
+    //if there is no session at all get from localstorage
     if (!match && !session) {
       console.log("hello");
       const storedCart = localStorage.getItem("cart");
@@ -107,9 +132,9 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   }, [status, session]);
 
   useEffect(() => {
-    if (!cookie) {
+    if (cart?.length === 0) return;
+    if (!cookie && !session) {
       localStorage.setItem("cart", JSON.stringify(cart));
-    } else {
     }
   }, [cart]);
 

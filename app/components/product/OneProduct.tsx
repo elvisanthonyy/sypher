@@ -12,8 +12,9 @@ const OneProduct = () => {
   const [qty, setQty] = useState<number | undefined>(1);
 
   useEffect(() => {
-    console.log("hi");
-    const checkCart = cart?.find((i) => i.productId === product?._id);
+    const checkCart = cart?.find(
+      (i) => i.productId === product?._id || i._id === product?._id
+    );
 
     if (checkCart) {
       setIsInCart(true);
@@ -21,9 +22,9 @@ const OneProduct = () => {
     } else {
       setIsInCart(false);
     }
-  }, [product, cart.length]);
+  }, [product, cart]);
   return (
-    <div className="flex w-full text-black border-b border-t border-sypher-light-border my-2 justify-start py-4  items-center flex-col h-120">
+    <div className="flex w-full text-black border-b border-t border-sypher-light-border my-2 justify-start py-4  items-center flex-col h-115">
       <div className="shrink-0 overflow-hidden border-b border-b-sypher-light-border w-full h-50 bg-gray-300">
         {product?.image?.url && (
           <Image
@@ -35,18 +36,33 @@ const OneProduct = () => {
           />
         )}
       </div>
-      <div className="flex text-sm my-5 flex-col h-[50%] px-1 w-[95%] ">
-        <div>{product?.name}</div>
+      <div className="flex text-sm my-5 bg-am flex-col h-[50%] px-1 w-[95%] ">
+        <div className="w-full flex mb-1 justify-between">
+          <div>{product?.name}</div>
+          <div className="italic">{product?.category}</div>
+        </div>
+
         <div className="text-lg font-semibold">
           {product?.price && `₦${product?.price}.00`}
         </div>
-        <div className="italic">{product?.category}</div>
-        <div className="w-full border-b border-b-sypher-light-border py-2">
+
+        <div className="w-full border-b mb-4 border-b-sypher-light-border py-2">
           Specs
+        </div>
+        <div>
+          Core i5
+          <br />
+          6th Gen
+          <br />
+          500GB SSD
+          <br />
+          Keyboard light
+          <br />
+          Windows 10 pro
         </div>
 
         {isInCart ? (
-          <div className="fixed bottom-10 left-[50%] bg-white -translate-x-[50%] w-[95%] h-18 py-3 rounded-lg px-5 flex justify-between items-center ">
+          <div className="fixed bottom-10 left-[50%]  border border-sypher-light-darkBorder bg-white -translate-x-[50%] w-[95%] h-18 py-3 rounded-lg px-5 flex justify-between items-center ">
             <div
               onClick={() => (qty ?? 0) > 1 && setQty((qty ?? 0) - 1)}
               className="flex justify-center items-center text-lg aspect-square h-[90%] rounded-lg bg-black text-white"

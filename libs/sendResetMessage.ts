@@ -22,8 +22,9 @@ export async function sendResetMessage(email: string, resetToken: string) {
       subject: "SYPHER",
       html: `<div><h3 style="margin-bottom: 50px">Your reset link</h3>
       <p style="margin-bottom: 50px">This is your reset link <a style="color: blue;" href="${process.env.BASE_URL}/user/reset-password?token=${resetToken}">Reset Password</a></p> 
-      <p style="margin-bottom: 30px;">Expires in 1 hour <p>
+      <p style="margin-bottom: 30px;">Expires in 1 hour </p>
       <p>Contact 09045342672 on WhatsApp for help info</p></div>`,
+      headers: {},
     });
   } catch (error) {
     console.error("error in sending message", error);

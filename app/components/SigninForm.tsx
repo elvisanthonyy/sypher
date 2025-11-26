@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { FaUser, FaEye, FaEyeSlash, FaLock } from "react-icons/fa";
 import Loading from "./loading/Loading";
 import { toast } from "react-toastify";
+import { useCart } from "../context/CartContext";
+import { useSession } from "next-auth/react";
 
 interface FormFields {
   email: string;
@@ -16,7 +18,9 @@ interface FormFields {
 const SigninForm = () => {
   const router = useRouter();
   const [isPasswordVisible, setIsPasswordVisble] = useState(false);
+  const { cart } = useCart();
   const [loading, setLoading] = useState(false);
+  const { data: session } = useSession();
   const [message, setMessage] = useState("");
   const { register, handleSubmit, reset } = useForm<FormFields>();
   const onSubmit: SubmitHandler<FormFields> = async (data) => {

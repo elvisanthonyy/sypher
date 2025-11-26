@@ -8,6 +8,7 @@ interface ReqBody extends IItem {
   userId: string;
   cartId: string;
   unitsAvailable: number;
+  imageURL: string;
 }
 
 const handler = async (req: Request) => {
@@ -22,6 +23,7 @@ const handler = async (req: Request) => {
     price,
     qty,
     unitsAvailable,
+    imageURL,
   } = (await req.json()) as ReqBody;
 
   try {
@@ -51,6 +53,9 @@ const handler = async (req: Request) => {
         price: price,
         qty: qty,
         unitsAvailable: unitsAvailable,
+        image: {
+          url: imageURL.toString(),
+        },
       } as any);
     }
 

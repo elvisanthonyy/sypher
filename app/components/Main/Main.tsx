@@ -42,10 +42,9 @@ const Main = ({ session, products }: ChildProps) => {
       setAcceptCookiesModal(true);
     } else {
       setAcceptCookiesModal(false);
-    }
-
-    if (session) {
-      document.cookie = "cart_id=; path=/; max-age=0";
+      if (session) {
+        document.cookie = "cart_id=; path=/; max-age=0";
+      }
     }
   }, []);
   return (
@@ -152,20 +151,20 @@ const Main = ({ session, products }: ChildProps) => {
           ))}
       </div>
       {acceptCookiesModal && (
-        <div className="fixed flex-col justify-center items-center left-[50%] -translate-x-[50%] bottom-4 flex w-[90%] h-30 rounded-2xl bg-black">
+        <div className="fixed flex-col justify-center items-center left-0 bottom-0 flex w-full h-55 rounded-tl-2xl rounded-tr-2xl bg-black">
           <div className="text-white">Do you want to accept cookies?</div>
-          <div className="flex items-center mt-3">
+          <div className="flex w-full px-5 flex-col items-center mt-3">
             <button
               onClick={acceptCookies}
-              className="bg-white text-black h-7 w-15 mx-5"
+              className="bg-white text-black h-10 w-[80%] mx-5 my-2"
             >
-              Yes
+              Accept all
             </button>
             <button
               onClick={() => setAcceptCookiesModal(false)}
-              className="bg-white text-black h-7 w-15 mx-5"
+              className="bg-white text-black h-10 w-[80%] mx-5 my-2"
             >
-              No
+              Reject all
             </button>
           </div>
         </div>

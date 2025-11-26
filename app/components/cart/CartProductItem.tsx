@@ -1,6 +1,7 @@
 "use client";
 import { CartItem } from "@/app/context/CartContext";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface ChildProps {
   cartItem: CartItem;
@@ -12,25 +13,36 @@ const CartProductItem = ({ cartItem, removeFromCart }: ChildProps) => {
   const total =
     cartItem?.price && cartItem?.qty ? cartItem?.price * cartItem?.qty : 0;
   return (
-    <div className="flex mx-auto shrink-0 justify-start py-4 my-4 border-b border-b-sypher-light-border border-t border-t-sypher-light-border text-black items-center flex-col w-full h-110 bg-sypher-compGray">
-      <div className="w-[90%] bg-sypher-light-border h-40 "></div>
-      <div className="flex flex-col h-50 py-10 w-[90%]">
-        <div>{cartItem?.name}</div>
-        <div>{cartItem?.type}</div>
+    <div className="flex mx-auto shrink-0 bg-white justify-start py-4 my-4 border-b border-b-sypher-light-border border-t border-t-sypher-light-border text-black items-center flex-col w-full min-h-113 bg-sypher-compGray">
+      <div className="w-full overflow-hidden border-b border-b-sypher-light-darkBorder bg-sypher-light-border h-45 ">
+        {cartItem?.image?.url && (
+          <Image
+            height={100}
+            width={200}
+            alt="cart product image"
+            src={cartItem.image.url}
+            className="w-full h-full object-cover"
+          />
+        )}
+      </div>
+      <div className="flex flex-col h-50 py-5 px-4 w-full">
+        <div className="text-sypher-light-text">{cartItem?.name}</div>
+        <div className="font-semibold">{`Total: N${total}.00`}</div>
         <div>{cartItem?.category}</div>
-        <div>{cartItem?.qty}</div>
-        <div>{`Total: N${total},000.00`}</div>
+        <div className="text-sypher-light-text text-sm">
+          {cartItem?.qty && `Quantity: ${cartItem?.qty}`}
+        </div>
 
-        <div className="w-full ">
+        <div className="w-full flex flex-col items-center">
           <button
             onClick={() => router.push(`/product/order/${cartItem.productId}`)}
-            className="cursor-pointer mr-5 py-2 px-5 my-5 text-black border rounded-2xl"
+            className="w-full cursor-pointer py-2 mt-4 px-5 my-2 bg-black text-white border rounded-lg"
           >
             Order Now
           </button>
           <button
             onClick={removeFromCart}
-            className="cursor-pointer py-2 px-5 my-5 text-black border rounded-2xl"
+            className="w-full cursor-pointer py-2 px-5 my-2 text-black border rounded-lg"
           >
             Remove to cart
           </button>

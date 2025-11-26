@@ -13,7 +13,9 @@ const CartMain = () => {
         <div className="my-4" key={cartItem?._id}>
           <CartProductItem
             cartItem={cartItem}
-            removeFromCart={() => removeFromCart(cartItem?._id)}
+            removeFromCart={() =>
+              removeFromCart(cartItem?._id, cartItem.productId)
+            }
           />
         </div>
       ))}

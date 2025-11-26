@@ -34,7 +34,8 @@ const CartItemSchema = new Schema<IItem>({
     required: true,
   },
   image: {
-    type: String,
+    url: String,
+    filename: String,
   },
 });
 
