@@ -19,7 +19,7 @@ export interface FormFields {
 
 const ProductUploadMain = () => {
   const router = useRouter();
-  const { register, handleSubmit } = useForm<FormFields>();
+  const { register, handleSubmit, reset } = useForm<FormFields>();
   const [preview, setPreview] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState<File | null>(null);
@@ -47,6 +47,7 @@ const ProductUploadMain = () => {
       .post("/api/product/upload", formData)
       .then((res) => {
         if (res.data.status === "okay") {
+          reset();
           setLoading(false);
           toast.success(res.data.message, {
             theme: "dark",

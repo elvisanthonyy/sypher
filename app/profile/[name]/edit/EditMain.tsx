@@ -2,6 +2,7 @@
 import { IUser } from "@/models/user";
 import { useForm, SubmitHandler } from "react-hook-form";
 import api from "@/libs/api";
+import { toast } from "react-toastify";
 
 interface ChildProps {
   user: IUser;
@@ -32,9 +33,20 @@ const EditMain = ({ user }: ChildProps) => {
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     api
       .post("/api/profile/user/edit", { ...data, userId })
-      .then(() => {})
+      .then((res) => {
+        if (res.data.status === "okay") {
+          toast.success(res.data.message, {
+            theme: "dark",
+            position: "top-center",
+          });
+        }
+      })
       .catch((error) => {
         console.error("error", error);
+        toast.error(error.response.message, {
+          theme: "dark",
+          position: "top-center",
+        });
       });
   };
   return (

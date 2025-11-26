@@ -25,18 +25,20 @@ const ResetPassMain = ({ token }: ChildProps) => {
       .post("/api/reset-password", { ...data, token })
       .then((res) => {
         setLoading(false);
-        toast(res.data.message, {
-          theme: "dark",
-          position: "top-center",
-        });
-        setTimeout(() => {
-          router.push("/auth/sigin");
-        }, 1000);
+        if (res.status === 200) {
+          toast(res.data.message, {
+            theme: "dark",
+            position: "top-center",
+          });
+          setTimeout(() => {
+            router.push("/auth/sigin");
+          }, 1000);
+        }
       })
       .catch((error) => {
         setLoading(false);
         console.error(error);
-        toast.error(error.response, {
+        toast.error(error.response.message, {
           theme: "dark",
           position: "top-center",
         });
