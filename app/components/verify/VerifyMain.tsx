@@ -4,6 +4,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import api from "@/libs/api";
 import { useState, useEffect } from "react";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
+import { toast } from "react-toastify";
+import { redirect } from "next/navigation";
 
 interface FieldValues {
   otp: string;
@@ -23,7 +25,10 @@ const VerifyMain = ({ email }: ChildProps) => {
       .post("/api/verify/resend", { email })
       .then((res) => {
         if (res.data.status === "okay") {
-          alert(res.data.message);
+          toast.success(res.data.message, {
+            theme: "dark",
+            position: "top-center",
+          });
         }
 
         countDown();
@@ -36,7 +41,13 @@ const VerifyMain = ({ email }: ChildProps) => {
     api
       .post("/api/verify/user", { email, otp: data.otp })
       .then((res) => {
-        alert(res.data.message);
+        toast.success(res.data.message, {
+          theme: "dark",
+          position: "top-center",
+        });
+        setTimeout(() => {
+          redirect("/auth/signin");
+        }, 2000);
       })
       .catch((error) => {
         console.error("error", error);

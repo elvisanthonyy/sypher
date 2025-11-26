@@ -26,7 +26,7 @@ const ResetPassMain = ({ token }: ChildProps) => {
       .then((res) => {
         setLoading(false);
         if (res.status === 200) {
-          toast(res.data.message, {
+          toast.success(res.data.message, {
             theme: "dark",
             position: "top-center",
           });
