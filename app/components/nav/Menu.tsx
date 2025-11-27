@@ -22,7 +22,7 @@ const Menu = ({ name, userId, role, userName }: ChildProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="z-100 h-full  flex items-center relative">
+    <div className="z-100 h-full mg:fixed md:top-0 left-0  flex items-center relative">
       <div
         onClick={() =>
           isMenuOpen ? setIsMenuOpen(false) : setIsMenuOpen(true)

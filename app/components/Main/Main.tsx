@@ -107,9 +107,7 @@ const Main = ({ session, products }: ChildProps) => {
         )}
         {dellProducts?.length > 0 && (
           <div className="flex md:border-b min-h-0 shrink-0 custom-scrollbar mt-2 custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
-            <div className="px-5 mt-5">Dells</div>
-
-            {products.map((product: IProduct) => (
+            {dellProducts.map((product: IProduct) => (
               <div key={product._id} className={`flex mx-1`}>
                 <ProductComponent mainRange={mainRange} product={product} />
               </div>
