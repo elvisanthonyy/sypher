@@ -14,10 +14,13 @@ import { MdUpload } from "react-icons/md";
 interface ChildProps {
   name: string | undefined;
   userId: string | undefined;
+  role: string | undefined;
+  userName: string | undefined;
 }
 
-const Menu = ({ name, userId }: ChildProps) => {
+const Menu = ({ name, userId, role, userName }: ChildProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <div className="z-100 h-full  flex items-center relative">
       <div
@@ -46,8 +49,15 @@ const Menu = ({ name, userId }: ChildProps) => {
           onClick={(e) => e.stopPropagation()}
           className={`bg-white w-[80%] h-full grid relative place-items-start text-gray-900 gap-y-5 auto-rows-min px-6 py-18 `}
         >
+          {name !== "profile" && (
+            <Link className="w-full" href={`/profile/${encodeURI(userName)}`}>
+              <div className="w-full shrink-0 py-5 pt-8 border-t border-t-sypher-light-border h-7 flex items-center">
+                <FaUser className="mr-5 text-xl" /> Profile
+              </div>
+            </Link>
+          )}
           <Link className="w-full" href={"/"}>
-            <div className="w-full shrink-0 py-5 pt-8 border-t border-t-sypher-light-border h-7 flex items-center">
+            <div className="w-full shrink-0 py-5 border-t-sypher-light-border h-7 flex items-center">
               <RiHomeLine className="mr-5 text-2xl" /> Home
             </div>
           </Link>
@@ -75,12 +85,15 @@ const Menu = ({ name, userId }: ChildProps) => {
               <FiShoppingBag className="mr-5 text-2xl" /> My Products
             </div>
           </Link>
-          <Link className={`w-full flex`} href={`/product/upload`}>
-            <div className="w-full shrink-0 py-5 pb-8 border-b border-b-sypher-light-border h-10 flex items-center">
-              <MdUpload className="mr-5 border-2 rounded-sm text-xl text-sypher-light-text" />{" "}
-              Upload Product
-            </div>
-          </Link>
+          {role === "admin" && (
+            <Link className={`w-full flex`} href={`/product/upload`}>
+              <div className="w-full shrink-0 py-5 pb-8 border-b border-b-sypher-light-border h-10 flex items-center">
+                <MdUpload className="mr-5 border-2 rounded-sm text-xl text-sypher-light-text" />{" "}
+                Upload Product
+              </div>
+            </Link>
+          )}
+
           <div className=" w-full px-6 absolute bottom-10">
             <div className="w-full shrink-0 py-8 border-t border-t-sypher-light-border h-10 flex items-center">
               <FaUser className="mr-5 text-lg" /> Contact

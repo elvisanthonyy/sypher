@@ -3,6 +3,7 @@ import { IUser } from "@/models/user";
 import { useForm, SubmitHandler } from "react-hook-form";
 import api from "@/libs/api";
 import { toast } from "react-toastify";
+import { FaAngleDown } from "react-icons/fa";
 
 interface ChildProps {
   user: IUser;
@@ -54,39 +55,48 @@ const EditMain = ({ user }: ChildProps) => {
       <form onSubmit={handleSubmit(onSubmit)} className="w-full px-5">
         <input
           {...register("name")}
-          className="border px-4 my-3 w-full h-12 rounded-sm"
+          className="border focus:outline-none border-sypher-light-darkBorder text-sypher-light-text px-3 my-3 w-full h-12 rounded-sm"
         />
         <input
           {...register("address")}
-          className="border px-4 my-3 w-full h-12 rounded-sm"
+          placeholder="Address"
+          className="border focus:outline-none border-sypher-light-darkBorder text-sypher-light-text px-3 my-3 w-full h-12 rounded-sm"
         />
         <div className="flex items-center">
           <input
             {...register("countryCode")}
             type="number"
-            className="w-[20%] border text-center  h-12 mr-2 rounded-sm"
+            className="w-[25%] px-3 focus:outline-none border-sypher-light-darkBorder text-sypher-light-text border text-center  h-12 mr-2 rounded-sm"
             disabled
           />
           <input
             {...register("number")}
             type="number"
-            className="border px-4 my-3 w-full h-12 rounded-sm"
+            placeholder="Phone Number"
+            className="border focus:outline-none border-sypher-light-darkBorder text-sypher-light-text px-3 my-3 w-full h-12 rounded-sm"
           />
         </div>
 
-        <select
-          {...register("gender")}
-          className="border px-4 my-3 w-full h-12 rounded-sm"
-        >
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
+        <div className="relative h-12 flex items-center">
+          <select
+            {...register("gender")}
+            className="border appearance-none focus:outline-none border-sypher-light-darkBorder text-sypher-light-text px-3 my-3 w-full h-12 rounded-sm"
+          >
+            <option value="" disabled>
+              Gender
+            </option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+          <FaAngleDown className="absolute right-3 pointer-events-none" />
+        </div>
+
         <input
           {...register("dateOfBirth")}
           type="date"
-          className="border px-4 my-3 w-full h-12 rounded-sm"
+          className="border focus:outline-none border-sypher-light-darkBorder text-sypher-light-text px-4  my-3 w-full h-12 rounded-sm"
         />
-        <button className="w-full h-13 my-2 bg-black text-white rounded-sm">
+        <button className="w-full  h-13 my-2 bg-black text-white rounded-sm">
           Edit
         </button>
       </form>

@@ -24,7 +24,7 @@ const OneProduct = () => {
     }
   }, [product]);
   return (
-    <div className="flex w-full text-black border-b border-t border-sypher-light-border my-2 justify-start py-4  items-center flex-col h-115">
+    <div className="flex w-[95%] text-black border border-sypher-light-border my-2 justify-start py-4  items-center flex-col h-115">
       <div className="shrink-0 overflow-hidden border-b border-b-sypher-light-border w-full h-50 bg-gray-300">
         {product?.image?.url && (
           <Image

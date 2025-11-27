@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { MainRange } from "../Main/Main";
+import { FaAngleDown } from "react-icons/fa";
 
 interface ChildProps {
   mainRange: MainRange;
@@ -18,28 +19,34 @@ const FilterComponent = ({ setMainRange }: ChildProps) => {
   return (
     <div className="w-full h-13 border-b border-b-sypher-light-darkBorder px-5 r fixed flex text-sypher-light-text justify-between items-center top-18 left-0 z-20 bg-white">
       <div className="">Filter by price </div>
-      <div>---</div>
-      <select
-        value={range}
-        onChange={(e) => setRangeValues(e.target.value)}
-        className="flex justify-center focus:outline-0 text-sm px-3 bg-sypher-light-compGray border-sypher-light-border  w-40 h-8 rounded-lg"
-      >
-        <option value="0-10000000000" className="text-black" defaultChecked>
-          none
-        </option>
-        <option value="100000-200000" className="text-black">
-          N100k - N200k
-        </option>
-        <option value="200000-350000" className="text-black">
-          N200k - N350k
-        </option>
-        <option value="350000-500000" className="text-black">
-          N350k - N500k
-        </option>
-        <option value="500000-1000000" className="text-black">
-          N500k - 1M
-        </option>
-      </select>
+      <div>-</div>
+      <div className="h-8 w-auto relative flex justify-center">
+        <select
+          value={range}
+          onChange={(e) => setRangeValues(e.target.value)}
+          className="flex appearance-none justify-center focus:outline-0 text-sm px-4 bg-sypher-light-compGray border-sypher-light-border  w-40 h-8 rounded-lg"
+        >
+          <option value="0-10000000000" className="text-black" defaultChecked>
+            none
+          </option>
+          <option value="100000-200000" className="text-black">
+            N100k - N200k
+          </option>
+          <option value="200000-350000" className="text-black">
+            N200k - N350k
+          </option>
+          <option value="350000-500000" className="text-black">
+            N350k - N500k
+          </option>
+          <option value="500000-1000000" className="text-black">
+            N500k - 1M
+          </option>
+          <option value="1000000-2000000" className="text-black">
+            1M - 2M
+          </option>
+        </select>
+        <FaAngleDown className="absolute right-3 text-sm top-[50%] -translate-y-[50%] pointer-events-none" />
+      </div>
     </div>
   );
 };

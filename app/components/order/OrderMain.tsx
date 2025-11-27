@@ -106,6 +106,7 @@ const OrderMain = ({ user, cartItem }: ChildProps) => {
           {...register("location", {
             required: "location is required",
           })}
+          placeholder="Enter Address"
           className="border px-4 my-2 h-12 rounded-lg"
           type="text"
         />

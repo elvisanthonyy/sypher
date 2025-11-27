@@ -15,10 +15,12 @@ const ProfileItemComponent = ({
 }: ChildProps) => {
   return (
     <div>
-      <div className="">
-        <div className="text-sm">{title && title}</div>
+      <div className="w-[95%] mx-auto">
+        <div className="text-sm text-sypher-light-darkBorder">
+          {title && title}
+        </div>
         {type === "string" && (
-          <div className="w-full h-10 flex items-end border-b pb-2 my-2">
+          <div className="w-full h-8 flex pb-3 items-end border-b border-sypher-light-darkBorder  mb-3 mt-3">
             {body}
           </div>
         )}

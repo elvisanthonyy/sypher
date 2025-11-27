@@ -27,7 +27,7 @@ const page = async () => {
   console.log(data);
 
   return (
-    <div className="w-full h-dvh pt-22 flex flex-col">
+    <div className="w-full h-dvh pt-14 flex flex-col">
       <ProfileNav />
       <AdminOrderMain orders={data.allOrders} />
     </div>

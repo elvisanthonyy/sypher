@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
 import { Product } from "@/models/product";
 import { Order } from "@/models/order";
+import { User } from "@/models/user";
 
 const handler = async (req: Request) => {
   await dbConnect();
@@ -19,6 +20,7 @@ const handler = async (req: Request) => {
   try {
     const orders = await Order.find();
     const products = await Product.find();
+    const users = await User.find();
 
     return NextResponse.json(
       {
@@ -26,6 +28,7 @@ const handler = async (req: Request) => {
         details: {
           totalProducts: products?.length,
           totalOrders: orders?.length,
+          totalUsers: users?.length,
         },
       },
       { status: 200 }

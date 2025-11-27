@@ -19,7 +19,12 @@ const Nav = async ({ name }: ChildProps) => {
 
   return (
     <div className=" z-30 fixed bg-white top-0 text-sypher-light-text left-0 flex items-center justify-between px-[5%] w-full h-18 border-b border-b-sypher-light-darkBorder">
-      <Menu name={name} userId={session?.user?.id} />
+      <Menu
+        name={name}
+        userId={session?.user?.id}
+        role={session?.user?.role}
+        userName={session?.user?.name}
+      />
       <Link
         className={`cursor-pointer ${name === "profile" ? "hidden" : "flex"}`}
         href={"/"}

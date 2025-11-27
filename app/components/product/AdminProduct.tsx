@@ -3,6 +3,7 @@ import Image from "next/image";
 import api from "@/libs/api";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { FaEdit, FaTrash } from "react-icons/fa";
 
 interface ChildProps {
   product: IProduct;
@@ -20,8 +21,8 @@ const AdminProduct = ({ product }: ChildProps) => {
       });
   };
   return (
-    <div className="flex w-full my-5 relative text-black border-b border-t border-sypher-light-border justify-start py-4  items-center flex-col h-120">
-      <div className="shrink-0 overflow-hidden border-b border-b-sypher-light-border w-full h-50 bg-gray-300">
+    <div className="flex w-full my-5  mb-10 relative text-black border-b border-t border-sypher-light-border justify-start pb-4  items-center flex-col h-126">
+      <div className="shrink-0 overflow-hidden border-b  border-b-sypher-light-border w-full h-50 ">
         <div
           onClick={() => setIsDeleteModalOpen(false)}
           className={`h-dvh top-0 flex transition-all duration-500 ease-in-out left-0 ${
@@ -65,18 +66,29 @@ const AdminProduct = ({ product }: ChildProps) => {
         <div className="w-full border-b border-b-sypher-light-border py-2">
           Specs
         </div>
-        <div className="h-full flex justify-between w-full mt-18 px-2">
+        <div>
+          Core i5
+          <br />
+          6th Gen
+          <br />
+          500GB SSD
+          <br />
+          Keyboard light
+          <br />
+          Windows 10 pro
+        </div>
+        <div className="h-full py-2 border-t mt-3 border-sypher-light-border flex w-full px-0">
           <div
             onClick={() => router.push(`/product/edit/${product._id}`)}
-            className="w-25 h-12 rounded-lg flex justify-center items-center bg-black text-white"
+            className="w-12 mr-4 h-12 rounded-lg flex justify-center items-center bg-black text-white"
           >
-            Edit
+            <FaEdit className="ml-1 text-lg" />
           </div>
           <div
             onClick={() => setIsDeleteModalOpen(true)}
-            className="w-25 h-12 rounded-lg flex justify-center items-center bg-blue-700 text-white"
+            className="w-12 h-12 rounded-lg flex justify-center items-center bg-blue-700 text-white"
           >
-            Delete
+            <FaTrash />
           </div>
         </div>
       </div>

@@ -25,7 +25,7 @@ const page = async () => {
   const data = await res.json();
   console.log(data);
   return (
-    <div className="w-full min-h-dvh mt-22">
+    <div className="w-full min-h-dvh pt-14">
       <ProfileNav />
       <UserOrdersMain orders={data.orders} />
     </div>

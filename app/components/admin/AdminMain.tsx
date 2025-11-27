@@ -7,25 +7,38 @@ interface ChildProps {
   details: {
     totalProducts: number;
     totalOrders: number;
+    totalUsers: number;
   };
 }
 
 const AdminMain = ({ details }: ChildProps) => {
   console.log(details);
   return (
-    <div className="w-full px-5">
-      <div className="h-15 flex text-sypher-light-darkBorder  items-end pb-3 border-b-sypher-light-border my-4 border-b">
-        Products:{" "}
-        <span className="ml-1 text-sypher-light-text">
-          {details?.totalProducts && `${details?.totalProducts}`}
-        </span>
+    <div className="w-[95%] pt-10 h-fit pb-10  bg-white px-5">
+      <div className="border-l-2 border-sypher-light-darkBorder px-4">
+        <div className="text-sypher-light-text font-semibold">
+          Website details
+        </div>
+        <div className="h-14 flex text-sypher-light-darkBorder  items-end pb-2 border-b-sypher-light-border mb-2 border-b">
+          Products:{" "}
+          <span className="ml-1 text-sypher-light-text">
+            {details?.totalProducts && `${details?.totalProducts}`}
+          </span>
+        </div>
+        <div className="h-14 flex text-sypher-light-darkBorder  items-end pb-3 border-b-sypher-light-border my-2 border-b">
+          Orders:{" "}
+          <span className="ml-1 text-sypher-light-text">
+            {details?.totalOrders && `${details?.totalOrders}`}
+          </span>
+        </div>
+        <div className="h-14 flex text-sypher-light-darkBorder  items-end pb-3 border-b-sypher-light-border my-2 border-b">
+          Users:{" "}
+          <span className="ml-1 text-sypher-light-text">
+            {details?.totalUsers && `${details?.totalUsers}`}
+          </span>
+        </div>
       </div>
-      <div className="h-15 flex text-sypher-light-darkBorder  items-end pb-3 border-b-sypher-light-border my-4 border-b">
-        Orders:{" "}
-        <span className="ml-1 text-sypher-light-text">
-          {details?.totalOrders && `${details?.totalOrders}`}
-        </span>
-      </div>
+
       <div className="flex w-full  border-b border-b-sypher-light-border flex-col mt-15 min-h-50">
         <Link className={``} href={`/product/allproducts`}>
           <div className="w-full text-sypher-light-text shrink-0 py-5 my-1 h-15 flex items-center">

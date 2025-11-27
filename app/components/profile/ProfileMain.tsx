@@ -2,7 +2,7 @@
 import { IUser } from "@/models/user";
 import ProfileItemComponent from "./ProfileItemComponent";
 import { useRouter } from "next/navigation";
-import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
+import { FaArrowRight, FaArrowLeft, FaEdit } from "react-icons/fa";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import api from "@/libs/api";
@@ -86,13 +86,13 @@ const ProfileMain = ({ user }: ChildProps) => {
           />
           <button
             onClick={() => router.push(`/profile/${user?.name}/edit`)}
-            className="h-13 my-3 rounded-2xl cursor-pointer text-white w-full bg-blue-600"
+            className="h-13 flex items-center justify-center mt-8 rounded-2xl cursor-pointer text-white w-full bg-blue-600"
           >
-            Edit
+            Edit <FaEdit className="ml-3 text-lg mb-1" />
           </button>
           <div
             onClick={() => setChangePass(true)}
-            className="cursor-pointer h-10 mt-10 flex items-center"
+            className="cursor-pointer text-sypher-light-text h-10 mt-10 flex items-center"
           >
             Change Password <FaArrowRight className="ml-2" />
           </div>
@@ -142,14 +142,14 @@ const ProfileMain = ({ user }: ChildProps) => {
           <div className="w-full flex justify-center items-center my-6">
             <div
               onClick={() => router.push("/user/forgot-password")}
-              className="text-blue-500"
+              className="text-white rounded-lg mt-10 text-sm bg-black w-full h-13 flex justify-center items-center"
             >
               Forgot Password
             </div>
           </div>
           <div
             onClick={() => setChangePass(false)}
-            className="cursor-pointer h-10 mt-10 flex items-center"
+            className="cursor-pointer text-sypher-light-text h-10 mt-10 flex items-center"
           >
             <FaArrowLeft className="mr-3" /> Back to Profile
           </div>

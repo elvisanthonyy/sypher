@@ -9,7 +9,7 @@ interface ChildProps {
 const AllProdMain = ({ products }: ChildProps) => {
   return (
     <div>
-      <div>
+      <div className="bg-none">
         {products?.map((product) => (
           <div key={product._id} className="relative">
             <AdminProduct product={product} />
