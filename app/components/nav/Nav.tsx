@@ -29,7 +29,7 @@ const Nav = async ({ name }: ChildProps) => {
         className={`cursor-pointer ${name === "profile" ? "hidden" : "flex"}`}
         href={"/"}
       >
-        <div className="font-semibold">SYPHER</div>
+        <div className="font-semibold">UC DOM</div>
       </Link>
       {session ? (
         <Link href={`/profile/${encodeURI(session?.user?.name)}`}>

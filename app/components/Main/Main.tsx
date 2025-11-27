@@ -7,6 +7,7 @@ import ProductComponent from "./ProductComponent";
 import { getCookies } from "@/app/utils/getCookie";
 import FilterComponent from "../filter/FilterComponent";
 import { useRouter } from "next/navigation";
+import HomeLoading from "../loading/HomeLoading";
 
 interface ChildProps {
   session: Session | null;
@@ -55,106 +56,112 @@ const Main = ({ session, products }: ChildProps) => {
   return (
     <main className="h-dvh pt-30 flex flex-col w-full top-0 left-0 relative">
       <FilterComponent mainRange={mainRange} setMainRange={setMainRange} />
-      <div className="flex  shrink-0 custom-scrollbar mt-2 border-sypher-light-border overflow-x-scroll justify-start items-center w-auto min-w-full ">
-        {products &&
-          products
-            ?.filter((product: IProduct) =>
-              product?.name.toLowerCase().includes("hp")
-            )
-            .map((product: IProduct) => (
-              <div
-                key={product._id}
-                className={`flex mx-1 ${
-                  Number(product.price) >= mainRange.start &&
-                  Number(product.price) <= mainRange.end
-                    ? "flex"
-                    : "hidden"
-                }`}
-              >
-                <ProductComponent mainRange={mainRange} product={product} />
-              </div>
-            ))}
-      </div>
-      <div className="flex  min-h-0 shrink-0 custom-scrollbar mt-2 custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
-        {products &&
-          products
-            ?.filter((product: IProduct) =>
-              product.name.toLowerCase().includes("dell")
-            )
-            .map((product: IProduct) => (
-              <div
-                key={product._id}
-                className={`flex mx-1 ${
-                  Number(product.price) >= mainRange.start &&
-                  Number(product.price) <= mainRange.end
-                    ? "flex"
-                    : "hidden"
-                }`}
-              >
-                <ProductComponent mainRange={mainRange} product={product} />
-              </div>
-            ))}
-      </div>
-      <div className="flex shrink-0 custom-scrollbar my-3  custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
-        {products
-          ?.filter((product: IProduct) =>
-            product.name.toLowerCase().includes("lenovo")
-          )
-          .map((product: IProduct, index) => (
-            <div
-              key={product._id}
-              className={`flex mx-1 ${
-                Number(product.price) >= mainRange.start &&
-                Number(product.price) <= mainRange.end
-                  ? "flex"
-                  : "hidden"
-              }`}
-            >
-              <ProductComponent mainRange={mainRange} product={product} />
-            </div>
-          ))}
-      </div>
-      <div className="flex shrink-0 custom-scrollbar my-3  custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
-        {products
-          ?.filter((product: IProduct) =>
-            product.name.toLowerCase().includes("mac")
-          )
-          .map((product: IProduct, index) => (
-            <div
-              key={product._id}
-              className={`flex mx-1 ${
-                Number(product.price) >= mainRange.start &&
-                Number(product.price) <= mainRange.end
-                  ? "flex"
-                  : "hidden"
-              }`}
-            >
-              <ProductComponent mainRange={mainRange} product={product} />
-            </div>
-          ))}
-      </div>
-      <div className="flex shrink-0 custom-scrollbar my-3  custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
-        {products
-          ?.filter(
-            (product: IProduct) =>
-              !exclude.some((ex) =>
-                product.name.toLowerCase().includes(ex.toLowerCase())
+      {!products ? (
+        <HomeLoading />
+      ) : (
+        <>
+          <div className="flex  shrink-0 custom-scrollbar mt-2 border-sypher-light-border overflow-x-scroll justify-start items-center w-auto min-w-full ">
+            {products &&
+              products
+                ?.filter((product: IProduct) =>
+                  product?.name.toLowerCase().includes("hp")
+                )
+                .map((product: IProduct) => (
+                  <div
+                    key={product._id}
+                    className={`flex mx-1 ${
+                      Number(product.price) >= mainRange.start &&
+                      Number(product.price) <= mainRange.end
+                        ? "flex"
+                        : "hidden"
+                    }`}
+                  >
+                    <ProductComponent mainRange={mainRange} product={product} />
+                  </div>
+                ))}
+          </div>
+          <div className="flex  min-h-0 shrink-0 custom-scrollbar mt-2 custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
+            {products &&
+              products
+                ?.filter((product: IProduct) =>
+                  product.name.toLowerCase().includes("dell")
+                )
+                .map((product: IProduct) => (
+                  <div
+                    key={product._id}
+                    className={`flex mx-1 ${
+                      Number(product.price) >= mainRange.start &&
+                      Number(product.price) <= mainRange.end
+                        ? "flex"
+                        : "hidden"
+                    }`}
+                  >
+                    <ProductComponent mainRange={mainRange} product={product} />
+                  </div>
+                ))}
+          </div>
+          <div className="flex shrink-0 custom-scrollbar my-3  custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
+            {products
+              ?.filter((product: IProduct) =>
+                product.name.toLowerCase().includes("lenovo")
               )
-          )
-          .map((product: IProduct, index) => (
-            <div
-              key={product._id}
-              className={`flex mx-1 ${
-                Number(product.price) >= mainRange.start &&
-                Number(product.price) <= mainRange.end
-                  ? "flex"
-                  : "hidden"
-              }`}
-            >
-              <ProductComponent mainRange={mainRange} product={product} />
-            </div>
-          ))}
-      </div>
+              .map((product: IProduct, index) => (
+                <div
+                  key={product._id}
+                  className={`flex mx-1 ${
+                    Number(product.price) >= mainRange.start &&
+                    Number(product.price) <= mainRange.end
+                      ? "flex"
+                      : "hidden"
+                  }`}
+                >
+                  <ProductComponent mainRange={mainRange} product={product} />
+                </div>
+              ))}
+          </div>
+          <div className="flex shrink-0 custom-scrollbar my-3  custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
+            {products
+              ?.filter((product: IProduct) =>
+                product.name.toLowerCase().includes("mac")
+              )
+              .map((product: IProduct, index) => (
+                <div
+                  key={product._id}
+                  className={`flex mx-1 ${
+                    Number(product.price) >= mainRange.start &&
+                    Number(product.price) <= mainRange.end
+                      ? "flex"
+                      : "hidden"
+                  }`}
+                >
+                  <ProductComponent mainRange={mainRange} product={product} />
+                </div>
+              ))}
+          </div>
+          <div className="flex shrink-0 custom-scrollbar my-3  custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
+            {products
+              ?.filter(
+                (product: IProduct) =>
+                  !exclude.some((ex) =>
+                    product.name.toLowerCase().includes(ex.toLowerCase())
+                  )
+              )
+              .map((product: IProduct, index) => (
+                <div
+                  key={product._id}
+                  className={`flex mx-1 ${
+                    Number(product.price) >= mainRange.start &&
+                    Number(product.price) <= mainRange.end
+                      ? "flex"
+                      : "hidden"
+                  }`}
+                >
+                  <ProductComponent mainRange={mainRange} product={product} />
+                </div>
+              ))}
+          </div>
+        </>
+      )}
       {acceptCookiesModal && (
         <div className="fixed flex-col justify-center items-center left-0 bottom-0 flex w-full h-55 rounded-tl-2xl rounded-tr-2xl bg-black">
           <div className="text-white">Do you want to accept cookies?</div>
