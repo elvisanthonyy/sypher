@@ -93,7 +93,17 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const updateQuantity = (id: string, qty: number) => {
     setCart((prev) => prev.map((i) => (i._id === id ? { ...i, qty } : i)));
   };
-  const clearCart = () => setCart([]);
+  //clear cart
+  const clearCart = () => {
+    if (!session && !cookie) {
+      setCart([]);
+    } else {
+      api
+        .post("/api/cart/clear", { userId: session?.user?.id, cartId: cookie })
+        .then((res) => {})
+        .catch((error) => [console.error("error", error)]);
+    }
+  };
   useEffect(() => {
     //return nothing if session is loading
     if (status === "loading") return;

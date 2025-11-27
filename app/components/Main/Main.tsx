@@ -6,6 +6,7 @@ import { IProduct } from "@/models/product";
 import ProductComponent from "./ProductComponent";
 import { getCookies } from "@/app/utils/getCookie";
 import FilterComponent from "../filter/FilterComponent";
+import { useRouter } from "next/navigation";
 
 interface ChildProps {
   session: Session | null;
@@ -18,6 +19,7 @@ export interface MainRange {
 }
 
 const Main = ({ session, products }: ChildProps) => {
+  const router = useRouter();
   const [acceptCookiesModal, setAcceptCookiesModal] = useState(false);
   const exclude = ["hp", "mac", "dell", "lenovo"];
   const [mainRange, setMainRange] = useState<MainRange>({
@@ -26,11 +28,14 @@ const Main = ({ session, products }: ChildProps) => {
   });
 
   const acceptCookies = () => {
+    const cart = JSON.parse(localStorage.getItem("cart"));
     api
-      .get("/api/cookies/accept")
+      .post("/api/cookies/accept", { cartItems: cart })
       .then((res) => {
         if (res.data.ok === true) {
           setAcceptCookiesModal(false);
+          router.refresh();
+          localStorage.removeItem("cart");
         }
       })
       .catch((error) => console.error("Error", error));

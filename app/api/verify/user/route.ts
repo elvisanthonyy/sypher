@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import dbConnect from "@/libs/dbConnect";
 import { User } from "@/models/user";
+import { Cart } from "@/models/cart";
 
 interface ReqBody {
   email: string;
@@ -12,6 +13,7 @@ const handler = async (req: Request) => {
   const { email, otp } = (await req.json()) as ReqBody;
   try {
     const user = await User.findOne({ email: email });
+
     if (!user) {
       return NextResponse.json({ status: "error", message: "user not found" });
     }
@@ -36,6 +38,9 @@ const handler = async (req: Request) => {
     user.otp = undefined;
     user.otpExpires = undefined;
 
+    const userCart = await Cart.create({
+      userId: user._id,
+    });
     await user.save();
     return NextResponse.json({ status: "okay", message: "User verified" });
   } catch (error) {

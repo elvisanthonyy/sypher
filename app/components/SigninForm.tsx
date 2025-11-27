@@ -7,8 +7,10 @@ import { useRouter } from "next/navigation";
 import { FaUser, FaEye, FaEyeSlash, FaLock } from "react-icons/fa";
 import Loading from "./loading/Loading";
 import { toast } from "react-toastify";
+import api from "@/libs/api";
 import { useCart } from "../context/CartContext";
 import { useSession } from "next-auth/react";
+import { error } from "console";
 
 interface FormFields {
   email: string;
@@ -31,17 +33,42 @@ const SigninForm = () => {
       email: data.email,
       password: data.password,
       adminLogin: false,
+      bam: "hi",
     });
 
     if (!result?.error) {
-      setLoading(false);
-      toast.success("Log in successfull", {
+      const guestCart = localStorage.getItem("cart");
+      const cookies = document.cookie;
+      const match = cookies
+        .split("; ")
+        .find((row) => row.startsWith("cart_id"))
+        ?.split("=")[1];
+
+      if (match || guestCart) {
+        api
+          .post("/api/cart/merge", {
+            cartId: match,
+            cartItems: JSON.parse(guestCart),
+          })
+          .then((res) => {
+            if (res.data.status === "okay") {
+              setLoading(false);
+              localStorage.removeItem("cart");
+              document.cookie = "cart_id=; path=/; max-age=0";
+            }
+          })
+          .catch((error) => {
+            console.error("error", error);
+          });
+      }
+      toast.success("Login successfull", {
         theme: "dark",
         position: "top-center",
       });
+
       setTimeout(() => {
         router.push("/");
-      }, 1000);
+      }, 1500);
     } else if (result?.error === "user not verified") {
       setLoading(false);
       console.error(result?.error);
