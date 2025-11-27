@@ -6,6 +6,10 @@ import OrderMain from "@/app/components/order/OrderMain";
 
 const baseURL = process.env.BASE_URL;
 
+export const metadata = {
+  title: "Order Product",
+};
+
 const page = async ({ params }: { params: { productId: string } }) => {
   const req = await params;
   const session = await getServerSession(authOptions);

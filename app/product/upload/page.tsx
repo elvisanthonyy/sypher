@@ -4,6 +4,10 @@ import { getSession } from "@/app/utils/getSession";
 import dbConnect from "@/libs/dbConnect";
 import { redirect } from "next/navigation";
 
+export const metadata = {
+  title: "Upload Product as admin",
+};
+
 const page = async () => {
   await dbConnect();
   const session = await getSession();

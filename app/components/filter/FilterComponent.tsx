@@ -18,7 +18,7 @@ const FilterComponent = ({ setMainRange }: ChildProps) => {
   };
   return (
     <div className="w-full h-13 border-b border-b-sypher-light-darkBorder px-5 r fixed flex text-sypher-light-text justify-between items-center top-18 left-0 z-20 bg-white">
-      <div className="">Filter by price </div>
+      <div className="font-semibold">Filter by price </div>
       <div>-</div>
       <div className="h-8 w-auto relative flex justify-center">
         <select

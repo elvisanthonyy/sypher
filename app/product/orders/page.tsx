@@ -7,6 +7,10 @@ import ProfileNav from "@/app/components/profile/ProfileNav";
 
 const baseURL = process.env.BASE_URL;
 
+export const metadata = {
+  title: "All Users orders",
+};
+
 const page = async () => {
   await dbConnect();
   const session = await getSession();

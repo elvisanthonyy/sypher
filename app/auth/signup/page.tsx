@@ -1,4 +1,9 @@
 import Form from "@/app/components/Form";
+import { title } from "process";
+
+export const metadata = {
+  title: "Sign Up",
+};
 
 const page = () => {
   return (

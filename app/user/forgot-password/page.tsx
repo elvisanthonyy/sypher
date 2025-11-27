@@ -1,4 +1,9 @@
 import ForgetPassMain from "@/app/components/forget/ForgetPassMain";
+import { title } from "process";
+
+export const metadata = {
+  title: "Forgot Password",
+};
 
 const page = () => {
   return (

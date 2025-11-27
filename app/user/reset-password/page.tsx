@@ -1,5 +1,9 @@
 import ResetPassMain from "@/app/components/forget/ResetPassMain";
 
+export const metadata = {
+  title: "Reset Password",
+};
+
 type SearchParams = {
   [key: string]: string | string[] | undefined;
 };

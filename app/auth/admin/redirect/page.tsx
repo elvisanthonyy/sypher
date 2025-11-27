@@ -1,5 +1,9 @@
 import Link from "next/link";
 
+export const metadata = {
+  title: "You are not an admin",
+};
+
 const page = () => {
   return (
     <div className="w-full h-dvh flex flex-col justify-center items-center">

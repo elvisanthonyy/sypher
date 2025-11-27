@@ -143,9 +143,9 @@ const SigninForm = () => {
         </button>
         <div
           onClick={() => router.push("/user/forgot-password")}
-          className="w-full text-center text-blue-700"
+          className="w-full text-center text-blue-400"
         >
-          Forget Password
+          forgot Password?
         </div>
       </form>
       <div onClick={() => router.push("/auth/signup")} className="w-full px-5">

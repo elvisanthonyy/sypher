@@ -4,8 +4,13 @@ import { Session } from "next-auth";
 import Main from "./components/Main/Main";
 import Nav from "./components/nav/Nav";
 import dbConnect from "@/libs/dbConnect";
+import { title } from "process";
 
 const baseURL = process.env.BASE_URL;
+
+export const metadata = {
+  title: "Home",
+};
 
 export default async function Home() {
   await dbConnect();

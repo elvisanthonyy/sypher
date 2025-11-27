@@ -7,6 +7,10 @@ import { cookies } from "next/headers";
 
 const baseURL = process.env.BASE_URL;
 
+export const metadata = {
+  title: "All Products",
+};
+
 const page = async () => {
   await dbConnect();
   const session = await getSession();

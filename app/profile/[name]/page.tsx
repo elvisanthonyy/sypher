@@ -7,6 +7,13 @@ import ProfileMain from "@/app/components/profile/ProfileMain";
 
 const baseURL = process.env.BASE_URL;
 
+export async function generateMetadata({ params }) {
+  const reqBody = await params;
+  return {
+    title: `${decodeURI(reqBody.name)}`,
+  };
+}
+
 const page = async () => {
   await dbConnect();
   const session = await getServerSession(authOptions);

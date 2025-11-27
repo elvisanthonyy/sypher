@@ -42,19 +42,19 @@ const AdminMain = ({ details }: ChildProps) => {
       <div className="flex w-full  border-b border-b-sypher-light-border flex-col mt-15 min-h-50">
         <Link className={``} href={`/product/allproducts`}>
           <div className="w-full text-sypher-light-text shrink-0 py-5 my-1 h-15 flex items-center">
-            <FiShoppingBag className="mr-5 text-2xl" /> My Products
+            <FiShoppingBag className="mr-5 text-2xl" /> All Products
+          </div>
+        </Link>
+        <Link className={`w-full flex`} href={`/user/admin/orders`}>
+          <div className="w-full shrink-0 text-sypher-light-text py-5 my-1 h-15 flex items-center">
+            <MdInventory className="mr-5 text-2xl text-sypher-light-text" /> All
+            Orders
           </div>
         </Link>
         <Link className={`w-full flex`} href={`/product/upload`}>
           <div className="w-full shrink-0 text-sypher-light-text py-5 my-1 h-15 flex items-center">
             <MdUpload className="mr-5 border rounded-sm text-xl text-sypher-light-text" />{" "}
             Upload Product
-          </div>
-        </Link>
-        <Link className={`w-full flex`} href={`/user/admin/orders`}>
-          <div className="w-full shrink-0 text-sypher-light-text py-5 my-1 h-15 flex items-center">
-            <MdInventory className="mr-5 text-xl text-sypher-light-text" /> All
-            Orders
           </div>
         </Link>
       </div>

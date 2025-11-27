@@ -6,6 +6,12 @@ import EditMain from "./EditMain";
 
 const baseURL = process.env.BASE_URL;
 
+export async function generateMetadata({ params }) {
+  const reqBody = await params;
+  return {
+    title: `Edit ${decodeURI(reqBody.name)}'s Profile`,
+  };
+}
 const page = async () => {
   await dbConnect();
   const session = await getSession();

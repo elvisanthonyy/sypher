@@ -6,6 +6,13 @@ import { redirect } from "next/navigation";
 
 const baseURL = process.env.BASE_URL;
 
+export async function generateMetadata({ params }) {
+  const reqBody = await params;
+  return {
+    title: `Delete product ${decodeURI(reqBody.id)}`,
+  };
+}
+
 const page = async ({ params }: { params: { id: string } }) => {
   const session = await getSession();
   const paramReq = await params;
