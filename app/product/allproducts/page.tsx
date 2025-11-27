@@ -26,7 +26,7 @@ const page = async () => {
   console.log(data);
 
   return (
-    <div className="w-full flex flex-col min-h-dvh pt-22">
+    <div className="w-full flex flex-col min-h-dvh pt-14">
       <ProfileNav />
       <AllProdMain products={data.products} />
     </div>

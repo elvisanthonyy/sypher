@@ -21,7 +21,7 @@ const AdminProduct = ({ product }: ChildProps) => {
       });
   };
   return (
-    <div className="flex w-full my-5  mb-10 relative text-black border-b border-t border-sypher-light-border justify-start pb-4 bg-white items-center flex-col h-126">
+    <div className="flex w-full my-1  mb-10 relative text-black border-b border-t border-sypher-light-border justify-start pb-4 bg-white items-center flex-col h-126">
       <div className="shrink-0 overflow-hidden border-b  border-b-sypher-light-border w-full h-50 ">
         <div
           onClick={() => setIsDeleteModalOpen(false)}
@@ -86,7 +86,7 @@ const AdminProduct = ({ product }: ChildProps) => {
           </div>
           <div
             onClick={() => setIsDeleteModalOpen(true)}
-            className="w-12 h-12 rounded-lg flex justify-center items-center bg-blue-700 text-white"
+            className="w-12 h-12 rounded-lg flex justify-center items-center bg-blue-400 text-white"
           >
             <FaTrash />
           </div>

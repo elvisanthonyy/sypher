@@ -14,7 +14,7 @@
   --color-sypher-light-border: #d4d4d4;
   --color-sypher-light-darkBorder: #727272;
   --color-sypher-navGray: #ececec;
-  --color-sypher-light-text: #313131;
+  --color-sypher-light-text: #3a3a3a;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -35,7 +35,7 @@ body {
 }
 
 .helper {
-  color: #ececec;
+  color: #3a3a3a;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
