@@ -7,8 +7,8 @@ const CartMain = () => {
   const { cart, removeFromCart, clearCart } = useCart();
 
   return (
-    <div className="w-full flex-col min-h-[80dvh] flex pt-17">
-      <div className="w-full h-15 justify-between px-6 border-b flex items-center">
+    <div className="w-full flex-col min-h-[80dvh] flex pt-18">
+      <div className="w-full h-15 mb-2 justify-between px-6 border-b flex items-center">
         <div className="w-fit">Your Cart Items</div>
         <div
           onClick={clearCart}

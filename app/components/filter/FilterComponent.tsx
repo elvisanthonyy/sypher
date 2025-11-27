@@ -16,7 +16,7 @@ const FilterComponent = ({ setMainRange }: ChildProps) => {
     setMainRange((prev) => ({ ...prev, end: Number(e.split("-")[1]) }));
   };
   return (
-    <div className="w-full h-13 border-b border-b-sypher-light-darkBorder px-5 r fixed flex text-sypher-light-text justify-between items-center top-17 left-0 z-20 bg-white">
+    <div className="w-full h-13 border-b border-b-sypher-light-darkBorder px-5 r fixed flex text-sypher-light-text justify-between items-center top-18 left-0 z-20 bg-white">
       <div className="">Filter by price </div>
       <div>---</div>
       <select

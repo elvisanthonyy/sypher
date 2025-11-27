@@ -44,7 +44,7 @@ const Menu = ({ name, userId }: ChildProps) => {
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className={`bg-white w-[80%] h-full grid relative place-items-start text-gray-900 gap-y-5 auto-rows-min px-6 py-17 `}
+          className={`bg-white w-[80%] h-full grid relative place-items-start text-gray-900 gap-y-5 auto-rows-min px-6 py-18 `}
         >
           <Link className="w-full" href={"/"}>
             <div className="w-full shrink-0 py-5 pt-8 border-t border-t-sypher-light-border h-7 flex items-center">
