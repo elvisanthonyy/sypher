@@ -13,7 +13,7 @@ const CartProductItem = ({ cartItem, removeFromCart }: ChildProps) => {
   const total =
     cartItem?.price && cartItem?.qty ? cartItem?.price * cartItem?.qty : 0;
   return (
-    <div className="flex mx-auto shrink-0 bg-white justify-start py-4 my-1 border border-sypher-light-border text-black items-center flex-col w-[95%] min-h-113 bg-sypher-compGray">
+    <div className="flex mx-auto shrink-0 bg-white justify-start pb-4 my-1 border border-sypher-light-border text-black items-center flex-col w-[95%] min-h-113 bg-sypher-compGray">
       <div className="w-full overflow-hidden border-b border-b-sypher-light-darkBorder bg-sypher-light-border h-45 ">
         {cartItem?.image?.url && (
           <Image
