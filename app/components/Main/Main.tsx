@@ -53,9 +53,9 @@ const Main = ({ session, products }: ChildProps) => {
     }
   }, []);
   return (
-    <main className="h-dvh pt-34 w-full top-0 left-0 relative">
+    <main className="h-dvh pt-27 flex flex-col w-full top-0 left-0 relative">
       <FilterComponent mainRange={mainRange} setMainRange={setMainRange} />
-      <div className="flex custom-scrollbar my-3 border-sypher-light-border border-t overflow-x-scroll justify-start items-center w-auto min-w-full ">
+      <div className="flex  shrink-0 custom-scrollbar mt-2 border-sypher-light-border border-t overflow-x-scroll justify-start items-center w-auto min-w-full ">
         {products &&
           products
             ?.filter((product: IProduct) =>
@@ -75,7 +75,7 @@ const Main = ({ session, products }: ChildProps) => {
               </div>
             ))}
       </div>
-      <div className="flex custom-scrollbar my-3 custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
+      <div className="flex  min-h-0 shrink-0 custom-scrollbar mt-2 custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
         {products &&
           products
             ?.filter((product: IProduct) =>
@@ -95,7 +95,7 @@ const Main = ({ session, products }: ChildProps) => {
               </div>
             ))}
       </div>
-      <div className="flex custom-scrollbar my-3  custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
+      <div className="flex shrink-0 custom-scrollbar my-3  custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
         {products
           ?.filter((product: IProduct) =>
             product.name.toLowerCase().includes("lenovo")
@@ -114,7 +114,7 @@ const Main = ({ session, products }: ChildProps) => {
             </div>
           ))}
       </div>
-      <div className="flex custom-scrollbar my-3  custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
+      <div className="flex shrink-0 custom-scrollbar my-3  custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
         {products
           ?.filter((product: IProduct) =>
             product.name.toLowerCase().includes("mac")
@@ -133,7 +133,7 @@ const Main = ({ session, products }: ChildProps) => {
             </div>
           ))}
       </div>
-      <div className="flex custom-scrollbar my-3  custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
+      <div className="flex shrink-0 custom-scrollbar my-3  custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
         {products
           ?.filter(
             (product: IProduct) =>
