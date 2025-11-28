@@ -4,6 +4,8 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import api from "@/libs/api";
 import { toast } from "react-toastify";
 import { FaAngleDown } from "react-icons/fa";
+import Loading from "@/app/components/loading/Loading";
+import { useState } from "react";
 
 interface ChildProps {
   user: IUser;
@@ -20,6 +22,7 @@ interface FieldValues {
 
 const EditMain = ({ user }: ChildProps) => {
   const userId = user?._id;
+  const [loading, setLoading] = useState<boolean>(false);
   const { handleSubmit, register, reset } = useForm<FieldValues>({
     defaultValues: {
       name: user?.name,
@@ -32,9 +35,11 @@ const EditMain = ({ user }: ChildProps) => {
   });
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    setLoading(true);
     api
       .post("/api/profile/user/edit", { ...data, userId })
       .then((res) => {
+        setLoading(false);
         if (res.data.status === "okay") {
           toast.success(res.data.message, {
             theme: "dark",
@@ -43,7 +48,7 @@ const EditMain = ({ user }: ChildProps) => {
         }
       })
       .catch((error) => {
-        console.error("error", error);
+        setLoading(false);
         toast.error(error?.response?.message, {
           theme: "dark",
           position: "top-center",
@@ -96,8 +101,8 @@ const EditMain = ({ user }: ChildProps) => {
           type="date"
           className="border focus:outline-none border-sypher-light-darkBorder text-sypher-light-text px-4  my-3 w-full h-12 rounded-sm"
         />
-        <button className="w-full  h-13 my-2 bg-black text-white rounded-sm">
-          Edit
+        <button className="w-full flex justify-center items-center h-13 my-2 bg-black text-white rounded-sm">
+          {loading ? <Loading /> : "Edit"}
         </button>
       </form>
     </div>

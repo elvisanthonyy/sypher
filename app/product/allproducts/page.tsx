@@ -24,6 +24,7 @@ const page = async () => {
     headers: {
       Cookie: (await cookies()).toString(),
     },
+    cache: "no-store",
   });
 
   const data = await res.json();

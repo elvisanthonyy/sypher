@@ -54,7 +54,7 @@ const handler = async (req: Request) => {
         qty: qty,
         unitsAvailable: unitsAvailable,
         image: {
-          url: imageURL.toString(),
+          url: imageURL?.toString(),
         },
       } as any);
     }
@@ -63,7 +63,8 @@ const handler = async (req: Request) => {
 
     return NextResponse.json({ message: "item added or updated" });
   } catch (error) {
-    return NextResponse.json({ message: error });
+    console.error("error", error);
+    return NextResponse.json({ status: "error", message: error });
   }
 };
 

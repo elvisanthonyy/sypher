@@ -34,6 +34,7 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const { data: session, status } = useSession();
+  const [mounted, setMounted] = useState(true);
   const [cookie, setCookie] = useState<string | undefined>();
   const [cart, setCart] = useState<CartItem[]>([]);
 
@@ -63,7 +64,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
           qty: item.qty,
           imageURL: item?.image?.url,
         })
-        .then()
+        .then((res) => {})
         .catch((error) => {
           console.error("error", error);
         });
@@ -82,7 +83,9 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
           cartId: cookie,
           productId: productId,
         })
-        .then((res) => {})
+        .then((res) => {
+          setCart((prev) => prev.filter((i) => i.productId !== id));
+        })
         .catch((error) => {
           console.error("error", error);
         });
@@ -100,7 +103,9 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     } else {
       api
         .post("/api/cart/clear", { userId: session?.user?.id, cartId: cookie })
-        .then((res) => {})
+        .then((res) => {
+          setCart([]);
+        })
         .catch((error) => [console.error("error", error)]);
     }
   };
@@ -118,13 +123,11 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
     //if there is no session at all get from localstorage
     if (!match && !session) {
-      console.log("hello");
       const storedCart = localStorage.getItem("cart");
       if (storedCart) {
         setCart(JSON.parse(storedCart));
       }
     } else {
-      console.log("no");
       api
         .post("/api/cart/getitems", {
           cartId: match,

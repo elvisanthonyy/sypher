@@ -7,15 +7,30 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 
 interface ChildProps {
   product: IProduct;
+  stateProducts: IProduct[];
+  setStateProducts: React.Dispatch<React.SetStateAction<IProduct[]>>;
 }
 
-const AdminProduct = ({ product }: ChildProps) => {
+const AdminProduct = ({
+  product,
+  setStateProducts,
+  stateProducts,
+}: ChildProps) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const router = useRouter();
   const deleteProduct = () => {
     api
       .post("/api/product/delete", { productId: product._id })
-      .then(() => {})
+      .then((res) => {
+        if (res.data.message === "product deleted") {
+          setIsDeleteModalOpen(false);
+          const filteredProducts = stateProducts.filter(
+            (sProduct) => sProduct._id?.toString() !== product._id
+          );
+          console.log(filteredProducts.length);
+          setStateProducts(filteredProducts);
+        }
+      })
       .catch((err) => {
         console.error("error", err);
       });

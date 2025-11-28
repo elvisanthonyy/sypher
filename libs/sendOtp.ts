@@ -17,11 +17,16 @@ export async function sendOTP(email: string, otp: string) {
     });
 
     await transporter.sendMail({
-      from: process.env.EMAIL_USER,
+      from: `"UC DOM" <${process.env.EMAIL_USER}>`,
       to: email,
-      subject: "SYPHER - OTP",
-      html: `<h3 style="margin-bottom: 40px;"> OTP </h3>
-      <div style="height: 40px; display: flex; align-items: center;">Your OTP is <b style="margin-left: 5px;">${otp}</b>. It expires in 5 minutes.</div>`,
+      subject: "UC DOM - OTP",
+      html: `<h3 style="font: bold; margin-bottom: 30px; color: blue;"> UC DOM </h3>
+      <h3 style="margin-bottom: 40px;"> OTP </h3>
+      <div style="height: 40px; display: flex; align-items: center;">Verification code</div>
+      <div style="margin-left: 5px; font-size: 24px font: bold;">${otp}</div>
+      <div style="font-size: 8px;">(This code expires in 5 minutes)</div>
+      `,
+      headers: {},
     });
   } catch (error) {
     console.error("error in sending otp", error);

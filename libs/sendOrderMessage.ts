@@ -2,6 +2,7 @@ import nodemailer from "nodemailer";
 import { IOrder } from "@/models/order";
 
 export async function sendOrderMessage(order: IOrder) {
+  const orderDate = new Date(order.createdAt);
   try {
     const transporter = nodemailer.createTransport({
       service: "Gmail",
@@ -18,13 +19,21 @@ export async function sendOrderMessage(order: IOrder) {
     });
 
     await transporter.sendMail({
-      from: process.env.EMAIL_USER,
+      from: `"UC DOM" <${process.env.EMAIL_USER}>`,
       to: order.email,
-      subject: "SYPHER",
-      html: `<h3 style="margin-bottom: 50px">${order?.name},</h3>
-      <p style="margin-bottom: 50px">your order for <b>${order?.productName}</b> at the price of <b>N${order?.price},000.00 </b> on <b>${order.createdAt}</b>, has been succeccfully placed. Thank You. </p> 
+      subject: "UC DOM -ORDER",
+      html: `<h3 style="font: bold; margin-bottom: 30px; color: blue;"> UC DOM </h3>
+      <h3 style="margin-bottom: 50px">${order?.name},</h3>
+      <p style="margin-bottom: 50px">your order for <b>${
+        order?.productName
+      }</b> at the price of <b>N${
+        order?.price
+      },000.00 </b> on <b>${orderDate.toLocaleDateString(
+        "en-GB"
+      )}</b>, has been succeccfully placed. Thank You. </p> 
       <p style="margin-bottom: 30px;">Your OrderID - <b>${order._id}</b><p>
       <p>Contact 09045342672 on WhatsApp for more info</p>`,
+      headers: {},
     });
   } catch (error) {
     console.error("error in sending message", error);
