@@ -3,6 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import api from "@/libs/api";
 import { CartItem } from "@/app/context/CartContext";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 interface FormFields {
   name: string;
@@ -39,17 +40,20 @@ const OrderMain = ({ user, cartItem }: ChildProps) => {
   useEffect(() => {}, []);
 
   const onSubmit: SubmitHandler<FormFields> = (data) => {
-    if (user?.role !== "user") {
-      alert("you are the admin");
-    }
-
     api
       .post("/api/order/product", {
         ...data,
         userId: user?.id,
         itemId: cartItem?.productId,
       })
-      .then((res) => {})
+      .then((res) => {
+        if (res.data.status === "okay") {
+          toast.success(res.data.message.split(",")[0], {
+            theme: "dark",
+            position: "top-center",
+          });
+        }
+      })
       .catch((error) => {
         console.error("error", error);
       });
