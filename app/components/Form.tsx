@@ -45,7 +45,7 @@ const Form = () => {
       <form
         onChange={() => setMessage("")}
         onSubmit={handleSubmit(onSubmit)}
-        className="flex shrink-0 h-100 w-full px-5 justify-center items-center flex-col"
+        className="flex shrink-0 h-95 w-full px-5 justify-center items-center flex-col"
       >
         {message && <div className="text-red-600 mb-1">{message}</div>}
         <div className="w-full my-2 items-center height-auto relative flex">
@@ -139,7 +139,7 @@ const Form = () => {
           {loading ? <Loading /> : "sign up"}
         </button>
       </form>
-      <div className="w-full px-5 mt-10">
+      <div className="w-full px-5 mt-3">
         <button
           onClick={() => router.push("/auth/signin")}
           className="w-full border mx-auto h-14 rounded-2xl"

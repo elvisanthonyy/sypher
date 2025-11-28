@@ -22,7 +22,7 @@ export async function sendOrderMessage(order: IOrder) {
       from: `"UC DOM" <${process.env.EMAIL_USER}>`,
       to: order.email,
       subject: "Oreder has been placed successfully",
-      html: `<div style="width: 100%; display: flex; flex-direction: column; align-items: center;"><h3 style="font: bold; margin-bottom: 30px; color: #03a3ff;"> UC DOM </h3>
+      html: `<div style="width: 100%; display: flex; flex-direction: column; height: 100px; align-items: center;"><h3 style="font: bold; margin-bottom: 30px; color: #03a3ff;"> UC DOM </h3>
       <h3 style="margin-bottom: 50px">${order?.name},</h3>
       <p style="margin-bottom: 50px">your order for <b>${
         order?.productName
