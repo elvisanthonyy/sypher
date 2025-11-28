@@ -42,9 +42,6 @@ const Form = () => {
   };
   return (
     <>
-      <div className="w-30 text-xl h-30 flex justify-center items-center">
-        SYPHER
-      </div>
       <form
         onChange={() => setMessage("")}
         onSubmit={handleSubmit(onSubmit)}

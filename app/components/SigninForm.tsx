@@ -88,7 +88,7 @@ const SigninForm = () => {
       <form
         onSubmit={handleSubmit(onSubmit)}
         onChange={() => setMessage("")}
-        className="flex w-full px-5 justify-center h-100 flex-col"
+        className="flex w-full px-5 justify-center h-85 flex-col"
       >
         {message && (
           <div className="px-2 w-full text-center text-red-600">{message}</div>
