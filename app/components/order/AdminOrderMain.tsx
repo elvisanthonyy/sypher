@@ -17,7 +17,7 @@ const AdminOrderMain = ({ orders }: ChildProps) => {
       </div>
       <div className="w-full flex flex-col items-center">
         {orders?.map((order: IOrder) => (
-          <div className="w-[95%] " key={order._id}>
+          <div className="w-[95%] " key={order._id.toString()}>
             <AdminOrderComponent order={order} />
           </div>
         ))}

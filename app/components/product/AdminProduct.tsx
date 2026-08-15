@@ -25,7 +25,7 @@ const AdminProduct = ({
         if (res.data.message === "product deleted") {
           setIsDeleteModalOpen(false);
           const filteredProducts = stateProducts.filter(
-            (sProduct) => sProduct._id?.toString() !== product._id
+            (sProduct) => sProduct._id?.toString() !== product._id.toString(),
           );
           console.log(filteredProducts.length);
           setStateProducts(filteredProducts);

@@ -17,7 +17,10 @@ const UserOrdersMain = ({ orders }: ChildProps) => {
       </div>
       <div className=" min-h-[60dvh]">
         {orders?.map((order: IOrder) => (
-          <div className="w-full flex flex-col items-center" key={order?._id}>
+          <div
+            className="w-full flex flex-col items-center"
+            key={order?._id.toString()}
+          >
             <OrderComp order={order} />
           </div>
         ))}

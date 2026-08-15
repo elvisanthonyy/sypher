@@ -99,7 +99,10 @@ const Main = ({ session, products }: ChildProps) => {
           <div className="flex px-4 shrink-0 pt-4 custom-scrollbar border-b border-border overflow-x-scroll justify-start items-center w-auto min-w-full ">
             {hpProducts &&
               hpProducts.map((product: IProduct) => (
-                <div key={product._id} className={`flex bg-amber-50 mx-1`}>
+                <div
+                  key={product._id.toString()}
+                  className={`flex bg-amber-50 mx-1`}
+                >
                   <ProductComponent mainRange={mainRange} product={product} />
                 </div>
               ))}
@@ -108,7 +111,7 @@ const Main = ({ session, products }: ChildProps) => {
         {dellProducts?.length > 0 && (
           <div className="flex px-4 md:border-b border-b border-border min-h-0 shrink-0 custom-scrollbar mt-2 custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
             {dellProducts.map((product: IProduct) => (
-              <div key={product._id} className={`flex mx-1`}>
+              <div key={product._id.toString()} className={`flex mx-1`}>
                 <ProductComponent mainRange={mainRange} product={product} />
               </div>
             ))}
@@ -117,7 +120,7 @@ const Main = ({ session, products }: ChildProps) => {
         {lenovoProducts.length > 0 && (
           <div className="flex px-4 shrink-0 md:border-b border-b border-border custom-scrollbar my-3  custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
             {lenovoProducts.map((product: IProduct, index) => (
-              <div key={product._id} className={`flex mx-1`}>
+              <div key={product._id.toString()} className={`flex mx-1`}>
                 <ProductComponent mainRange={mainRange} product={product} />
               </div>
             ))}
@@ -126,7 +129,7 @@ const Main = ({ session, products }: ChildProps) => {
         {macProducts?.length > 0 && (
           <div className="flex px-4 shrink-0  custom-scrollbar my-3 border-b border-border custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
             {macProducts.map((product: IProduct, index) => (
-              <div key={product._id} className={`flex mx-1`}>
+              <div key={product._id.toString()} className={`flex mx-1`}>
                 <ProductComponent mainRange={mainRange} product={product} />
               </div>
             ))}
@@ -135,7 +138,7 @@ const Main = ({ session, products }: ChildProps) => {
         {otherProduct.length > 0 && (
           <div className="flex shrink-0 custom-scrollbar my-3  custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
             {otherProduct.map((product: IProduct, index) => (
-              <div key={product._id} className={`flex mx-1 `}>
+              <div key={product._id.toString()} className={`flex mx-1 `}>
                 <ProductComponent mainRange={mainRange} product={product} />
               </div>
             ))}
