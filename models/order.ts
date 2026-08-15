@@ -1,7 +1,7 @@
 import mongoose, { Document, models, Schema, Model, Types } from "mongoose";
 
 export interface IOrder extends Document {
-  _id: string;
+  _id: Types.ObjectId;
   userId: Types.ObjectId;
   name: string;
   email: string;
@@ -52,7 +52,7 @@ const OrderSchema = new mongoose.Schema<IOrder>(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 export const Order: Model<IOrder> =

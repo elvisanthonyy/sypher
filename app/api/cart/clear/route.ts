@@ -2,9 +2,10 @@ import { NextResponse } from "next/server";
 import dbConnect from "@/libs/dbConnect";
 import { Cart } from "@/models/cart";
 import { IItem } from "@/models/user";
+import { Types } from "mongoose";
 
 interface ReqBody extends IItem {
-  _id: string;
+  _id: Types.ObjectId;
   userId: string;
   cartId: string;
   unitsAvailable: number;
@@ -18,7 +19,7 @@ const handler = async (req: Request) => {
   try {
     const cart = await Cart.updateOne(
       userId ? { userId: userId } : { cartId: cartId },
-      { $pull: { items: {} } }
+      { $pull: { items: {} } },
     );
 
     return NextResponse.json({ message: "cart has been cleared" });

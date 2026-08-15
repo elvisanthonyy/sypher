@@ -1,7 +1,7 @@
-import mongoose, { Document, models, Model } from "mongoose";
+import mongoose, { Document, models, Model, Types } from "mongoose";
 
 export interface IProduct extends Document {
-  _id: string;
+  _id: Types.ObjectId;
   name: string;
   type: string;
   category: string;
@@ -42,7 +42,7 @@ const ProdusctSchema = new mongoose.Schema<IProduct>(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 export const Product: Model<IProduct> =

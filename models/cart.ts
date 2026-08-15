@@ -2,7 +2,7 @@ import mongoose, { Document, Schema, Model, Types } from "mongoose";
 import { IItem } from "./user";
 
 export interface ICart extends Document {
-  _id: string;
+  _id: Types.ObjectId;
   userId: string;
   cartId: string;
   items: Types.DocumentArray<IItem>;
