@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaUser, FaEye, FaEyeSlash, FaEnvelope, FaLock } from "react-icons/fa";
 import Loading from "./loading/Loading";
+import { toast } from "react-toastify";
+
 
 interface FormFields {
   name: string;
@@ -30,6 +32,11 @@ const Form = () => {
             router.push(
               `/verify/user/${encodeURIComponent(res.data.user.email)}`
             );
+          }else {
+            toast.error(res.data.message,{
+              theme: 'dark',
+              position: 'top-center'
+            })
           }
         })
         .catch((error) => {
