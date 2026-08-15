@@ -83,78 +83,87 @@ const SigninForm = () => {
     }
   };
   return (
-    <div className="w-full">
+    <div className="w-full px-4">
       <div></div>
       <form
         onSubmit={handleSubmit(onSubmit)}
         onChange={() => setMessage("")}
-        className="flex w-full px-5 justify-center h-85 flex-col"
+        className="flex w-full gap-6 p-4 py-14 border border-border bg-white rounded-[32px] justify-center h-fit flex-col"
       >
-        {message && (
-          <div className="px-2 w-full text-center text-red-600">{message}</div>
-        )}
-        <div className="w-full my-2 items-center height-auto relative flex">
-          <div className="absolute h-full flex items-center left-4 top-0 text-sypher-light-darkBorder">
-            <FaUser className="" />
-          </div>
+        <div className="flex w-full flex-col gap-2">
+          {message && (
+            <div className="px-2 w-full text-center text-red-600">
+              {message}
+            </div>
+          )}
 
-          <input
-            {...register("email", {
-              required: "email is required",
-            })}
-            placeholder="Email"
-            type="email"
-            className="flex bg-sypher-navGray px-12 text-sypher-light-text focus:outline-none h-13 rounded-2xl w-full"
-          />
-        </div>
-        <div className="w-full my-2 items-center height-auto relative flex">
-          <div className="absolute h-full flex items-center left-4 top-0 text-sypher-light-darkBorder">
-            <FaLock className="" />
-          </div>
+          <div className="w-full items-center height-auto relative flex">
+            <div className="absolute h-full flex items-center left-4 top-0 text-sypher-light-darkBorder">
+              <FaUser className="" />
+            </div>
 
-          <input
-            {...register("password", {
-              required: "password is required",
-            })}
-            placeholder="password"
-            type={isPasswordVisible ? "text" : "password"}
-            className="flex bg-sypher-navGray px-12 text-sypher-light-text  focus:outline-none h-13 rounded-2xl w-full"
-          />
+            <input
+              {...register("email", {
+                required: "email is required",
+              })}
+              placeholder="Email"
+              type="email"
+              className="flex border-border border px-12 text-text focus:outline-none h-13 rounded-2xl w-full"
+            />
+          </div>
+          <div className="w-full items-center height-auto relative flex">
+            <div className="absolute h-full flex items-center left-4 top-0 text-sypher-light-darkBorder">
+              <FaLock className="" />
+            </div>
+
+            <input
+              {...register("password", {
+                required: "password is required",
+              })}
+              placeholder="password"
+              type={isPasswordVisible ? "text" : "password"}
+              className="flex border-border border px-12 text-text  focus:outline-none h-13 rounded-2xl w-full"
+            />
+            <div
+              onClick={() =>
+                isPasswordVisible
+                  ? setIsPasswordVisble(false)
+                  : setIsPasswordVisble(true)
+              }
+              className="absolute cursor-pointer h-full flex items-center right-4 top-0 text-sypher-light-darkBorder"
+            >
+              {isPasswordVisible ? (
+                <FaEye className="" />
+              ) : (
+                <FaEyeSlash className="" />
+              )}
+            </div>
+          </div>
           <div
-            onClick={() =>
-              isPasswordVisible
-                ? setIsPasswordVisble(false)
-                : setIsPasswordVisble(true)
-            }
-            className="absolute cursor-pointer h-full flex items-center right-4 top-0 text-sypher-light-darkBorder"
+            onClick={() => router.push("/user/forgot-password")}
+            className="w-full text-[14px] flex justify-end text-blue-400"
           >
-            {isPasswordVisible ? (
-              <FaEye className="" />
-            ) : (
-              <FaEyeSlash className="" />
-            )}
+            forgot Password?
           </div>
         </div>
         <button
           disabled={loading ? true : false}
-          className="w-full cursor-pointer flex justify-center items-center text-white rounded-2xl my-4 h-13 bg-black"
+          className="w-full cursor-pointer text-[14px] flex justify-center items-center text-white rounded-[32px] h-13 bg-text"
         >
           {loading ? <Loading /> : "Log in"}
         </button>
-        <div
-          onClick={() => router.push("/user/forgot-password")}
-          className="w-full text-center text-blue-400"
-        >
-          forgot Password?
+
+        <div className="flex gap-2 items-center justify-center w-full px-5">
+          <div className="text-[14px] ">Don't have an account?</div>
+          <button
+            onClick={() => router.push("/auth/signup")}
+            className="text-[14px] cursor-pointer flex w-fit underline"
+          >
+            {" "}
+            Sign Up
+          </button>
         </div>
       </form>
-      <div onClick={() => router.push("/auth/signup")} className="w-full px-5">
-        <div className="w-full text-center mb-3 ">Don't have an account?</div>
-        <button className="w-full border mx-auto h-14 rounded-2xl">
-          {" "}
-          Sign Up
-        </button>
-      </div>
     </div>
   );
 };

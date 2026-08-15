@@ -1,5 +1,5 @@
 import Form from "@/app/components/Form";
-import { title } from "process";
+import Image from "next/image";
 
 export const metadata = {
   title: "Sign Up",
@@ -7,10 +7,17 @@ export const metadata = {
 
 const page = () => {
   return (
-    <div className="w-full flex-col h-dvh flex  items-center">
-      <div className="w-full flex-col font-semibold text-white bg-linear-to-br from-blue-600 to-green-300 text-3xl h-[30%] mb-10 flex justify-center items-center">
-        <div>UC DOM</div>
-        <p className="text-sm font-medium border-t">Computers</p>
+    <div className="w-full overflow-hidden flex-col h-dvh flex  items-center">
+      <div className="w-full relative flex-col text-3xl h-[30%] mb-10 flex justify-start items-center">
+        <div className="h-[80%] relative -left-60">
+          <Image
+            src="/backgrounds/signin-rings-mobile.svg"
+            width={1000}
+            height={1000}
+            alt="sign in image"
+            className="h-full"
+          />
+        </div>
       </div>
       <Form />
     </div>

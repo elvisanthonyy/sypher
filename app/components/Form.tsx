@@ -7,7 +7,6 @@ import { FaUser, FaEye, FaEyeSlash, FaEnvelope, FaLock } from "react-icons/fa";
 import Loading from "./loading/Loading";
 import { toast } from "react-toastify";
 
-
 interface FormFields {
   name: string;
   email: string;
@@ -30,13 +29,13 @@ const Form = () => {
           setLoading(false);
           if (res.data.status === "okay") {
             router.push(
-              `/verify/user/${encodeURIComponent(res.data.user.email)}`
+              `/verify/user/${encodeURIComponent(res.data.user.email)}`,
             );
-          }else {
-            toast.error(res.data.message,{
-              theme: 'dark',
-              position: 'top-center'
-            })
+          } else {
+            toast.error(res.data.message, {
+              theme: "dark",
+              position: "top-center",
+            });
           }
         })
         .catch((error) => {
@@ -48,114 +47,117 @@ const Form = () => {
     }
   };
   return (
-    <>
+    <div className="px-4 w-full">
       <form
         onChange={() => setMessage("")}
         onSubmit={handleSubmit(onSubmit)}
-        className="flex shrink-0 h-95 w-full px-5 justify-center items-center flex-col"
+        className="flex w-full gap-6 p-4 py-14 border border-border bg-white rounded-[32px] justify-center h-fit flex-col"
       >
-        {message && <div className="text-red-600 mb-1">{message}</div>}
-        <div className="w-full my-2 items-center height-auto relative flex">
-          <div className="absolute h-full flex items-center left-4 top-0 text-sypher-light-darkBorder">
-            <FaUser className="" />
+        <div className="gap-3 flex flex-col">
+          {message && <div className="text-red-600 mb-1">{message}</div>}
+          <div className="w-full items-center height-auto relative flex">
+            <div className="absolute h-full flex items-center left-4 top-0 text-sypher-light-darkBorder">
+              <FaUser className="" />
+            </div>
+
+            <input
+              {...register("name", {
+                required: "name is required",
+              })}
+              placeholder="Full name"
+              type="text"
+              className="flex border border-border text-text px-10 focus:outline-none h-13 rounded-2xl w-full"
+            />
           </div>
 
-          <input
-            {...register("name", {
-              required: "name is required",
-            })}
-            placeholder="Full name"
-            type="text"
-            className="flex bg-sypher-navGray px-12 text-sypher-light-text focus:outline-none h-13 rounded-2xl w-full"
-          />
+          <div className="w-full items-center height-auto relative flex">
+            <div className="absolute h-full flex items-center left-4 top-0 text-sypher-light-darkBorder">
+              <FaEnvelope className="" />
+            </div>
+
+            <input
+              {...register("email", {
+                required: "email is required",
+              })}
+              placeholder="Email"
+              type="email"
+              className="flex border border-border text-text px-10 focus:outline-none h-13 rounded-2xl w-full"
+            />
+          </div>
+          <div className="w-full items-center height-auto relative flex">
+            <div className="absolute h-full flex items-center left-4 top-0 text-sypher-light-darkBorder">
+              <FaLock className="" />
+            </div>
+
+            <input
+              {...register("password", {
+                required: "password is required",
+              })}
+              placeholder="Enter your Password"
+              type={isPasswordVisible ? "text" : "password"}
+              className="flex border border-border text-text px-10 focus:outline-none h-13 rounded-2xl w-full"
+            />
+
+            <div
+              onClick={() =>
+                isPasswordVisible
+                  ? setIsPasswordVisble(false)
+                  : setIsPasswordVisble(true)
+              }
+              className="absolute cursor-pointer h-full flex items-center right-4 top-0 text-sypher-light-darkBorder"
+            >
+              {isPasswordVisible ? (
+                <FaEye className="" />
+              ) : (
+                <FaEyeSlash className="" />
+              )}
+            </div>
+          </div>
+          <div className="w-full items-center height-auto relative flex">
+            <div className="absolute h-full flex items-center left-4 top-0 text-sypher-light-darkBorder">
+              <FaLock className="" />
+            </div>
+
+            <input
+              {...register("reapeatPassword", {
+                required: "reapeatPassword is required",
+              })}
+              placeholder=" Repeat password"
+              type={isPasswordVisible ? "text" : "password"}
+              className="flex border border-border text-text px-10 focus:outline-none h-13 rounded-2xl w-full"
+            />
+
+            <div
+              onClick={() =>
+                isPasswordVisible
+                  ? setIsPasswordVisble(false)
+                  : setIsPasswordVisble(true)
+              }
+              className="absolute cursor-pointer h-full flex items-center right-4 top-0 text-sypher-light-darkBorder"
+            >
+              {isPasswordVisible ? (
+                <FaEye className="" />
+              ) : (
+                <FaEyeSlash className="" />
+              )}
+            </div>
+          </div>
         </div>
-
-        <div className="w-full my-2 items-center height-auto relative flex">
-          <div className="absolute h-full flex items-center left-4 top-0 text-sypher-light-darkBorder">
-            <FaEnvelope className="" />
-          </div>
-
-          <input
-            {...register("email", {
-              required: "email is required",
-            })}
-            placeholder="Email"
-            type="email"
-            className="flex bg-sypher-navGray px-12 text-sypher-light-text focus:outline-none h-13 rounded-2xl w-full"
-          />
-        </div>
-        <div className="w-full my-2 items-center height-auto relative flex">
-          <div className="absolute h-full flex items-center left-4 top-0 text-sypher-light-darkBorder">
-            <FaLock className="" />
-          </div>
-
-          <input
-            {...register("password", {
-              required: "password is required",
-            })}
-            placeholder="password"
-            type={isPasswordVisible ? "text" : "password"}
-            className="flex bg-sypher-navGray px-12 text-sypher-light-text focus:outline-none h-13 rounded-2xl w-full"
-          />
-
-          <div
-            onClick={() =>
-              isPasswordVisible
-                ? setIsPasswordVisble(false)
-                : setIsPasswordVisble(true)
-            }
-            className="absolute cursor-pointer h-full flex items-center right-4 top-0 text-sypher-light-darkBorder"
-          >
-            {isPasswordVisible ? (
-              <FaEye className="" />
-            ) : (
-              <FaEyeSlash className="" />
-            )}
-          </div>
-        </div>
-        <div className="w-full my-2 items-center height-auto relative flex">
-          <div className="absolute h-full flex items-center left-4 top-0 text-sypher-light-darkBorder">
-            <FaLock className="" />
-          </div>
-
-          <input
-            {...register("reapeatPassword", {
-              required: "reapeatPassword is required",
-            })}
-            placeholder=" Repeat password"
-            type={isPasswordVisible ? "text" : "password"}
-            className="flex bg-sypher-navGray px-12 text-sypher-light-text focus:outline-none h-13 rounded-2xl w-full"
-          />
-
-          <div
-            onClick={() =>
-              isPasswordVisible
-                ? setIsPasswordVisble(false)
-                : setIsPasswordVisble(true)
-            }
-            className="absolute cursor-pointer h-full flex items-center right-4 top-0 text-sypher-light-darkBorder"
-          >
-            {isPasswordVisible ? (
-              <FaEye className="" />
-            ) : (
-              <FaEyeSlash className="" />
-            )}
-          </div>
-        </div>
-        <button className="w-full cursor-pointer flex justify-center items-center text-white rounded-2xl my-4 h-13 bg-black">
+        <button className="w-full cursor-pointer flex justify-center items-center text-white rounded-[32px] my-4 h-13 bg-text">
           {loading ? <Loading /> : "sign up"}
         </button>
+        <div className="w-full flex justify-center gap-2 items-center px-5">
+          <div>Have an account?</div>
+          <button
+            onClick={() => router.push("/auth/signin")}
+            className="underline w-fit"
+          >
+            {" "}
+            Log In
+          </button>
+        </div>
       </form>
-      <div className="w-full px-5 mt-3">
-        <button
-          onClick={() => router.push("/auth/signin")}
-          className="w-full border mx-auto h-14 rounded-2xl"
-        >
-          {" "}
-          Log In
-        </button>
-      </div>
-    </>
+    </div>
   );
 };
 
