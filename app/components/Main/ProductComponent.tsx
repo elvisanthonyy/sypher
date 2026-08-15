@@ -39,7 +39,7 @@ const ProductComponent = ({ product, mainRange }: ChildProps) => {
           <div className="text-[8px] text-white bg-text w-5 h-auto aspect-square flex justify-center items-center rounded-full">{`${Number(product?.unitsAvailable)}`}</div>
         </div>
 
-        <h1 className="text-[14px] ">{product?.name}</h1>
+        <h1 className="text-[14px] font-semibold">{product?.name}</h1>
 
         <div className="text-[14px]">{product?.category}</div>
 

@@ -54,7 +54,15 @@ const Nav = async ({ name }: ChildProps) => {
               <div className="mr-2">{session?.user?.name}</div>
             )}
             {session.user.role === "admin" ? (
-              <RiAdminFill className="mr-5 text-3xl p-[3px] rounded-full px-px border-[1.7px]" />
+              <div className="w-[20px] flex aspect-square ">
+                <Image
+                  src="/icons/admin-icon.svg"
+                  alt="Logo"
+                  width={24}
+                  height={24}
+                  className="w-full w-full text-white"
+                />
+              </div>
             ) : name === "profile" ? (
               <RiVerifiedBadgeFill className="text-lg" />
             ) : (

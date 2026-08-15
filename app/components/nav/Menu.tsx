@@ -10,6 +10,7 @@ import { FaUser } from "react-icons/fa";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
 import { MdUpload } from "react-icons/md";
+import Image from "next/image";
 
 interface ChildProps {
   name: string | undefined;
@@ -27,7 +28,7 @@ const Menu = ({ name, userId, role, userName }: ChildProps) => {
         onClick={() =>
           isMenuOpen ? setIsMenuOpen(false) : setIsMenuOpen(true)
         }
-        className=" flex z-120"
+        className=" flex z-120 w-full"
       >
         {isMenuOpen ? (
           <IoClose className="text-2xl text-text" />
@@ -50,21 +51,48 @@ const Menu = ({ name, userId, role, userName }: ChildProps) => {
           className={`bg-white w-[80%] h-full grid relative place-items-start text-gray-900 gap-y-5 auto-rows-min px-6 py-18 `}
         >
           <Link className="w-full" href={"/"}>
-            <div className="w-full border-t pt-8 border-t-sypher-light- text-sypher-light-text shrink-0 py-5  h-7 flex items-center">
-              <RiHomeLine className="mr-4 text-xl" /> Home
+            <div className="w-full pt-8  text-sypher-light-text shrink-0 py-5 gap-6 h-7 flex items-center">
+              <div className="w-[20px] h-[20px]">
+                <Image
+                  src="/icons/home-icon.svg"
+                  alt="Logo"
+                  width={20}
+                  height={20}
+                  className="w-full h-full"
+                />
+              </div>
+              Home
             </div>
           </Link>
           {name !== "profile" && (
             <Link className="w-full" href={`/profile/${encodeURI(userName)}`}>
-              <div className="w-full text-sypher-light-text shrink-0 py-5  h-7 flex items-center">
-                <FaUser className="mr-5 text-lg" /> Profile
+              <div className="w-full text-sypher-light-text gap-6 shrink-0 py-5  h-7 flex items-center">
+                <div className="w-[20px] h-[20px]">
+                  <Image
+                    src="/icons/profile-icon.svg"
+                    alt="Logo"
+                    width={20}
+                    height={20}
+                    className="w-full h-full"
+                  />
+                </div>{" "}
+                Profile
               </div>
             </Link>
           )}
 
           <Link className="w-full" href={"/product/orders"}>
-            <div className="w-full text-sypher-light-text shrink-0 py-5  h-10 flex items-center">
-              <MdInventory className="mr-4 -ml-0.5 text-xl" /> Orders
+            <div className="w-full text-sypher-light-text shrink-0 py-5 gap-6 h-10 flex items-center">
+              <div className="w-[20px] h-[20px]">
+                <Image
+                  src="/icons/orders-icon.svg"
+                  alt="Logo"
+                  width={20}
+                  height={20}
+                  className="w-full h-full"
+                />
+              </div>{" "}
+              Orders
             </div>
           </Link>
 
@@ -72,8 +100,16 @@ const Menu = ({ name, userId, role, userName }: ChildProps) => {
             className={`w-full ${name === "admin" ? "hidden" : "block"}`}
             href={`/user/admin`}
           >
-            <div className="w-full text-sypher-light-text shrink-0 py-5 h-10 flex items-center">
-              <RiAdminLine className="mr-5 text-[22px] rounded-full px-px border-2" />{" "}
+            <div className="w-full text-sypher-light-text shrink-0 py-5 gap-6 h-10 flex items-center">
+              <div className="w-[20px] h-[20px]">
+                <Image
+                  src="/icons/admin-icon.svg"
+                  alt="Logo"
+                  width={20}
+                  height={20}
+                  className="w-full h-full"
+                />
+              </div>{" "}
               Admin
             </div>
           </Link>
@@ -85,21 +121,15 @@ const Menu = ({ name, userId, role, userName }: ChildProps) => {
               <FiShoppingBag className="mr-4 -ml-0.5 text-xl" /> All Products
             </div>
           </Link>
-          {role === "admin" && (
-            <Link className={`w-full flex`} href={`/product/upload`}>
-              <div className="w-full shrink-0 py-5 pb-8 border-b border-b-sypher-light-border h-10 flex items-center">
-                <MdUpload className="mr-5 border-2 rounded-sm text-lg text-sypher-light-text" />{" "}
-                Upload Product
-              </div>
-            </Link>
-          )}
+          {role === "admin" && <div></div>}
 
-          <div className=" w-full px-6 absolute bottom-10">
+          <div className=" w-full flex justify-end px-6 absolute bottom-10">
             <div
               onClick={() => signOut()}
-              className="w-full text-sypher-light-text shrink-0 py-8 border-b border-b-sypher-light-border h-10 flex items-center"
+              className="w-fit text-[14px] bg-secondary-600 text-white shrink-0 py-2 px-6 gap-2 rounded-[32px] h-10 flex items-center"
             >
-              <MdOutlineLogout className="mr-5 text-xl" /> Log Out
+              Log Out
+              <MdOutlineLogout className="text-[16px]" />
             </div>
           </div>
         </div>

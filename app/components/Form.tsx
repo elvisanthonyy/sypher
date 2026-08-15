@@ -51,13 +51,16 @@ const Form = () => {
       <form
         onChange={() => setMessage("")}
         onSubmit={handleSubmit(onSubmit)}
-        className="flex w-full gap-6 p-4 py-14 border border-border bg-white rounded-[32px] justify-center h-fit flex-col"
+        className="flex w-full gap-6 p-5 py-14 border border-border bg-white rounded-[32px] justify-center h-fit flex-col"
       >
+        <div className="font-semibold  tracking-tight px-2 text-[18px] text-text">
+          Create your account for free
+        </div>
         <div className="gap-3 flex flex-col">
           {message && <div className="text-red-600 mb-1">{message}</div>}
           <div className="w-full items-center height-auto relative flex">
-            <div className="absolute h-full flex items-center left-4 top-0 text-sypher-light-darkBorder">
-              <FaUser className="" />
+            <div className="absolute h-full flex items-center left-3 top-0 text-sypher-light-darkBorder">
+              <FaUser className="text-[14px]" />
             </div>
 
             <input
@@ -66,13 +69,13 @@ const Form = () => {
               })}
               placeholder="Full name"
               type="text"
-              className="flex border border-border text-text px-10 focus:outline-none h-13 rounded-2xl w-full"
+              className="flex border border-border text-[14px] text-text px-8 focus:outline-none h-13 rounded-2xl w-full"
             />
           </div>
 
           <div className="w-full items-center height-auto relative flex">
-            <div className="absolute h-full flex items-center left-4 top-0 text-sypher-light-darkBorder">
-              <FaEnvelope className="" />
+            <div className="absolute h-full flex items-center left-3 top-0 text-sypher-light-darkBorder">
+              <FaEnvelope className="text-[14px]" />
             </div>
 
             <input
@@ -81,12 +84,12 @@ const Form = () => {
               })}
               placeholder="Email"
               type="email"
-              className="flex border border-border text-text px-10 focus:outline-none h-13 rounded-2xl w-full"
+              className="flex border border-border text-[14px] text-text px-8 focus:outline-none h-13 rounded-2xl w-full"
             />
           </div>
           <div className="w-full items-center height-auto relative flex">
-            <div className="absolute h-full flex items-center left-4 top-0 text-sypher-light-darkBorder">
-              <FaLock className="" />
+            <div className="absolute h-full flex items-center left-3 top-0 text-sypher-light-darkBorder">
+              <FaLock className="text-[14px]" />
             </div>
 
             <input
@@ -95,7 +98,7 @@ const Form = () => {
               })}
               placeholder="Enter your Password"
               type={isPasswordVisible ? "text" : "password"}
-              className="flex border border-border text-text px-10 focus:outline-none h-13 rounded-2xl w-full"
+              className="flex border border-border text-[14px] text-text px-8 focus:outline-none h-13 rounded-2xl w-full"
             />
 
             <div
@@ -114,8 +117,8 @@ const Form = () => {
             </div>
           </div>
           <div className="w-full items-center height-auto relative flex">
-            <div className="absolute h-full flex items-center left-4 top-0 text-sypher-light-darkBorder">
-              <FaLock className="" />
+            <div className="absolute h-full flex items-center left-3 top-0 text-sypher-light-darkBorder">
+              <FaLock className="text-[14px]" />
             </div>
 
             <input
@@ -124,7 +127,7 @@ const Form = () => {
               })}
               placeholder=" Repeat password"
               type={isPasswordVisible ? "text" : "password"}
-              className="flex border border-border text-text px-10 focus:outline-none h-13 rounded-2xl w-full"
+              className="flex border border-border text-[14px] text-text px-8 focus:outline-none h-13 rounded-2xl w-full"
             />
 
             <div
@@ -146,11 +149,11 @@ const Form = () => {
         <button className="w-full cursor-pointer flex justify-center items-center text-white rounded-[32px] my-4 h-13 bg-text">
           {loading ? <Loading /> : "sign up"}
         </button>
-        <div className="w-full flex justify-center gap-2 items-center px-5">
+        <div className="w-full flex justify-center items-center gap-2 items-center px-5">
           <div>Have an account?</div>
           <button
             onClick={() => router.push("/auth/signin")}
-            className="underline w-fit"
+            className="underline w-fit text-[14px]"
           >
             {" "}
             Log In

@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import api from "@/libs/api";
 import { useCart } from "../context/CartContext";
 import { useSession } from "next-auth/react";
-import { error } from "console";
+import Image from "next/image";
 
 interface FormFields {
   email: string;
@@ -83,13 +83,15 @@ const SigninForm = () => {
     }
   };
   return (
-    <div className="w-full px-4">
-      <div></div>
+    <div className="w-full px-5">
       <form
         onSubmit={handleSubmit(onSubmit)}
         onChange={() => setMessage("")}
-        className="flex w-full gap-6 p-4 py-14 border border-border bg-white rounded-[32px] justify-center h-fit flex-col"
+        className="flex w-full gap-6 p-4 py-16 border border-border bg-white rounded-[32px] justify-center h-fit flex-col"
       >
+        <div className="font-semibold tracking-tight px-2 text-[18px] text-text">
+          Welcome back!
+        </div>
         <div className="flex w-full flex-col gap-2">
           {message && (
             <div className="px-2 w-full text-center text-red-600">
@@ -98,8 +100,8 @@ const SigninForm = () => {
           )}
 
           <div className="w-full items-center height-auto relative flex">
-            <div className="absolute h-full flex items-center left-4 top-0 text-sypher-light-darkBorder">
-              <FaUser className="" />
+            <div className="absolute h-full flex items-center left-3 top-0 text-sypher-light-darkBorder">
+              <FaUser className="text-[14px]" />
             </div>
 
             <input
@@ -108,12 +110,12 @@ const SigninForm = () => {
               })}
               placeholder="Email"
               type="email"
-              className="flex border-border border px-12 text-text focus:outline-none h-13 rounded-2xl w-full"
+              className="flex border-border text-[14px] border px-8 text-text focus:outline-none h-12.5 rounded-2xl w-full"
             />
           </div>
           <div className="w-full items-center height-auto relative flex">
-            <div className="absolute h-full flex items-center left-4 top-0 text-sypher-light-darkBorder">
-              <FaLock className="" />
+            <div className="absolute h-full flex items-center left-3 top-0 text-sypher-light-darkBorder">
+              <FaLock className="text-[14px]" />
             </div>
 
             <input
@@ -122,7 +124,7 @@ const SigninForm = () => {
               })}
               placeholder="password"
               type={isPasswordVisible ? "text" : "password"}
-              className="flex border-border border px-12 text-text  focus:outline-none h-13 rounded-2xl w-full"
+              className="flex border-border text-[14px] border px-8 text-text  focus:outline-none h-12.5 rounded-2xl w-full"
             />
             <div
               onClick={() =>
@@ -141,7 +143,7 @@ const SigninForm = () => {
           </div>
           <div
             onClick={() => router.push("/user/forgot-password")}
-            className="w-full text-[14px] flex justify-end text-blue-400"
+            className="w-full text-[14px] flex justify-end text-text"
           >
             forgot Password?
           </div>
@@ -150,7 +152,7 @@ const SigninForm = () => {
           disabled={loading ? true : false}
           className="w-full cursor-pointer text-[14px] flex justify-center items-center text-white rounded-[32px] h-13 bg-text"
         >
-          {loading ? <Loading /> : "Log in"}
+          {loading ? <Loading /> : "Sign In"}
         </button>
 
         <div className="flex gap-2 items-center justify-center w-full px-5">

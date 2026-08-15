@@ -109,12 +109,17 @@ const Main = ({ session, products }: ChildProps) => {
           </div>
         )}
         {dellProducts?.length > 0 && (
-          <div className="flex px-4 md:border-b border-b border-border min-h-0 shrink-0 custom-scrollbar mt-2 custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
-            {dellProducts.map((product: IProduct) => (
-              <div key={product._id.toString()} className={`flex mx-1`}>
-                <ProductComponent mainRange={mainRange} product={product} />
-              </div>
-            ))}
+          <div className="flex pt-3 px-4 flex-col w-full">
+            <div className="font-semibold px-2 text-[16px] text-text">
+              Dell Products
+            </div>
+            <div className="flex md:border-b border-b border-border min-h-0 shrink-0 custom-scrollbar mt-2 custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
+              {dellProducts.map((product: IProduct) => (
+                <div key={product._id.toString()} className={`flex mx-1`}>
+                  <ProductComponent mainRange={mainRange} product={product} />
+                </div>
+              ))}
+            </div>
           </div>
         )}
         {lenovoProducts.length > 0 && (
