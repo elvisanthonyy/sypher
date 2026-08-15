@@ -30,7 +30,9 @@ const handler = async (req: Request) => {
       });
     }
 
-    const oneItem = cart.items.find((i: CartItem) => i.productId === itemId);
+    const oneItem = cart.items.find(
+      (i: CartItem) => i.productId.toString() === itemId.toString(),
+    );
 
     return NextResponse.json({ status: "okay", cartItem: oneItem });
   } catch (error) {

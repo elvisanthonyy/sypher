@@ -2,9 +2,9 @@ import { NextResponse } from "next/server";
 import dbConnect from "@/libs/dbConnect";
 import { Cart } from "@/models/cart";
 import { IItem } from "@/models/user";
+import { Types } from "mongoose";
 
 interface ReqBody extends IItem {
-  _id: string;
   userId: string;
   cartId: string;
   unitsAvailable: number;
@@ -28,7 +28,7 @@ const handler = async (req: Request) => {
 
   try {
     let cart = await Cart.findOne(
-      userId ? { userId: userId } : { cartId: cartId }
+      userId ? { userId: userId } : { cartId: cartId },
     );
     if (!cart) {
       cart = await new Cart({
@@ -39,7 +39,7 @@ const handler = async (req: Request) => {
     }
 
     const existingItem = cart?.items.find(
-      (i: any) => i.productId.toString() === productId
+      (i: any) => i.productId.toString() === productId,
     );
     if (existingItem) {
       console.log("it exist");

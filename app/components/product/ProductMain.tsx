@@ -36,7 +36,7 @@ const ProductMain = ({ productProp }: ChildProps) => {
       <OneProduct />
       <div className="flex my-3 custom-scrollbar border-black border-t overflow-x-scroll justify-start items-center w-full ">
         {products?.map((product: IProduct, index: number) => (
-          <div key={product._id} className={`flex mx-1 }`}>
+          <div key={product._id.toString()} className={`flex mx-1 }`}>
             <ProductComponent product={product} />
           </div>
         ))}
