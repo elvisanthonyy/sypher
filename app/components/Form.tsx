@@ -6,6 +6,7 @@ import { useState } from "react";
 import { FaUser, FaEye, FaEyeSlash, FaEnvelope, FaLock } from "react-icons/fa";
 import Loading from "./loading/Loading";
 import { toast } from "react-toastify";
+import Image from "next/image";
 
 interface FormFields {
   name: string;
@@ -47,7 +48,21 @@ const Form = () => {
     }
   };
   return (
-    <div className="px-4 w-full">
+    <div className="px-4 w-full absolute top-[50%] translate-y-[-45%]">
+      <div className="flex gap-2 items-center w-full mb-7">
+        <div className="w-[46px] aspect-square">
+          <Image
+            src="/icons/logo.svg"
+            alt="Logo"
+            width={100}
+            height={100}
+            className="w-full h-full"
+          />
+        </div>
+        <div className="font-semibold tracking-tight px-2 text-[20px] text-text">
+          Max Gadgets
+        </div>
+      </div>
       <form
         onChange={() => setMessage("")}
         onSubmit={handleSubmit(onSubmit)}

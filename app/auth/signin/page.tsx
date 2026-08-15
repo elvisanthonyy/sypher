@@ -17,20 +17,6 @@ const page = () => {
             className="h-full"
           />
         </div>
-        <div className="flex px-5 gap-2 items-center w-full mb-7">
-          <div className="w-[46px] aspect-square">
-            <Image
-              src="/icons/logo.svg"
-              alt="Logo"
-              width={100}
-              height={100}
-              className="w-full h-full"
-            />
-          </div>
-          <div className="font-semibold tracking-tight px-2 text-[20px] text-text">
-            Max Gadgets
-          </div>
-        </div>
       </div>
       <SigninForm />
     </div>

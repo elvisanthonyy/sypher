@@ -83,7 +83,21 @@ const SigninForm = () => {
     }
   };
   return (
-    <div className="w-full px-5">
+    <div className="w-full px-5 absolute top-[50%] translate-y-[-50%]">
+      <div className="flex gap-2 items-center w-full mb-7">
+        <div className="w-[46px] aspect-square">
+          <Image
+            src="/icons/logo.svg"
+            alt="Logo"
+            width={100}
+            height={100}
+            className="w-full h-full"
+          />
+        </div>
+        <div className="font-semibold tracking-tight px-2 text-[20px] text-text">
+          Max Gadgets
+        </div>
+      </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
         onChange={() => setMessage("")}
