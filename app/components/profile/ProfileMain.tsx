@@ -51,50 +51,50 @@ const ProfileMain = ({ user }: ChildProps) => {
     }
   };
   return (
-    <div className="w-full flex flex-col h-auto min-h-[60dvh] mt-4 px-5">
+    <div className="w-full px-4">
       {!changePass && (
-        <div>
-          <ProfileItemComponent
-            title="Full Name"
-            type="string"
-            body={user?.name}
-          />
-          <ProfileItemComponent
-            title="Full Email"
-            type="string"
-            body={user?.email}
-          />
-          <ProfileItemComponent
-            title="Gender"
-            type="string"
-            body={user?.gender}
-          />
-          <ProfileItemComponent
-            title="Address"
-            type="string"
-            body={user?.address}
-          />
-          <ProfileItemComponent
-            title="Number"
-            type="number"
-            bodyNum={user?.number}
-          />
-          <ProfileItemComponent
-            title="Date of birth"
-            type="date"
-            bodyDate={user?.dateOfBirth?.toString().split("T")[0]}
-          />
+        <div className="w-full flex  flex-col justify-center items-center gap-5">
+          <div className="w-full t flex flex-col justify-center items-center">
+            <div className="w-40 aspect-square bg-text rounded-full"></div>
+          </div>
+          <div className="text-center flex flex-col gap-2 text-text">
+            <div className="text-[20px] font-semibold">{user?.name}</div>
+            <div className="text-[16px] text-border">{user?.email}</div>
+          </div>
+          <div className="gap-4 w-full rounded-[24px] p-2 flex flex-col h-auto bg-white">
+            <ProfileItemComponent
+              title="Gender"
+              type="string"
+              body={user?.gender}
+            />
+            <ProfileItemComponent
+              title="Address"
+              type="string"
+              body={user?.address}
+            />
+            <ProfileItemComponent
+              title="Number"
+              type="number"
+              bodyNum={user?.number}
+            />
+            <ProfileItemComponent
+              title="Date of birth"
+              type="date"
+              bodyDate={user?.dateOfBirth?.toString().split("T")[0]}
+            />
+          </div>
           <button
             onClick={() => router.push(`/profile/${user?.name}/edit`)}
-            className="h-13 flex items-center justify-center mt-8 rounded-2xl cursor-pointer text-white w-full bg-blue-600"
+            className="h-13 flex text-[14px] items-center justify-center mt-8 rounded-[32px] cursor-pointer text-white w-full bg-primary-400"
           >
-            Edit <FaEdit className="ml-3 text-lg mb-1" />
+            Edit <FaEdit className="ml-3  mb-1" />
           </button>
           <div
             onClick={() => setChangePass(true)}
-            className="cursor-pointer text-sypher-light-text h-10 mt-10 flex items-center"
+            className="cursor-pointer text-[14px] gap-2 text-text w-full justify-end flex items-center"
           >
-            Change Password <FaArrowRight className="ml-2" />
+            Change Password{" "}
+            <FaArrowRight className="text-[14px] text-primary-400" />
           </div>
         </div>
       )}
@@ -139,7 +139,7 @@ const ProfileMain = ({ user }: ChildProps) => {
           >
             {loading ? <Loading /> : "Change Password"}
           </button>
-          <div className="w-full flex justify-center items-center my-6">
+          <div className="w-full flex gap-2 justify-center items-center">
             <div
               onClick={() => router.push("/user/forgot-password")}
               className="text-white rounded-lg mt-10 text-sm bg-black w-full h-13 flex justify-center items-center"
@@ -149,7 +149,7 @@ const ProfileMain = ({ user }: ChildProps) => {
           </div>
           <div
             onClick={() => setChangePass(false)}
-            className="cursor-pointer text-sypher-light-text h-10 mt-10 flex items-center"
+            className="cursor-pointer text-[14px] text-text w-full justify-end flex items-center"
           >
             <FaArrowLeft className="mr-3" /> Back to Profile
           </div>

@@ -103,7 +103,7 @@ const SigninForm = () => {
         onChange={() => setMessage("")}
         className="flex w-full gap-6 p-4 py-16 border border-border bg-white rounded-[32px] justify-center h-fit flex-col"
       >
-        <div className="font-semibold tracking-tight px-2 text-[18px] text-text">
+        <div className="font-semibold tracking-tight px-1 text-[18px] text-text">
           Welcome back!
         </div>
         <div className="flex w-full flex-col gap-2">

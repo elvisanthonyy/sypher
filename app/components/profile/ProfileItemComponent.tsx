@@ -14,25 +14,12 @@ const ProfileItemComponent = ({
   type,
 }: ChildProps) => {
   return (
-    <div>
-      <div className="w-[95%] mx-auto">
-        <div className="text-sm text-sypher-light-darkBorder">
-          {title && title}
-        </div>
-        {type === "string" && (
-          <div className="w-full h-8 flex pb-3 items-end border-b border-sypher-light-darkBorder  mb-3 mt-3">
-            {body}
-          </div>
-        )}
-        {type === "number" && (
-          <div className="w-full h-10 flex items-end border-b pb-2 my-2">
-            {bodyNum}
-          </div>
-        )}
+    <div className="bg-background px-4 rounded-[16px] text-text text-[14px] font-medium flex items-center h-12.5 flex">
+      <div className="w-full">
+        {type === "string" && <div className="">{body}</div>}
+        {type === "number" && <div className="">{bodyNum}</div>}
         {type === "date" && (
-          <div className="w-full h-10 flex items-end border-b pb-2 my-2">
-            {bodyDate?.toString()}
-          </div>
+          <div className="">{bodyDate ? bodyDate?.toString() : title}</div>
         )}
       </div>
     </div>

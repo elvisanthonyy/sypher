@@ -59,7 +59,7 @@ const Form = () => {
             className="w-full h-full"
           />
         </div>
-        <div className="font-semibold tracking-tight px-2 text-[20px] text-text">
+        <div className="font-semibold tracking-tight px-1 text-[20px] text-text">
           Max Gadgets
         </div>
       </div>
