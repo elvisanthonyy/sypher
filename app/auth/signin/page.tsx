@@ -7,8 +7,8 @@ export const metadata = {
 const page = () => {
   return (
     <div className="w-full overflow-x-hidden flex-col  h-dvh flex justify-start items-center">
-      <div className="w-full  relative flex-col text-3xl h-[281px] flex justify-end items-center">
-        <div className="h-[281px] relative -right-30">
+      <div className="w-full  relative flex-col text-3xl h-[25dvh] flex justify-end items-center">
+        <div className="h-full relative -right-30">
           <Image
             src="/backgrounds/signin-rings-mobile.svg"
             width={1000}

@@ -99,10 +99,7 @@ const Main = ({ session, products }: ChildProps) => {
           <div className="flex px-4 shrink-0 pt-4 custom-scrollbar border-b border-border overflow-x-scroll justify-start items-center w-auto min-w-full ">
             {hpProducts &&
               hpProducts.map((product: IProduct) => (
-                <div
-                  key={product._id.toString()}
-                  className={`flex bg-amber-50 mx-1`}
-                >
+                <div key={product._id.toString()} className={`flex mx-1`}>
                   <ProductComponent mainRange={mainRange} product={product} />
                 </div>
               ))}

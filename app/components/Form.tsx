@@ -48,9 +48,9 @@ const Form = () => {
     }
   };
   return (
-    <div className="px-4 w-full absolute top-[50%] translate-y-[-45%]">
-      <div className="flex gap-2 items-center w-full mb-7">
-        <div className="w-[46px] aspect-square">
+    <div className="px-4 w-full absolute top-[50%] translate-y-[-50%]">
+      <div className="flex gap-1 items-center w-full mb-7">
+        <div className="w-[40px] aspect-square">
           <Image
             src="/icons/logo.svg"
             alt="Logo"
