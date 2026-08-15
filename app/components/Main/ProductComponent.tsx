@@ -18,9 +18,9 @@ const ProductComponent = ({ product, mainRange }: ChildProps) => {
   return (
     <div
       onClick={() => router.replace(`/one/product/${product._id}`)}
-      className="flex text-black cursor-pointer border border-sypher-light-border my-3 justify-start pb-4  items-center flex-col w-60 h-68 bg-white"
+      className="flex text-text cursor-pointer justify-start pb-4 gap-4  items-center flex-col w-41.5 "
     >
-      <div className="shrink-0 border-b border-b-sypher-light-border overflow-hidden flex justify-center items-center w-full h-42 bg-gray-300">
+      <div className="shrink-0 rounded-[8px]  overflow-hidden flex justify-center items-center w-full aspect-square bg-border">
         {product?.image?.url && (
           <Image
             src={product.image?.url}
@@ -31,16 +31,17 @@ const ProductComponent = ({ product, mainRange }: ChildProps) => {
           ></Image>
         )}
       </div>
-      <div className="flex text-sm my-2 flex-col h-[50%] px-3 w-full">
-        <h1 className="text-[13px] ">{product?.name}</h1>
-        <div className="text-xs mb-0.5 italic">{product?.category}</div>
-        <div className="font-semibold text-[16px] mb-0.5 text-sypher-light-text">{`₦${Number(
-          product?.price
-        )}.00`}</div>
+      <div className="flex text-sm flex-col h-[50%] w-full">
+        <div className="flex h-fit justify-between items-start w-full pr-1">
+          <div className="font-semibold text-[16px] text-secondary-700">{`₦${Number(
+            product?.price,
+          )}.00`}</div>
+          <div className="text-[8px] text-white bg-text w-5 h-auto aspect-square flex justify-center items-center rounded-full">{`${Number(product?.unitsAvailable)}`}</div>
+        </div>
 
-        <div className="">{`Available: ${Number(
-          product?.unitsAvailable
-        )}`}</div>
+        <h1 className="text-[14px] ">{product?.name}</h1>
+
+        <div className="text-[14px]">{product?.category}</div>
 
         <div className="w-full "></div>
       </div>

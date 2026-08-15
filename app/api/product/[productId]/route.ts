@@ -8,7 +8,7 @@ const handler = async (
   context: { params: Promise<{ productId: string }> }
 ) => {
   const { productId } = await context.params;
-  console.log(productId);
+
   await dbConnect();
 
   try {

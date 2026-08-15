@@ -33,36 +33,36 @@ const Main = ({ session, products }: ChildProps) => {
     (product: IProduct) =>
       product?.name.toLowerCase().includes("hp") &&
       product?.price >= mainRange.start &&
-      product?.price <= mainRange.end
+      product?.price <= mainRange.end,
   );
   const dellProducts = products?.filter(
     (product: IProduct) =>
       product.name.toLowerCase().includes("dell") &&
       product?.price >= mainRange.start &&
-      product?.price <= mainRange.end
+      product?.price <= mainRange.end,
   );
   const lenovoProducts = products?.filter(
     (product: IProduct) =>
       product.name.toLowerCase().includes("lenovo") &&
       product?.price >= mainRange.start &&
-      product?.price <= mainRange.end
+      product?.price <= mainRange.end,
   );
   const macProducts = products?.filter(
     (product: IProduct) =>
       product.name.toLowerCase().includes("mac") &&
       product?.price >= mainRange.start &&
-      product?.price <= mainRange.end
+      product?.price <= mainRange.end,
   );
 
   const otherProductNoFilter = products?.filter(
     (product: IProduct) =>
       !exclude.some((ex) =>
-        product.name.toLowerCase().includes(ex.toLowerCase())
-      )
+        product.name.toLowerCase().includes(ex.toLowerCase()),
+      ),
   );
   const otherProduct = otherProductNoFilter?.filter(
     (product: IProduct) =>
-      product?.price >= mainRange.start && product?.price <= mainRange.end
+      product?.price >= mainRange.start && product?.price <= mainRange.end,
   );
 
   const acceptCookies = () => {
@@ -96,17 +96,17 @@ const Main = ({ session, products }: ChildProps) => {
 
       <div className="">
         {hpProducts?.length > 0 && (
-          <div className="flex md:border-b shrink-0 custom-scrollbar mt-2 border-sypher-light-border overflow-x-scroll justify-start items-center w-auto min-w-full ">
+          <div className="flex px-4 shrink-0 pt-4 custom-scrollbar border-b border-border overflow-x-scroll justify-start items-center w-auto min-w-full ">
             {hpProducts &&
               hpProducts.map((product: IProduct) => (
-                <div key={product._id} className={`flex mx-1`}>
+                <div key={product._id} className={`flex bg-amber-50 mx-1`}>
                   <ProductComponent mainRange={mainRange} product={product} />
                 </div>
               ))}
           </div>
         )}
         {dellProducts?.length > 0 && (
-          <div className="flex md:border-b min-h-0 shrink-0 custom-scrollbar mt-2 custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
+          <div className="flex px-4 md:border-b border-b border-border min-h-0 shrink-0 custom-scrollbar mt-2 custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
             {dellProducts.map((product: IProduct) => (
               <div key={product._id} className={`flex mx-1`}>
                 <ProductComponent mainRange={mainRange} product={product} />
@@ -115,7 +115,7 @@ const Main = ({ session, products }: ChildProps) => {
           </div>
         )}
         {lenovoProducts.length > 0 && (
-          <div className="flex shrink-0 md:border-b custom-scrollbar my-3  custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
+          <div className="flex px-4 shrink-0 md:border-b border-b border-border custom-scrollbar my-3  custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
             {lenovoProducts.map((product: IProduct, index) => (
               <div key={product._id} className={`flex mx-1`}>
                 <ProductComponent mainRange={mainRange} product={product} />
@@ -124,7 +124,7 @@ const Main = ({ session, products }: ChildProps) => {
           </div>
         )}
         {macProducts?.length > 0 && (
-          <div className="flex shrink-0 custom-scrollbar my-3  custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
+          <div className="flex px-4 shrink-0  custom-scrollbar my-3 border-b border-border custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
             {macProducts.map((product: IProduct, index) => (
               <div key={product._id} className={`flex mx-1`}>
                 <ProductComponent mainRange={mainRange} product={product} />
@@ -144,20 +144,30 @@ const Main = ({ session, products }: ChildProps) => {
       </div>
 
       {acceptCookiesModal && (
-        <div className="fixed flex-col justify-center items-center left-0 bottom-0 flex w-full h-55 rounded-tl-2xl rounded-tr-2xl bg-black">
-          <div className="text-white">Do you want to accept cookies?</div>
-          <div className="flex w-full px-5 flex-col items-center mt-3">
+        <div className="fixed flex-col justify-between start gap-4 p-5 left-0 bottom-0 flex w-full h-fit min-h-[226px] bg-white">
+          <div className="flex flex-col gap-2">
+            <div className="text-text tracking-tight text-[24px] font-bold">
+              Cookies notification
+            </div>
+            <div className="text-text space-x-[18px] text-[14px]">
+              We use cookies on our website to help us provide the best internet
+              experience, by click accept you accept our terms and conditions
+            </div>
+          </div>
+
+          <div className="flex w-full gap-4 mb-5  items-center mt-3">
             <button
               onClick={acceptCookies}
-              className="bg-white text-black h-10 w-[80%] mx-5 my-2"
+              className="bg-primary-400 text-white
+               h-[49px] w-[127px] rounded-[8px]"
             >
-              Accept all
+              Accept
             </button>
             <button
               onClick={() => setAcceptCookiesModal(false)}
-              className="bg-white text-black h-10 w-[80%] mx-5 my-2"
+              className="bg-text text-white h-[49px] w-[127px] rounded-[8px]"
             >
-              Reject all
+              Reject
             </button>
           </div>
         </div>

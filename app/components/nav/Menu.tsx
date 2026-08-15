@@ -30,9 +30,9 @@ const Menu = ({ name, userId, role, userName }: ChildProps) => {
         className=" flex z-120"
       >
         {isMenuOpen ? (
-          <IoClose className="text-2xl" />
+          <IoClose className="text-2xl text-text" />
         ) : (
-          <FiMenu className="text-2xl" />
+          <FiMenu className="text-2xl text-text" />
         )}
       </div>
       <div
@@ -95,9 +95,6 @@ const Menu = ({ name, userId, role, userName }: ChildProps) => {
           )}
 
           <div className=" w-full px-6 absolute bottom-10">
-            <div className="w-full text-sypher-light-text shrink-0 py-8 border-t border-t-sypher-light-border h-10 flex items-center">
-              <FaUser className="mr-5 text-lg" /> Contact
-            </div>
             <div
               onClick={() => signOut()}
               className="w-full text-sypher-light-text shrink-0 py-8 border-b border-b-sypher-light-border h-10 flex items-center"
