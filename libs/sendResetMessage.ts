@@ -46,7 +46,7 @@ export async function sendResetMessage(email: string, resetToken: string) {
         "
       >
         <div style="width: fit-content; height: fit-content; margin-top: auto">
-          <img src="cid:logo" style="margin-top: auto" />
+          <img src="cid:logo" style="margin-top: auto; height: 28px; width: 28px;" />
         </div>
       </td>
 
