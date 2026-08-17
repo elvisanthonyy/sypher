@@ -1,27 +1,6 @@
-import nodemailer from "nodemailer";
-
-export async function sendResetMessage(email: string, resetToken: string) {
-  try {
-    const transporter = nodemailer.createTransport({
-      service: "Gmail",
-      port: 465,
-      secure: true,
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-      connectionTimeout: 10000,
-      tls: {
-        rejectUnauthorized: false,
-      },
-    });
-
-    await transporter.sendMail({
-      from: `"Max Gadgets" <${process.env.EMAIL_USER}>`,
-      to: email,
-      subject: "Reset Password",
-      html: `<div style="
-      display: block;
+<div
+  style="
+    display: block;
     background-color: #171717;
     font-family: Arial, sans-serif;
     padding: 32px;
@@ -45,7 +24,7 @@ export async function sendResetMessage(email: string, resetToken: string) {
         "
       >
         <div style="width: fit-content; height: fit-content; margin-top: auto">
-          <img src="cid:logo" style="margin-top: auto" />
+          <img src="./logo.svg" style="margin-top: auto" />
         </div>
       </td>
 
@@ -80,7 +59,9 @@ export async function sendResetMessage(email: string, resetToken: string) {
       "
     >
       <a
-        href="${process.env.BASE_URL}/user/reset-password?token=${resetToken}"
+        href="${
+        process.env.BASE_URL
+        }/user/reset-password?token=${resetToken}"
         style="
           color: white;
 
@@ -123,17 +104,4 @@ export async function sendResetMessage(email: string, resetToken: string) {
   <p style="font-size: 8px; opacity: 0; width: 100%; text-align: center">
     Mail Id: ${Date.now()}
   </p>
-</div>`,
-      attachments: [
-        {
-          filename: "logo.svg",
-          path: "./public/icons/logo.svg",
-          cid: "logo", // same cid value as in the html img src
-        },
-      ],
-      headers: {},
-    });
-  } catch (error) {
-    console.error("error in sending message", error);
-  }
-}
+</div>
