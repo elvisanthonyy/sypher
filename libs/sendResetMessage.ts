@@ -87,7 +87,7 @@ export async function sendResetMessage(email: string, resetToken: string) {
 
           text-decoration: none;
 
-          font-size: 14px;
+          font-size: 12px;
           width: 100%;
         "
         >Reset Link</a
@@ -128,7 +128,7 @@ export async function sendResetMessage(email: string, resetToken: string) {
       attachments: [
         {
           filename: "logo.svg",
-          path: path.join(process.cwd(), "public", "icons", "logo.svg"),
+          path: path.join(process.cwd(), "public", "icons", "logoo.svg"),
           cid: "logo", // same cid value as in the html img src
         },
       ],
