@@ -1,14 +1,16 @@
-<div style="display: block; font-family: Arial, sans-serif; padding: 32px">
+<div
+  style="
+    display: block;
+    font-family: Arial, sans-serif;
+    background-color: rgb(29, 29, 29);
+    padding: 16px;
+  "
+>
   <table
+    width="100%"
     cellpadding="0"
     cellspacing="0"
-    style="
-      width: 100%;
-      background-color: #171717;
-      padding-right: auto;
-      font-size: 0;
-      margin-bottom: 40px;
-    "
+    style="font-size: 0; margin-bottom: 40px"
   >
     <tr style="">
       <td
@@ -22,7 +24,10 @@
         "
       >
         <div style="width: fit-content; height: fit-content; margin-top: auto">
-          <img src="./logo.svg" style="margin-top: auto" />
+          <img
+            src="./logo.png"
+            style="margin-top: auto; height: 28px; width: 28px"
+          />
         </div>
       </td>
 
@@ -30,7 +35,6 @@
         style="
           height: fit-content;
           text-align: left;
-          background-color: #f15353;
           padding: 0;
           width: fit-content;
           color: rgb(212, 212, 212);
@@ -42,40 +46,65 @@
     </tr>
   </table>
   <div style="width: 100%; display: block; color: #777777; font-size: 14px">
-    <div style="margin-bottom: 40px">Hello,</div>
+    <div style="margin-bottom: 40px">Hello, ${order?.name},</div>
     <div style="margin-bottom: 20px">
-      You need to click the link below hello to change your max gadgets account
-      password. You can sign in afterwards.
+      Thank you for your purchase! We are excited to let you know that your
+      order has been placed successfully.
     </div>
-    <div
-      style="
-        width: 100%;
-        background-color: #007bff;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        padding: 8px 0;
-        text-align: center;
-      "
-    >
-      <a
-        href="${
-        process.env.BASE_URL
-        }/user/reset-password?token=${resetToken}"
+    <div style="margin-bottom: 20px">
+      <h5 style="color: #fd755a; margin-bottom: 8px">Order Summary</h5>
+      <div
         style="
-          color: white;
-
-          text-decoration: none;
-
-          font-size: 14px;
-          width: 100%;
+          background-color: rgb(49, 49, 49);
+          padding: 4px 0;
+          border-radius: 8px;
         "
-        >Reset Link</a
       >
+        <ul>
+          <li style="margin-bottom: 4px">
+            Order Id:
+            <span style="font-weight: 600; color: #cecece">${order?._id}</span>
+          </li>
+          <li style="margin-bottom: 4px">
+            Order Date:
+            <span style="font-weight: 600; color: #cecece">${order?.date}</span>
+          </li>
+          <li style="margin-bottom: 4px">
+            Address:
+            <span style="font-weight: 600; color: #cecece"
+              >${order?.address}</span
+            >
+          </li>
+        </ul>
+      </div>
     </div>
-    <div style="color: #777777; font-size: 14px">
-      <span style="color: #fd755a; margin-right: 4px">Note:</span>
-      Link expires in 1 hour
+    <div style="margin-bottom: 20px">
+      <h5 style="color: #fd755a; margin-bottom: 8px">Items Ordered</h5>
+      <div
+        style="
+          background-color: rgb(49, 49, 49);
+          padding: 4px 0;
+          border-radius: 8px;
+        "
+      >
+        <ul>
+          <li style="margin-bottom: 4px">
+            Product Name:
+            <span style="font-weight: 600; color: #cecece"
+              >${order?._id} X ${order?.qty}</span
+            >
+          </li>
+          <li style="margin-bottom: 4px">
+            Total Amound:
+            <span style="font-weight: 600; color: #cecece">${order?.date}</span>
+          </li>
+        </ul>
+      </div>
     </div>
+  </div>
+  <div style="margin-bottom: 20px; color: #777777; font-size: 14px">
+    Prodduct has been reserved for you, kindly come to out office for payment
+    and pick-up.
   </div>
   <div style="width: 100%; display: block">
     <div
@@ -96,8 +125,11 @@
         &copy; 2026 Max Gadgets. All rights reserved.
       </div>
       <div style="font-size: 12px; width: 100%">
-        Contact 09045342672 on WhatsApp for help information.
+        Contact 09045342672 on WhatsApp for more information.
       </div>
     </div>
   </div>
+  <p style="font-size: 8px; opacity: 0; width: 100%; text-align: center">
+    Mail Id: ${Date.now()}
+  </p>
 </div>

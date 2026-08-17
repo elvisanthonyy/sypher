@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import path from "path";
 
 export async function sendOTP(email: string, otp: string) {
   try {
@@ -17,16 +18,115 @@ export async function sendOTP(email: string, otp: string) {
     });
 
     await transporter.sendMail({
-      from: `"UC DOM" <${process.env.EMAIL_USER}>`,
+      from: `"Max Gadgets" <${process.env.EMAIL_USER}>`,
       to: email,
       subject: "Otp verification",
-      html: `<div style="width: 100%; height: fit-content; display: block; padding-bottom: 20px; align-items: center;"><h2 style="font: bold; font-size: 30px; border: 3px solid white; margin: 0px auto;  margin-bottom: 60px; border-radius: 8px; padding: 30px 0px; text-align: center; width: 90%; color: #03a3ff;">UC DOM</h2>
-      <h3 style="margin-bottom: 40px; text-align: center; width: 100%;"> Your OTP </h3>
-      <div style="margin-bottom: 5px; text-align: center; width: 100%;">Verification code</div>
-      <div><div style="margin-bottom: 10px; font-size: 30px; font: bold; text-align: center; width: 100%;">${otp}</div>
-      <div style="font-size: 8px; margin-bottom: 40px; text-align: center; width: 100%;">(This code expires in 5 minutes)&nbsp;</div></div>
-      <p style="font-size: 8px; opacity: 0; width: 100%; text-align: center;">Mail Id: ${Date.now()}</p></div>
+      html: `<div
+  style="
+    display: block;
+    font-family: Arial, sans-serif;
+    padding: 16px;
+  "
+>
+  <table
+    width="100%"
+    cellpadding="0"
+    cellspacing="0"
+    style="font-size: 0; margin-bottom: 40px"
+  >
+    <tr style="">
+      <td
+        style="
+          display: block;
+          width: fit-content;
+          height: fit-content;
+          padding: 8px;
+          background-color: #ffff;
+          border-radius: 16px;
+        "
+      >
+        <div style="width: fit-content; height: fit-content; margin-top: auto">
+          <img
+            src="./logo.png"
+            style="margin-top: auto; height: 28px; width: 28px"
+          />
+        </div>
+      </td>
+
+      <td
+        style="
+          height: fit-content;
+          text-align: left;
+          padding: 0;
+          width: fit-content;
+          color: rgb(212, 212, 212);
+          font-size: 20px;
+        "
+      >
+        Max Gadgets
+      </td>
+    </tr>
+  </table>
+  <div style="width: 100%; display: block; color: #777777; font-size: 14px">
+    <div style="margin-bottom: 40px">Hello,</div>
+    <div style="margin-bottom: 20px">
+      Welcome to Max Gadgets!! Please use the following time verification code
+      to complete your account registration
+    </div>
+    <div
+      style="
+        width: 100%;
+        border: 1px solid #777777;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        padding: 8px 0;
+        text-align: center;
+        font-size: 20px;
+      "
+    >
+      ${otp} >
+    </div>
+    <div style="color: #777777; font-size: 14px">
+      <span style="color: #fd755a; margin-right: 4px">Note:</span>
+      OTP expires in 5 minutes
+    </div>
+  </div>
+  <div style="width: 100%; display: block">
+    <div
+      style="
+        color: rgb(212, 212, 212);
+        color: #777777;
+        font-size: 14px;
+        margin-top: 40px;
+        margin-bottom: 40px;
+        border-top: 1px solid #383838;
+        padding-top: 16px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+      "
+    >
+      <div style="margin-bottom: 8px; font-size: 12px">
+        &copy; 2026 Max Gadgets. All rights reserved.
+      </div>
+      <div style="font-size: 12px; width: 100%">
+        Contact 09045342672 on WhatsApp for more information.
+      </div>
+    </div>
+  </div>
+  <p style="font-size: 8px; opacity: 0; width: 100%; text-align: center">
+    Mail Id: ${Date.now()}
+  </p>
+</div>
+
       `,
+      attachments: [
+        {
+          filename: "logo.png",
+          path: path.join(process.cwd(), "public", "icons", "logo.png"),
+          cid: "logo", // same cid value as in the html img src
+        },
+      ],
       headers: {},
     });
   } catch (error) {
