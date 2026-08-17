@@ -23,7 +23,7 @@ export async function sendResetMessage(email: string, resetToken: string) {
       subject: "Reset Password",
       html: `<div style="
       display: block;
- 
+      padding: 0 16px;
     font-family: Arial, sans-serif;
     
   "
