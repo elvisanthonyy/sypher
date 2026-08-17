@@ -8,6 +8,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import api from "@/libs/api";
 import { toast } from "react-toastify";
 import Loading from "../loading/Loading";
+import Image from "next/image";
 
 interface ChildProps {
   user: IUser;
@@ -55,39 +56,73 @@ const ProfileMain = ({ user }: ChildProps) => {
       {!changePass && (
         <div className="w-full flex  flex-col justify-center items-center gap-5">
           <div className="w-full t flex flex-col justify-center items-center">
-            <div className="w-40 aspect-square bg-text rounded-full"></div>
+            <div className="w-40 aspect-square flex items-center justify-center bg-text rounded-full">
+              <div className="w-25 aspect-square">
+                <Image
+                  src="/icons/profile-head-icon.svg"
+                  alt="Profile"
+                  width={160}
+                  height={160}
+                  className="w-full h-full"
+                />
+              </div>
+            </div>
           </div>
           <div className="text-center flex flex-col gap-2 text-text">
-            <div className="text-[20px] font-semibold">{user?.name}</div>
+            <div className="text-[20px] font-semibold flex gap-2">
+              {user?.name}{" "}
+              <div className="w-6 aspect-square">
+                <Image
+                  src="/icons/verified-icon.svg"
+                  alt="Edit"
+                  width={60}
+                  height={60}
+                  className="w-full h-full"
+                />{" "}
+              </div>
+            </div>
             <div className="text-[16px] text-border">{user?.email}</div>
           </div>
           <div className="gap-4 w-full rounded-[24px] p-2 flex flex-col h-auto bg-white">
             <ProfileItemComponent
+              iconUrl="/icons/gender-icon.svg"
               title="Gender"
               type="string"
               body={user?.gender}
             />
             <ProfileItemComponent
+              iconUrl="/icons/date-of-birth-icon.svg"
+              title="Date of birth"
+              type="date"
+              bodyDate={user?.dateOfBirth?.toString().split("T")[0]}
+            />
+            <ProfileItemComponent
+              iconUrl="/icons/location-icon.svg"
               title="Address"
               type="string"
               body={user?.address}
             />
             <ProfileItemComponent
+              iconUrl="/icons/phone-icon.svg"
               title="Number"
-              type="number"
-              bodyNum={user?.number}
-            />
-            <ProfileItemComponent
-              title="Date of birth"
-              type="date"
-              bodyDate={user?.dateOfBirth?.toString().split("T")[0]}
+              type="string"
+              bodyNum={`+234 ${user?.number}`}
             />
           </div>
           <button
             onClick={() => router.push(`/profile/${user?.name}/edit`)}
-            className="h-13 flex text-[14px] items-center justify-center mt-8 rounded-[32px] cursor-pointer text-white w-full bg-primary-400"
+            className="h-13 flex text-[14px] gap-2 items-center justify-center mt-8 rounded-[32px] cursor-pointer text-white w-full bg-primary-400"
           >
-            Edit <FaEdit className="ml-3  mb-1" />
+            Edit{" "}
+            <div className="w-4 aspect-square">
+              <Image
+                src="/icons/edit-icon.svg"
+                alt="Edit"
+                width={20}
+                height={20}
+                className="w-full h-full"
+              />
+            </div>
           </button>
           <div
             onClick={() => setChangePass(true)}

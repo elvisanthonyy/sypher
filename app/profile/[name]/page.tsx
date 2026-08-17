@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import dbConnect from "@/libs/dbConnect";
 import { redirect } from "next/navigation";
-import Nav from "@/app/components/nav/Nav";
+import NavTwo from "@/app/components/nav/NavTwo";
 import ProfileMain from "@/app/components/profile/ProfileMain";
 
 const baseURL = process.env.BASE_URL;
@@ -27,7 +27,7 @@ const page = async () => {
 
   return (
     <div className="w-full min-h-dvh pt-20">
-      <Nav name="profile" />
+      <NavTwo name="profile" />
       <ProfileMain user={data?.user} />
     </div>
   );

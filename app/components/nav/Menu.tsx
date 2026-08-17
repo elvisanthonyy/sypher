@@ -25,16 +25,10 @@ const Menu = ({ name, userId, role, userName }: ChildProps) => {
   return (
     <div className="z-100 h-full mg:fixed md:top-0 left-0  flex items-center relative">
       <div
-        onClick={() =>
-          isMenuOpen ? setIsMenuOpen(false) : setIsMenuOpen(true)
-        }
-        className=" flex z-120 w-full"
+        onClick={() => setIsMenuOpen(true)}
+        className=" flex z-120 w-full left-0"
       >
-        {isMenuOpen ? (
-          <IoClose className="text-2xl text-text" />
-        ) : (
-          <FiMenu className="text-2xl text-text" />
-        )}
+        <FiMenu className="text-2xl text-text" />
       </div>
       <div
         onClick={() => setIsMenuOpen(false)}
@@ -48,10 +42,17 @@ const Menu = ({ name, userId, role, userName }: ChildProps) => {
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className={`bg-white w-[80%] h-full grid relative place-items-start text-gray-900 gap-y-5 auto-rows-min px-6 py-18 `}
+          className={`bg-white w-[80%] h-full grid relative place-items-start text-gray-900 gap-y-5 auto-rows-min px-6 `}
         >
+          <div
+            className="w-full h-[64px] items-center border-b border-border flex "
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <IoClose className="text-2xl text-text" />
+          </div>
+
           <Link className="w-full" href={"/"}>
-            <div className="w-full pt-8  text-sypher-light-text shrink-0 py-5 gap-6 h-7 flex items-center">
+            <div className="w-full border-b border-border pt-8  text-sypher-light-text shrink-0 py-5 gap-6 h-7 flex items-center">
               <div className="w-[20px] h-[20px]">
                 <Image
                   src="/icons/home-icon.svg"
@@ -64,25 +65,24 @@ const Menu = ({ name, userId, role, userName }: ChildProps) => {
               Home
             </div>
           </Link>
-          {name !== "profile" && (
-            <Link className="w-full" href={`/profile/${encodeURI(userName)}`}>
-              <div className="w-full text-sypher-light-text gap-6 shrink-0 py-5  h-7 flex items-center">
-                <div className="w-[20px] h-[20px]">
-                  <Image
-                    src="/icons/profile-icon.svg"
-                    alt="Logo"
-                    width={20}
-                    height={20}
-                    className="w-full h-full"
-                  />
-                </div>{" "}
-                Profile
-              </div>
-            </Link>
-          )}
+
+          <Link className="w-full" href={`/profile/${encodeURI(userName)}`}>
+            <div className="w-full border-b border-border text-sypher-light-text gap-6 shrink-0 py-5  h-7 flex items-center">
+              <div className="w-[20px] h-[20px]">
+                <Image
+                  src="/icons/profile-icon.svg"
+                  alt="Logo"
+                  width={20}
+                  height={20}
+                  className="w-full h-full"
+                />
+              </div>{" "}
+              Profile
+            </div>
+          </Link>
 
           <Link className="w-full" href={"/product/orders"}>
-            <div className="w-full text-sypher-light-text shrink-0 py-5 gap-6 h-10 flex items-center">
+            <div className="w-full border-b border-border text-sypher-light-text shrink-0 py-5 gap-6 h-10 flex items-center">
               <div className="w-[20px] h-[20px]">
                 <Image
                   src="/icons/orders-icon.svg"
@@ -100,7 +100,7 @@ const Menu = ({ name, userId, role, userName }: ChildProps) => {
             className={`w-full ${name === "admin" ? "hidden" : "block"}`}
             href={`/user/admin`}
           >
-            <div className="w-full text-sypher-light-text shrink-0 py-5 gap-6 h-10 flex items-center">
+            <div className="w-full border-b border-border text-sypher-light-text shrink-0 py-5 gap-6 h-10 flex items-center">
               <div className="w-[20px] h-[20px]">
                 <Image
                   src="/icons/admin-icon.svg"
@@ -117,7 +117,7 @@ const Menu = ({ name, userId, role, userName }: ChildProps) => {
             className={`w-full ${name !== "admin" ? "hidden" : "block"}`}
             href={`/user/admin`}
           >
-            <div className="w-full text-sypher-light-text shrink-0 py-5 h-10 flex items-center">
+            <div className="w-full border-b border-border text-sypher-light-text shrink-0 py-5 h-10 flex items-center">
               <FiShoppingBag className="mr-4 -ml-0.5 text-xl" /> All Products
             </div>
           </Link>

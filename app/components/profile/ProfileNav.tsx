@@ -2,14 +2,13 @@
 
 import { FaArrowLeft } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import BackButton from "../BackButton";
 
 const ProfileNav = () => {
   const router = useRouter();
   return (
     <div className="w-full bg-white flex justify-start px-5 items-center absolute top-0 left-0 h-14 border-b-sypher-light-text border-b">
-      <div className="text-sypher-light-text" onClick={() => router.back()}>
-        <FaArrowLeft />
-      </div>
+      <BackButton />
     </div>
   );
 };
