@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import path from "path";
 
 export async function sendResetMessage(email: string, resetToken: string) {
   try {
@@ -127,7 +128,7 @@ export async function sendResetMessage(email: string, resetToken: string) {
       attachments: [
         {
           filename: "logo.svg",
-          path: "./public/icons/logo.svg",
+          path: path.join(process.cwd(), "public", "icons", "logo.svg"),
           cid: "logo", // same cid value as in the html img src
         },
       ],
