@@ -74,51 +74,55 @@ const VerifyMain = ({ email }: ChildProps) => {
     return () => clearInterval(timer);
   }, [resendCount]);
   return (
-    <>
+    <div className="absolute top-[50%] translate-y-[-50%] px-4">
+      <div className="text-[20px] mb-10 px-2 tracking-tight w-full flex text-left text-text font-semibold">
+        {" "}
+        Verify your Email
+      </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex px-5 flex-col w-full items-center"
+        className="flex px-5 py-10 flex-col border  border-border bg-white rounded-[32px]  w-full items-center"
       >
-        <div className="w-full flex-col my-4 items-center height-auto relative flex">
-          {errors.otp && (
-            <div>
-              <div className="text-red-600 md:w-[50%] md:mx-auto mb-3 text-sm px-2">
+        <div className="flex flex-col w-full gap-2">
+          <div className="w-full flex-col pb-1 items-center height-auto relative flex">
+            {errors.otp && (
+              <div className="text-red-400 w-full text-left md:w-[50%] md:mx-auto mb-1 text-[12px] px-2">
                 {errors.otp?.message}
               </div>
-            </div>
-          )}
-          <input
-            {...register("otp", {
-              required: "otp is required",
-              minLength: {
-                value: 6,
-                message: "OTP must be a 6 digit code",
-              },
-            })}
-            placeholder="------"
-            type="password"
-            maxLength={6}
-            className="flex justify-center items-center text-4xl border border-gray-600 text-center text-black focus:outline-none h-13 rounded-2xl w-full"
-          />
-        </div>
-        <button
-          onClick={resendOtp}
-          type="button"
-          className={`${
-            resendCount > 0 ? "text-gray-700" : "text-blue-700 cursor-pointer"
-          } text-black`}
-          disabled={resendCount > 0 ? true : false}
-        >
-          {resendCount > 0 ? `${resendCount} to ` : ""} Resend Otp
-        </button>
-        <button className="w-full mt-20 flex justify-center items-center cursor-pointer text-white rounded-2xl my-4 h-13 bg-black">
-          <div className="flex items-center">
-            <RiVerifiedBadgeFill className="mr-3" />
-            Verify
+            )}
+            <input
+              {...register("otp", {
+                required: "OTP is required",
+                minLength: {
+                  value: 6,
+                  message: "OTP must be a 6 digit code",
+                },
+              })}
+              placeholder="------"
+              type="password"
+              maxLength={6}
+              className="flex justify-center items-center text-4xl border border-border text-center text-text focus:outline-none h-13 rounded-[16px] w-full"
+            />
           </div>
-        </button>
+          <button
+            onClick={resendOtp}
+            type="button"
+            className={`text-right px-1 w-full text-[14px] ${
+              resendCount > 0 ? "text-gray-700" : "text-blue-400 cursor-pointer"
+            }`}
+            disabled={resendCount > 0 ? true : false}
+          >
+            {resendCount > 0 ? `${resendCount} to ` : ""} Resend Otp
+          </button>
+          <button className="w-full mt-4 flex justify-center items-center cursor-pointer text-white rounded-[32px] mb-4 h-11 bg-text">
+            <div className="flex items-center gap-2">
+              Verify
+              <RiVerifiedBadgeFill className="text-[20px]" />
+            </div>
+          </button>
+        </div>
       </form>
-    </>
+    </div>
   );
 };
 

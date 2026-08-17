@@ -49,7 +49,7 @@ export async function sendOrderMessage(order: IOrder) {
       >
         <div style="width: fit-content; height: fit-content; margin-top: auto">
           <img
-            src="./logo.png"
+            src="cid:log"
             style="margin-top: auto; height: 28px; width: 28px"
           />
         </div>

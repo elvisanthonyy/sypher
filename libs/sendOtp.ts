@@ -47,7 +47,7 @@ export async function sendOTP(email: string, otp: string) {
       >
         <div style="width: fit-content; height: fit-content; margin-top: auto">
           <img
-            src="./logo.png"
+            src="cid:logo"
             style="margin-top: auto; height: 28px; width: 28px"
           />
         </div>
@@ -77,14 +77,16 @@ export async function sendOTP(email: string, otp: string) {
       style="
         width: 100%;
         border: 1px solid #777777;
-        border-radius: 8px;
+        border-radius: 32px;
         margin-bottom: 20px;
-        padding: 8px 0;
+        padding: 16px 0;
         text-align: center;
         font-size: 20px;
+        font-weight: 800;
+        background-color: #444444;
       "
     >
-      ${otp} >
+      ${otp} 
     </div>
     <div style="color: #777777; font-size: 14px">
       <span style="color: #fd755a; margin-right: 4px">Note:</span>
