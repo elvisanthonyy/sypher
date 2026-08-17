@@ -23,9 +23,9 @@ export async function sendResetMessage(email: string, resetToken: string) {
       subject: "Reset Password",
       html: `<div style="
       display: block;
-    background-color: #171717;
+ 
     font-family: Arial, sans-serif;
-    padding: 32px;
+    
   "
 >
   <table
@@ -128,7 +128,7 @@ export async function sendResetMessage(email: string, resetToken: string) {
       attachments: [
         {
           filename: "logo.svg",
-          path: path.join(process.cwd(), "public", "icons", "logo.svg"),
+          path: path.join(process.cwd(), "icons", "logo.svg"),
           cid: "logo", // same cid value as in the html img src
         },
       ],
