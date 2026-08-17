@@ -127,8 +127,8 @@ export async function sendResetMessage(email: string, resetToken: string) {
 </div>`,
       attachments: [
         {
-          filename: "logo.svg",
-          path: path.join(process.cwd(), "public", "icons", "logo.svg"),
+          filename: "logo.png",
+          path: path.join(process.cwd(), "public", "icons", "logo.png"),
           cid: "logo", // same cid value as in the html img src
         },
       ],
