@@ -96,21 +96,26 @@ const Main = ({ session, products }: ChildProps) => {
 
       <div className="">
         {hpProducts?.length > 0 && (
-          <div className="flex px-4 shrink-0 pt-4 custom-scrollbar border-b border-border overflow-x-scroll justify-start items-center w-auto min-w-full ">
-            {hpProducts &&
-              hpProducts.map((product: IProduct) => (
-                <div key={product._id.toString()} className={`flex mx-1`}>
-                  <ProductComponent mainRange={mainRange} product={product} />
-                </div>
-              ))}
+          <div className="flex pt-3 px-4 flex-col gap-3 w-full">
+            <div className="font-semibold tracking-tight px-2 text-[16px] text-text">
+              HP Products
+            </div>
+            <div className="flex shrink-0 custom-scrollbar border-b border-border overflow-x-scroll justify-start items-center w-auto min-w-full ">
+              {hpProducts &&
+                hpProducts.map((product: IProduct) => (
+                  <div key={product._id.toString()} className={`flex mx-1`}>
+                    <ProductComponent mainRange={mainRange} product={product} />
+                  </div>
+                ))}
+            </div>
           </div>
         )}
         {dellProducts?.length > 0 && (
-          <div className="flex pt-3 px-4 flex-col w-full">
-            <div className="font-semibold px-2 text-[16px] text-text">
+          <div className="flex pt-3 px-4 gap-3 flex-col w-full">
+            <div className="font-semibold tracking-tight px-2 text-[16px] text-text">
               Dell Products
             </div>
-            <div className="flex md:border-b border-b border-border min-h-0 shrink-0 custom-scrollbar mt-2 custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
+            <div className="flex md:border-b border-b border-border min-h-0 shrink-0 custom-scrollbar custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
               {dellProducts.map((product: IProduct) => (
                 <div key={product._id.toString()} className={`flex mx-1`}>
                   <ProductComponent mainRange={mainRange} product={product} />
@@ -120,30 +125,45 @@ const Main = ({ session, products }: ChildProps) => {
           </div>
         )}
         {lenovoProducts.length > 0 && (
-          <div className="flex px-4 shrink-0 md:border-b border-b border-border custom-scrollbar my-3  custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
-            {lenovoProducts.map((product: IProduct, index) => (
-              <div key={product._id.toString()} className={`flex mx-1`}>
-                <ProductComponent mainRange={mainRange} product={product} />
-              </div>
-            ))}
+          <div className="flex pt-3 px-4 gap-3 flex-col w-full">
+            <div className="font-semibold tracking-tight px-2 text-[16px] text-text">
+              Lenovo Products
+            </div>
+            <div className="flex shrink-0 md:border-b border-b border-border custom-scrollbar custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
+              {lenovoProducts.map((product: IProduct, index) => (
+                <div key={product._id.toString()} className={`flex mx-1`}>
+                  <ProductComponent mainRange={mainRange} product={product} />
+                </div>
+              ))}
+            </div>
           </div>
         )}
         {macProducts?.length > 0 && (
-          <div className="flex px-4 shrink-0  custom-scrollbar my-3 border-b border-border custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
-            {macProducts.map((product: IProduct, index) => (
-              <div key={product._id.toString()} className={`flex mx-1`}>
-                <ProductComponent mainRange={mainRange} product={product} />
-              </div>
-            ))}
+          <div className="flex pt-3 gap-3 px-4 flex-col w-full">
+            <div className="font-semibold tracking-tight px-2 text-[16px] text-text">
+              MacBooks
+            </div>
+            <div className="flex shrink-0  custom-scrollbar border-b border-border custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
+              {macProducts.map((product: IProduct, index) => (
+                <div key={product._id.toString()} className={`flex mx-1`}>
+                  <ProductComponent mainRange={mainRange} product={product} />
+                </div>
+              ))}
+            </div>
           </div>
         )}
         {otherProduct.length > 0 && (
-          <div className="flex shrink-0 custom-scrollbar my-3  custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
-            {otherProduct.map((product: IProduct, index) => (
-              <div key={product._id.toString()} className={`flex mx-1 `}>
-                <ProductComponent mainRange={mainRange} product={product} />
-              </div>
-            ))}
+          <div className="flex pt-3 px-4 gap-3 flex-col w-full">
+            <div className="font-semibold tracking-tight px-2 text-[16px] text-text">
+              Others
+            </div>
+            <div className="flex shrink-0 custom-scrollbar custom-scrollbar overflow-x-scroll justify-start items-center w-auto min-w-full ">
+              {otherProduct.map((product: IProduct, index) => (
+                <div key={product._id.toString()} className={`flex mx-1 `}>
+                  <ProductComponent mainRange={mainRange} product={product} />
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>

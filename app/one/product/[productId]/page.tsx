@@ -13,7 +13,7 @@ const page = async ({ params }: { params: { productId: string } }) => {
 
   console.log(data);
   return (
-    <div className=" flex w-full min-h-dvh">
+    <div className="px-4 flex w-full min-h-dvh">
       <Nav />
       <ProductMain productProp={data.product} />
     </div>

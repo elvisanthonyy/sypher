@@ -13,7 +13,7 @@ const OneProduct = () => {
 
   useEffect(() => {
     const checkCart = cart?.find(
-      (i) => i.productId === product?._id || i._id === product?._id
+      (i) => i.productId === product?._id || i._id === product?._id,
     );
 
     if (checkCart) {
@@ -24,8 +24,8 @@ const OneProduct = () => {
     }
   }, [product]);
   return (
-    <div className="flex w-[95%] text-black border border-sypher-light-border my-2 justify-start pb-4  items-center flex-col h-115">
-      <div className="shrink-0 overflow-hidden border-b border-b-sypher-light-border w-full h-50 bg-gray-300">
+    <div className="flex p-3 my-3 gap-2 w-full bg-white rounded-[16px] text-black border border-border justify-start pb-4  items-center flex-col h-115">
+      <div className="shrink-0 rounded-[4px] overflow-hidden border-b border-b-sypher-light-border w-full h-50 bg-gray-300">
         {product?.image?.url && (
           <Image
             height={300}
@@ -36,67 +36,67 @@ const OneProduct = () => {
           />
         )}
       </div>
-      <div className="flex text-sm my-5 bg-am flex-col h-[50%] px-1 w-[95%] ">
+      <div className="flex text-sm bg-am flex-col h-[50%] w-full ">
+        <div className="text-[16px] text-text font-semibold">
+          {product?.price && `₦${product?.price}.00`}
+        </div>
+
         <div className="w-full flex mb-1 justify-between">
           <div>{product?.name}</div>
           <div className="italic">{product?.category}</div>
         </div>
 
-        <div className="text-lg font-semibold">
-          {product?.price && `₦${product?.price}.00`}
-        </div>
-
-        <div className="w-full border-b mb-4 border-b-sypher-light-border py-2">
+        <div className="w-full border-b mb-2 border-b-sypher-light-border py-2">
           Specs
         </div>
-        <div>
-          Core i5
-          <br />
-          6th Gen
-          <br />
-          500GB SSD
-          <br />
-          Keyboard light
-          <br />
-          Windows 10 pro
+        <div className="grid row-[1fr, 1fr]">
+          <div>Core i5</div>
+
+          <div>6th Gen</div>
+          <div>500GB SSD</div>
+          <div>Keyboard light</div>
+
+          <div>Keyboard light</div>
         </div>
 
-        {isInCart ? (
-          <div className="fixed bottom-10 left-[50%]  border border-sypher-light-darkBorder bg-white -translate-x-[50%] w-[95%] h-18 py-3 rounded-lg px-5 flex justify-between items-center ">
-            <div
-              onClick={() => (qty ?? 0) > 1 && setQty((qty ?? 0) - 1)}
-              className="flex justify-center items-center text-lg aspect-square h-[90%] rounded-lg bg-black text-white"
-            >
-              -
+        <div className="fixed -translate-x-[50%] bottom-0 bg-white left-[50%] px-5 pt-3 pb-5 w-full">
+          {isInCart ? (
+            <div className="w-full h-18 rounded-lg flex justify-between items-center ">
+              <div
+                onClick={() => (qty ?? 0) > 1 && setQty((qty ?? 0) - 1)}
+                className="flex justify-center items-center text-lg aspect-square rounded-[8px] h-[36px] aspect-square bg-primary-400 text-white"
+              >
+                -
+              </div>
+              <input
+                type="number"
+                value={qty}
+                onChange={(e) => setQty(Number(e.target.value))}
+                min={1}
+                max={2}
+                maxLength={2}
+                className="border border-border text-text aspect-square rounded-[8px] h-[36px] aspect-square text-center"
+                disabled
+              />
+              <div
+                onClick={() =>
+                  (qty ?? 0) < (product?.unitsAvailable ?? 0) &&
+                  setQty((qty ?? 0) + 1)
+                }
+                className="flex justify-center items-center text-lg aspect-square rounded-[8px] h-[36px] aspect-square border border-border"
+              >
+                +
+              </div>
             </div>
-            <input
-              type="number"
-              value={qty}
-              onChange={(e) => setQty(Number(e.target.value))}
-              min={1}
-              max={2}
-              maxLength={2}
-              className="border h-[90%] rounded-lg aspect-square w-15 text-center"
-              disabled
-            />
+          ) : (
             <div
-              onClick={() =>
-                (qty ?? 0) < (product?.unitsAvailable ?? 0) &&
-                setQty((qty ?? 0) + 1)
-              }
-              className="flex justify-center items-center text-lg aspect-square h-[90%] rounded-lg border border-black"
+              onClick={() => addToCart({ ...product, qty })}
+              className="text-white h-[49px] rounded-[16px] flex justify-center items-center bg-primary-400"
             >
-              +
+              Add to Cart
             </div>
-          </div>
-        ) : (
-          <div
-            onClick={() => addToCart({ ...product, qty })}
-            className="fixed bottom-10 left-[50%] -translate-x-[50%] w-[95%] text-white h-13 rounded-lg flex justify-center items-center bg-blue-700"
-          >
-            Add to Cart
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

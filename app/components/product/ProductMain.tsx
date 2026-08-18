@@ -32,9 +32,9 @@ const ProductMain = ({ productProp }: ChildProps) => {
     getSimilarProducts();
   }, []);
   return (
-    <div className="w-full min-h-[80dvh] flex flex-col items-center pt-20">
+    <div className="w-full min-h-[80dvh] flex flex-col gap-2 items-center pt-[64px]">
       <OneProduct />
-      <div className="flex my-3 custom-scrollbar border-black border-t overflow-x-scroll justify-start items-center w-full ">
+      <div className="flex pt-3 custom-scrollbar border-border border-t overflow-x-scroll justify-start items-center w-full ">
         {products?.map((product: IProduct, index: number) => (
           <div key={product._id.toString()} className={`flex mx-1 }`}>
             <ProductComponent product={product} />
