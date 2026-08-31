@@ -29,7 +29,7 @@ const FilterComponent = ({ setMainRange }: ChildProps) => {
             className="text-text text-[14px] rounded-[16px]"
             defaultChecked
           >
-            Filter by price
+            All
           </option>
           <option value="100000-200000" className="text-black">
             N100k - N200k

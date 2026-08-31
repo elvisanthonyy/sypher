@@ -7,27 +7,27 @@ const CartMain = () => {
   const { cart, removeFromCart, clearCart } = useCart();
 
   return (
-    <div className="w-full flex-col min-h-[80dvh] flex pt-18">
-      <div className="w-full h-15 mb-2 justify-between px-6 border-b flex items-center">
-        <div className="w-fit">Your Cart Items</div>
+    <div className="w-full flex-col min-h-[80dvh] flex pt-[64px]">
+      <section className="w-full bg-white h-[52px] justify-between px-4 border-b flex border-border items-center">
         <div
           onClick={clearCart}
-          className="w-20 rounded-2xl bg-black text-white h-10 flex justify-center items-center"
+          className="text-[14px] rounded-[32px] bg-text text-white px-4 py-2 flex justify-center items-center"
         >
           Clear
         </div>
-      </div>
+      </section>
 
-      {cart?.map((cartItem) => (
-        <div className="mb-4" key={cartItem?._id}>
+      <section className="mt-3 flex flex-col gap-3 px-4">
+        {cart?.map((cartItem) => (
           <CartProductItem
+            key={cartItem?._id}
             cartItem={cartItem}
             removeFromCart={() =>
               removeFromCart(cartItem?._id, cartItem.productId)
             }
           />
-        </div>
-      ))}
+        ))}
+      </section>
     </div>
   );
 };

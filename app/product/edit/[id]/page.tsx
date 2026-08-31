@@ -1,5 +1,5 @@
 import EditProductMain from "@/app/components/edit/EditProductMain";
-import ProfileNav from "@/app/components/profile/ProfileNav";
+import ProfileNav from "@/app/components/profile/ThirdNav";
 import dbConnect from "@/libs/dbConnect";
 import { getSession } from "@/app/utils/getSession";
 import { redirect } from "next/navigation";

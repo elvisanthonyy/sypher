@@ -5,49 +5,55 @@ import Image from "next/image";
 
 interface ChildProps {
   cartItem: CartItem;
+  key: string;
   removeFromCart: () => void;
 }
 
-const CartProductItem = ({ cartItem, removeFromCart }: ChildProps) => {
+const CartProductItem = ({ cartItem, removeFromCart, key }: ChildProps) => {
   const router = useRouter();
   const total =
     cartItem?.price && cartItem?.qty ? cartItem?.price * cartItem?.qty : 0;
   return (
-    <div className="flex mx-auto shrink-0 bg-white justify-start pb-4 my-1 border border-sypher-light-border text-black items-center flex-col w-[95%] min-h-113 bg-sypher-compGray">
-      <div className="w-full overflow-hidden border-b border-b-sypher-light-darkBorder bg-sypher-light-border h-45 ">
-        {cartItem?.image?.url && (
-          <Image
-            height={100}
-            width={200}
-            alt="cart product image"
-            src={cartItem.image.url}
-            className="w-full h-full object-cover"
-          />
-        )}
-      </div>
-      <div className="flex flex-col h-50 py-5 px-4 w-full">
-        <div className="text-sypher-light-text">{cartItem?.name}</div>
-        <div className="font-semibold">{`Total: N${total}.00`}</div>
-        <div>{cartItem?.category}</div>
-        <div className="text-sypher-light-text text-sm">
-          {cartItem?.qty && `Quantity: ${cartItem?.qty}`}
+    <div
+      key={key}
+      className="flex rounded-[20px] mx-auto p-3 gap-4 shrink-0 bg-white justify-start border border-border text-black items-center flex-col w-full bg-sypher-compGray"
+    >
+      <section className="h-[94px] border border-border rounded-[8px] bg-[#fafafa] flex w-full items-center gap-4">
+        <div className="h-full aspect-square rounded-[8px] overflow-hidden border-b border-b-sypher-light-darkBorder bg-sypher-light-border h-45 ">
+          {cartItem?.image?.url && (
+            <Image
+              height={100}
+              width={200}
+              alt="cart product image"
+              src={cartItem.image.url}
+              className="w-full h-full object-cover"
+            />
+          )}
         </div>
+        <div>
+          <div className="text-[16px] tracking-tight text-secondary-700 font-semibold">{`N${total}.00`}</div>
+          <div className="text-[#b4b4b4] text-[14px]">{cartItem?.name}</div>
+        </div>
+      </section>
 
-        <div className="w-full flex flex-col items-center">
-          <button
-            onClick={() => router.push(`/product/order/${cartItem.productId}`)}
-            className="w-full cursor-pointer py-2 mt-4 px-5 my-2 bg-black text-white border rounded-lg"
-          >
-            Order Now
-          </button>
-          <button
-            onClick={removeFromCart}
-            className="w-full cursor-pointer py-2 px-5 my-2 text-black border rounded-lg"
-          >
-            Remove to cart
-          </button>
-        </div>
-      </div>
+      <section className="w-full flex gap-2 items-center">
+        <button
+          onClick={() =>
+            router.push(
+              `/product/order/${cartItem.productId ? cartItem.productId : cartItem._id}`,
+            )
+          }
+          className="w-full cursor-pointer h-[34px] bg-text text-[14px] text-white border rounded-[8px]"
+        >
+          Order
+        </button>
+        <button
+          onClick={removeFromCart}
+          className="w-full cursor-pointer h-[34px] bg-primary-400 text-[14px] text-white border rounded-[8px]"
+        >
+          Delete
+        </button>
+      </section>
     </div>
   );
 };

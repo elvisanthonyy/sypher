@@ -81,7 +81,7 @@ const ProfileMain = ({ user }: ChildProps) => {
                 />{" "}
               </div>
             </div>
-            <div className="text-[16px] text-border">{user?.email}</div>
+            <div className="text-[16px] text-[#b4b4b4]">{user?.email}</div>
           </div>
           <div className="gap-4 w-full rounded-[24px] p-2 flex flex-col h-auto bg-white">
             <ProfileItemComponent

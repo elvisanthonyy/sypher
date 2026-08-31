@@ -2,8 +2,12 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import api from "@/libs/api";
 import { CartItem } from "@/app/context/CartContext";
-import { useEffect } from "react";
+import { use, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import CompletedComponent from "../CompletedComponent";
+import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import Image from "next/image";
 
 interface FormFields {
   name: string;
@@ -25,7 +29,8 @@ interface ChildProps {
 }
 
 const OrderMain = ({ user, cartItem }: ChildProps) => {
-  console.log(cartItem);
+  const searchParams = useSearchParams();
+  const status = searchParams.get("status");
   const total = (cartItem?.price ?? 0) * (cartItem?.qty ?? 0);
   const { register, handleSubmit } = useForm<FormFields>({
     defaultValues: {
@@ -36,6 +41,7 @@ const OrderMain = ({ user, cartItem }: ChildProps) => {
       qty: cartItem?.qty,
     },
   });
+  const router = useRouter();
 
   useEffect(() => {}, []);
 
@@ -48,6 +54,7 @@ const OrderMain = ({ user, cartItem }: ChildProps) => {
       })
       .then((res) => {
         if (res.data.status === "okay") {
+          router.push(`/product/order/${cartItem?.productId}?status=done`);
           toast.success(res.data.message.split(",")[0], {
             theme: "dark",
             position: "top-center",
@@ -60,65 +67,115 @@ const OrderMain = ({ user, cartItem }: ChildProps) => {
   };
 
   return (
-    <div>
-      <form
-        onClick={handleSubmit(onSubmit)}
-        className="flex w-full flex-col px-5"
-      >
-        <input
-          {...register("name", {
-            required: "name is required",
-          })}
-          className="border px-4 my-2 h-12 rounded-lg"
-          type="text"
-          disabled
+    <section>
+      {status ? (
+        <CompletedComponent
+          title="Order Placed!"
+          subTitle="Your order has been placed successfully,
+        check your email for more details"
+          buttonTitle="Orders"
+          buttonLink="/"
         />
-        <input
-          {...register("email", {
-            required: "email is required",
-          })}
-          className="border px-4 my-2 h-12 rounded-lg"
-          type="text"
-          disabled
-        />
+      ) : (
+        <form
+          onClick={handleSubmit(onSubmit)}
+          className="flex gap-3 w-full text-text text-[14px] flex-col px-5"
+        >
+          <section className="p-3 flex gap-2 border border-primary-100 bg-white h-[138px] rounded-[20px]">
+            <div className="h-full overflow-hidden aspect-square rounded-[8px]">
+              <Image
+                src={cartItem.image.url}
+                height={1000}
+                width={1000}
+                alt="product image"
+                className="h-full"
+                draggable={false}
+              />
+            </div>
+            <div className="flex flex-col h-full">
+              <p>{cartItem.name}</p>
+              <h1>{cartItem.price}</h1>
+            </div>
+          </section>
 
-        <input
-          {...register("productName", {
-            required: "productName is required",
-          })}
-          className="border px-4 my-2 h-12 rounded-lg"
-          type="text"
-          disabled
-        />
-        <input
-          {...register("price", {
-            required: "price is required",
-          })}
-          className="border px-4 my-2 h-12 rounded-lg"
-          type="text"
-          disabled
-        />
-        <input
-          {...register("qty", {
-            required: "qty is required",
-          })}
-          className="border px-4 my-2 h-12 rounded-lg"
-          type="text"
-          disabled
-        />
-        <input
-          {...register("location", {
-            required: "location is required",
-          })}
-          placeholder="Enter Address"
-          className="border px-4 my-2 h-12 rounded-lg"
-          type="text"
-        />
-        <button className="bg-black h-12 rounded-lg my-2 text-white">
-          Order
-        </button>
-      </form>
-    </div>
+          {/* user details */}
+          <section className="h-full flex pb-8 flex-col p-4 gap-4 bg-white border border-border rounded-[20px]">
+            <h1 className="w-full text-[16px] font-semibold pb-2 border-b border-border">
+              User Details
+            </h1>
+            <div className="flex flex-col gap-3">
+              <div className="flex justify-between">
+                <label className="text-[#b4b4b4]" htmlFor="name">
+                  Name
+                </label>
+                <div
+                  {...register("name", {
+                    required: "name is required",
+                  })}
+                  id="name"
+                  className="flex font-semibold items-end "
+                >
+                  {cartItem.name}
+                </div>
+              </div>
+              <div className="flex justify-between">
+                <label className="text-[#b4b4b4]" htmlFor="name">
+                  Email
+                </label>
+                <div
+                  {...register("name", {
+                    required: "name is required",
+                  })}
+                  id="name"
+                  className="flex font-semibold items-end "
+                >
+                  {user.email}
+                </div>
+              </div>
+            </div>
+          </section>
+          <section className="h-full flex pb-8 flex-col p-4 gap-4 bg-white border border-border rounded-[20px]">
+            <h1 className="w-full text-[16px] font-semibold pb-2 border-b border-border">
+              Order Details
+            </h1>
+            <div className="flex flex-col gap-3">
+              <div className="flex justify-between">
+                <label className="text-[#b4b4b4]" htmlFor="name">
+                  Quantity
+                </label>
+                <div
+                  {...register("name", {
+                    required: "name is required",
+                  })}
+                  id="name"
+                  className="flex font-semibold items-end "
+                >
+                  {cartItem.qty}
+                </div>
+              </div>
+              <div className="flex justify-between">
+                <label className="text-[#b4b4b4]" htmlFor="name">
+                  Price
+                </label>
+                <div
+                  {...register("name", {
+                    required: "name is required",
+                  })}
+                  id="name"
+                  className="flex font-semibold items-end "
+                >
+                  {cartItem.price}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <button className="bg-primary-400 cursor-pointer h-12 rounded-[8px] my-2 text-white">
+            Order
+          </button>
+        </form>
+      )}
+    </section>
   );
 };
 

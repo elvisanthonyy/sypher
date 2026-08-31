@@ -3,7 +3,7 @@ import dbConnect from "@/libs/dbConnect";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import AdminOrderMain from "@/app/components/order/AdminOrderMain";
-import ProfileNav from "@/app/components/profile/ProfileNav";
+import ProfileNav from "@/app/components/profile/ThirdNav";
 
 const baseURL = process.env.BASE_URL;
 const page = async () => {

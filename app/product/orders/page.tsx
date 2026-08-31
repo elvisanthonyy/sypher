@@ -3,7 +3,7 @@ import dbConnect from "@/libs/dbConnect";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import UserOrdersMain from "@/app/components/usersOrders/UserOrdersMain";
-import ProfileNav from "@/app/components/profile/ProfileNav";
+import NavOrder from "@/app/components/nav/NavOrder";
 
 const baseURL = process.env.BASE_URL;
 
@@ -29,8 +29,8 @@ const page = async () => {
   const data = await res.json();
   console.log(data);
   return (
-    <div className="w-full min-h-dvh pt-14">
-      <ProfileNav />
+    <div className="w-full min-h-dvh pt-16">
+      <NavOrder ordersNumber={data.orders.length} />
       <UserOrdersMain orders={data.orders} />
     </div>
   );

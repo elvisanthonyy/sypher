@@ -1,7 +1,7 @@
 import dbConnect from "@/libs/dbConnect";
 import { getSession } from "@/app/utils/getSession";
 import { redirect } from "next/navigation";
-import ProfileNav from "@/app/components/profile/ProfileNav";
+import ProfileNav from "@/app/components/profile/ThirdNav";
 import AllProdMain from "@/app/components/product/AllProdMain";
 import { cookies } from "next/headers";
 

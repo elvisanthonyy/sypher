@@ -1,4 +1,4 @@
-import ProfileNav from "@/app/components/profile/ProfileNav";
+import ProfileNav from "@/app/components/profile/ThirdNav";
 import dbConnect from "@/libs/dbConnect";
 import { getSession } from "@/app/utils/getSession";
 import { redirect } from "next/navigation";
@@ -16,7 +16,7 @@ const page = async () => {
   await dbConnect();
   const session = await getSession();
   if (!session) {
-    redirect("/auth/signin");
+    redirect("/auth/signin?redirecctUrl=");
   }
   const res = await fetch(`${baseURL}/api/profile/user/${session.user.id}`);
   const data = await res.json();

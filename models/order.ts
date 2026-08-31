@@ -11,6 +11,7 @@ export interface IOrder extends Document {
   price: number;
   qty: number;
   createdAt: Date;
+  status: [string];
 }
 
 const OrderSchema = new mongoose.Schema<IOrder>(
@@ -48,6 +49,12 @@ const OrderSchema = new mongoose.Schema<IOrder>(
     qty: {
       type: Number,
       require: true,
+    },
+    status: {
+      type: [String],
+      enum: ["pending", "success", "cancelled"],
+      default: ["pending"],
+      required: true,
     },
   },
   {

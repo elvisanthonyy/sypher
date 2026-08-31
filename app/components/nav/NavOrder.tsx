@@ -12,35 +12,16 @@ import BackButton from "../BackButton";
 
 interface ChildProps {
   name?: string;
+  ordersNumber: number;
 }
 
-const NavTwo = async ({ name }: ChildProps) => {
+const NavOrder = async ({ name, ordersNumber }: ChildProps) => {
   // get user session
   await dbConnect();
   const session = await getServerSession(authOptions);
 
   return (
     <div className=" z-30 fixed bg-white top-0 text-text left-0 flex items-center justify-between px-[5%] w-full h-16 border-b border-b-border">
-      <div
-        className={`cursor-pointer flex items-center gap-4 ${name === "profile" ? "hidden" : "flex"}`}
-      >
-        <Link href={"/"}>
-          <div className="w-fit flex items-center justify-center gap-2">
-            <div className="w-[28px] flex aspect-square ">
-              <Image
-                src="/icons/logo.svg"
-                alt="Logo"
-                width={24}
-                height={24}
-                className="w-full w-full "
-              />
-            </div>
-
-            <div className="font-semibold text-[16px]">Max Gadgets</div>
-          </div>
-        </Link>
-      </div>
-
       <div className="flex items-center gap-4">
         <BackButton />
         {session ? (
@@ -74,9 +55,15 @@ const NavTwo = async ({ name }: ChildProps) => {
           </Link>
         )}
       </div>
+      <div className="flex gap-2">
+        <div className="text-[16px] font-semibold">Orders</div>
+        <div className="text-[12px] flex h-[24px] aspect-square items-center justify-center bg-primary-400 text-white rounded-full">
+          {ordersNumber}
+        </div>
+      </div>
       <Menu name={name} />
     </div>
   );
 };
 
-export default NavTwo;
+export default NavOrder;

@@ -17,7 +17,7 @@ const ProfileItemComponent = ({
   iconUrl,
 }: ChildProps) => {
   return (
-    <div className="bg-background px-4 gap-4 rounded-[16px] text-text font-medium text-[14px] font-medium flex items-center h-12.5 flex">
+    <div className="bg-background px-4 gap-4 rounded-[16px] text-text text-[14px] font-semibold flex items-center h-12.5 flex">
       <div className="w-5 aspect-square">
         <Image
           src={iconUrl}

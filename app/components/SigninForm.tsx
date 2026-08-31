@@ -11,6 +11,7 @@ import api from "@/libs/api";
 import { useCart } from "../context/CartContext";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 
 interface FormFields {
   email: string;
@@ -19,15 +20,22 @@ interface FormFields {
 
 const SigninForm = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [isPasswordVisible, setIsPasswordVisble] = useState(false);
   const { cart } = useCart();
   const [loading, setLoading] = useState(false);
   const { data: session } = useSession();
+  const redirectUrl = searchParams.get("redirectUrl");
+  //disable button when clicked
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [message, setMessage] = useState("");
   const { register, handleSubmit, reset } = useForm<FormFields>();
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     setLoading(true);
+    setIsButtonDisabled(true);
     console.log(data);
+
+    //send data
     const result = await signIn("credentials", {
       redirect: false,
       email: data.email,
@@ -37,7 +45,9 @@ const SigninForm = () => {
     });
 
     if (!result?.error) {
+      //get cart when use is not logged in
       const guestCart = localStorage.getItem("cart");
+      //get cookies
       const cookies = document.cookie;
       const match = cookies
         .split("; ")
@@ -45,6 +55,7 @@ const SigninForm = () => {
         ?.split("=")[1];
 
       if (match || guestCart) {
+        //merge cart with users cart
         api
           .post("/api/cart/merge", {
             cartId: match,
@@ -67,10 +78,15 @@ const SigninForm = () => {
       });
 
       setTimeout(() => {
-        router.push("/");
+        if (redirectUrl) {
+          router.push(`${redirectUrl}`);
+        } else {
+          router.push("/");
+        }
       }, 1500);
     } else if (result?.error === "user not verified") {
       setLoading(false);
+      setIsButtonDisabled(false);
       console.error(result?.error);
       setMessage(result.error);
       setTimeout(() => {
@@ -80,6 +96,7 @@ const SigninForm = () => {
       console.error("error", result?.error);
       setLoading(false);
       setMessage(result.error);
+      setIsButtonDisabled(false);
     }
   };
   return (
@@ -174,6 +191,7 @@ const SigninForm = () => {
           <button
             onClick={() => router.push("/auth/signup")}
             className="text-[14px] cursor-pointer flex w-fit underline"
+            disabled={isButtonDisabled}
           >
             {" "}
             Sign Up

@@ -50,7 +50,9 @@ const OneProduct = () => {
           Specs
         </div>
         <div className="grid row-[1fr, 1fr]">
-          <div>Core i5</div>
+          <div>
+            <div></div>Core i5
+          </div>
 
           <div>6th Gen</div>
           <div>500GB SSD</div>

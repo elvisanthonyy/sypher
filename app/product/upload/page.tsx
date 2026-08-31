@@ -1,5 +1,5 @@
 import ProductUploadMain from "@/app/components/productUpload/ProductUploadMain";
-import ProfileNav from "@/app/components/profile/ProfileNav";
+import ProfileNav from "@/app/components/profile/ThirdNav";
 import { getSession } from "@/app/utils/getSession";
 import dbConnect from "@/libs/dbConnect";
 import { redirect } from "next/navigation";
