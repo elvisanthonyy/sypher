@@ -98,7 +98,7 @@ const Menu = ({ name }: ChildProps) => {
             {session ? (
               <div
                 onClick={() => signOut()}
-                className="w-fit text-[14px] bg-primary-500 text-white shrink-0 py-2 px-6 gap-2 cursor-pointer rounded-[32px] h-10 flex items-center"
+                className="w-fit text-[14px] bg-primary-400 text-white shrink-0 py-2 px-6 gap-2 cursor-pointer rounded-[32px] h-10 flex items-center"
               >
                 Log Out
                 <MdOutlineLogout className="text-[16px]" />

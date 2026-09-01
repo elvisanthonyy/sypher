@@ -33,7 +33,7 @@ const UserOrdersMain = ({ orders }: ChildProps) => {
               className="w-full flex flex-col items-center"
               key={order?._id.toString()}
             >
-              <OrderComp order={order} />
+              <OrderComp selectedFilter={selectedFilter} order={order} />
             </div>
           ))}
         </div>

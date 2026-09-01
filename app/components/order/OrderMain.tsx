@@ -55,10 +55,6 @@ const OrderMain = ({ user, cartItem }: ChildProps) => {
       .then((res) => {
         if (res.data.status === "okay") {
           router.push(`/product/order/${cartItem?.productId}?status=done`);
-          toast.success(res.data.message.split(",")[0], {
-            theme: "dark",
-            position: "top-center",
-          });
         }
       })
       .catch((error) => {

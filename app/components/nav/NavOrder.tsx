@@ -32,21 +32,6 @@ const NavOrder = async ({ name, ordersNumber }: ChildProps) => {
                   {session?.user?.name}
                 </div>
               )}
-              {session.user.role === "admin" ? (
-                <div className="w-[20px] hidden flex aspect-square ">
-                  <Image
-                    src="/icons/admin-icon.svg"
-                    alt="Logo"
-                    width={24}
-                    height={24}
-                    className="w-full w-full text-white"
-                  />
-                </div>
-              ) : name === "profile" ? (
-                <RiVerifiedBadgeFill className="text-lg" />
-              ) : (
-                <FaUser className="text-lg" />
-              )}
             </div>
           </Link>
         ) : (
