@@ -15,6 +15,8 @@ const ProductComponent = ({ product, mainRange }: ChildProps) => {
   const { addToCart } = useCart();
   const [qty, setQty] = useState<number>(1);
   const router = useRouter();
+  const splitPrice = product?.price?.toString().split("");
+
   return (
     <div
       onClick={() => router.replace(`/one/product/${product._id}`)}
@@ -33,9 +35,7 @@ const ProductComponent = ({ product, mainRange }: ChildProps) => {
       </div>
       <div className="flex text-sm gap-1 flex-col h-fit w-full">
         <div className="flex h-fit justify-between items-start w-full pr-1">
-          <div className="font-semibold text-[16px] text-secondary-700">{`₦${Number(
-            product?.price,
-          )}.00`}</div>
+          <div className="font-semibold text-[16px] text-secondary-700">{`₦${product?.price?.toFixed(2)}`}</div>
           <div className="text-[8px] text-white bg-text w-5 h-auto aspect-square flex justify-center items-center rounded-full">{`${Number(product?.unitsAvailable)}`}</div>
         </div>
 

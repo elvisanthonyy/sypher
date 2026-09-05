@@ -25,7 +25,7 @@ const Menu = ({ name }: ChildProps) => {
     <div className="z-100 h-full mg:fixed md:top-0 left-0  flex items-center relative">
       <div
         onClick={() => setIsMenuOpen(true)}
-        className=" flex z-120 w-full left-0"
+        className={`flex z-120 ${isMenuOpen && "hidden"} w-full left-0`}
       >
         <FiMenu className="text-2xl text-text" />
       </div>

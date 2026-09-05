@@ -80,7 +80,7 @@ const OrderMain = ({ user, cartItem }: ChildProps) => {
           <section className="p-3 flex gap-2 border border-primary-100 bg-white h-[138px] rounded-[20px]">
             <div className="h-full overflow-hidden aspect-square rounded-[8px]">
               <Image
-                src={cartItem.image.url}
+                src={cartItem?.image?.url}
                 height={1000}
                 width={1000}
                 alt="product image"

@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
-import Nav from "@/app/components/nav/Nav";
+import AdminNav from "@/app/components/admin/AdminNav";
 import AdminMain from "@/app/components/admin/AdminMain";
 import { cookies } from "next/headers";
 
@@ -27,8 +27,8 @@ const page = async () => {
   const data = await res.json();
 
   return (
-    <div className="w-full pt-22 min-h-dvh flex justify-center">
-      <Nav name="admin" />
+    <div className="w-full pt-20 min-h-dvh flex flex-col justify-start items-center gap-4">
+      <AdminNav />
       <AdminMain details={data?.details} />
     </div>
   );

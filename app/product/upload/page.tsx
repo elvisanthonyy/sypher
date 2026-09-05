@@ -15,7 +15,7 @@ const page = async () => {
     redirect("/auth/admin/redirect");
   }
   return (
-    <div className="w-full h-dvh pt-25">
+    <div className="w-full h-dvh pt-[80px]">
       <ProfileNav />
       <ProductUploadMain />
     </div>

@@ -11,6 +11,7 @@ export interface IProduct extends Document {
     filename: string;
     url: string;
   };
+  specifications: [string];
 }
 
 const ProdusctSchema = new mongoose.Schema<IProduct>(
@@ -38,6 +39,9 @@ const ProdusctSchema = new mongoose.Schema<IProduct>(
     image: {
       url: String,
       filename: String,
+    },
+    specifications: {
+      type: [String],
     },
   },
   {

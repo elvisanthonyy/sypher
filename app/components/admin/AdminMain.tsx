@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
-import { FiShoppingBag } from "react-icons/fi";
-import { MdUpload, MdInventory } from "react-icons/md";
+import AdminDetailsComp from "./AdminDetailsComp";
+import ButtonIcon from "./ButtonIcon";
 
 interface ChildProps {
   details: {
@@ -12,52 +12,50 @@ interface ChildProps {
 }
 
 const AdminMain = ({ details }: ChildProps) => {
-  console.log(details);
   return (
-    <div className="w-[95%] pt-10 h-fit pb-10  bg-white px-5">
-      <div className="border-l-2 border-sypher-light-darkBorder px-4">
-        <div className="text-sypher-light-text font-semibold">
+    <div className="w-full flex flex-col gap-4 px-4">
+      {/* Website details section */}
+      <section className="bg-primary-500 flex flex-col gap-8 rounded-[16px] p-4">
+        <h1 className="text-[18px] font-semibold text-[#FDF8F7]">
           Website details
+        </h1>
+        <div className="flex flex-wrap gap-2 flex-col">
+          <AdminDetailsComp
+            label="Total Products"
+            value={details.totalProducts}
+          />
+          <AdminDetailsComp label="Total Orders" value={details.totalOrders} />
+          <AdminDetailsComp label="Total Users" value={details.totalUsers} />
         </div>
-        <div className="h-14 flex text-sypher-light-darkBorder  items-end pb-2 border-b-sypher-light-border mb-2 border-b">
-          Products:{" "}
-          <span className="ml-1 text-sypher-light-text">
-            {details?.totalProducts && `${details?.totalProducts}`}
-          </span>
-        </div>
-        <div className="h-14 flex text-sypher-light-darkBorder  items-end pb-3 border-b-sypher-light-border my-2 border-b">
-          Orders:{" "}
-          <span className="ml-1 text-sypher-light-text">
-            {details?.totalOrders && `${details?.totalOrders}`}
-          </span>
-        </div>
-        <div className="h-14 flex text-sypher-light-darkBorder  items-end pb-3 border-b-sypher-light-border my-2 border-b">
-          Users:{" "}
-          <span className="ml-1 text-sypher-light-text">
-            {details?.totalUsers && `${details?.totalUsers}`}
-          </span>
-        </div>
-      </div>
+      </section>
 
-      <div className="flex w-full  border-b border-b-sypher-light-border flex-col mt-15 min-h-50">
-        <Link className={``} href={`/product/allproducts`}>
-          <div className="w-full text-sypher-light-text shrink-0 py-5 my-1 h-15 flex items-center">
-            <FiShoppingBag className="mr-5 text-2xl" /> All Products
-          </div>
-        </Link>
-        <Link className={`w-full flex`} href={`/user/admin/orders`}>
-          <div className="w-full shrink-0 text-sypher-light-text py-5 my-1 h-15 flex items-center">
-            <MdInventory className="mr-5 text-2xl text-sypher-light-text" /> All
-            Orders
-          </div>
-        </Link>
-        <Link className={`w-full flex`} href={`/product/upload`}>
-          <div className="w-full shrink-0 text-sypher-light-text py-5 my-1 h-15 flex items-center">
-            <MdUpload className="mr-5 border rounded-sm text-xl text-sypher-light-text" />{" "}
-            Upload Product
-          </div>
-        </Link>
-      </div>
+      {/* Actions section */}
+      <section className="flex flex-col gap-3">
+        <h1 className="text-[18px] font-semibold border-b border-border pb-2 text-text">
+          Actions
+        </h1>
+        <div className="flex w-full text-[14px] flex-col gap-3 p-4 bg-white border border-border rounded-[20px]">
+          <Link className={``} href={`/product/allproducts`}>
+            <div className="w-fit text-white px-6 gap-2 shrink-0 h-10 bg-text rounded-[8px] flex items-center">
+              <p>View all Products</p>
+
+              <ButtonIcon icon="/icons/all-product-icon.svg" />
+            </div>
+          </Link>
+          <Link className={`w-full flex`} href={`/product/upload`}>
+            <div className="w-fit text-text px-6 gap-2 shrink-0 h-10 border border-text rounded-[8px] flex items-center">
+              <p>Upload Product</p>
+              <ButtonIcon icon="/icons/upload-product-icon.svg" />
+            </div>
+          </Link>
+          <Link className={`w-full flex`} href={`/user/admin/orders`}>
+            <div className="w-fit text-white px-6 gap-2 shrink-0 h-10 bg-gradient-to-r from-[#19AECC] to-[#14879F] rounded-[8px] flex items-center">
+              <p>View all Orders</p>
+              <ButtonIcon icon="/icons/all-orders-icon.svg" />
+            </div>
+          </Link>
+        </div>
+      </section>
     </div>
   );
 };

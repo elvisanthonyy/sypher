@@ -33,14 +33,22 @@ const ProductMain = ({ productProp }: ChildProps) => {
   }, []);
   return (
     <div className="w-full min-h-[80dvh] flex flex-col gap-2 items-center pt-[64px]">
-      <OneProduct />
-      <div className="flex pt-3 custom-scrollbar border-border border-t overflow-x-scroll justify-start items-center w-full ">
-        {products?.map((product: IProduct, index: number) => (
-          <div key={product._id.toString()} className={`flex mx-1 }`}>
-            <ProductComponent product={product} />
-          </div>
-        ))}
-      </div>
+      <section className="px-4 w-full">
+        <OneProduct />
+      </section>
+
+      <section className="flex w-full px-4 flex-col pt-2 border-border border-t">
+        <h1 className="text-[16px] font-semibold text-text">
+          Similar Products
+        </h1>
+        <div className="flex gap-2 pt-3 custom-scrollbar overflow-x-scroll justify-start items-center w-full ">
+          {products?.map((product: IProduct, index: number) => (
+            <div key={product._id.toString()} className={`flex}`}>
+              <ProductComponent product={product} />
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 };

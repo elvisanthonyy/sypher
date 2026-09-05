@@ -4,6 +4,8 @@ import { useProductContext } from "@/app/context/ProductContext";
 import { useCart } from "@/app/context/CartContext";
 import Image from "next/image";
 
+const specs = ["Core i5", "6th Gen", "500GB SSD", "Keyboard light"];
+
 // component to display product when clicked
 const OneProduct = () => {
   const { product } = useProductContext();
@@ -24,8 +26,8 @@ const OneProduct = () => {
     }
   }, [product]);
   return (
-    <div className="flex p-3 my-3 gap-2 w-full bg-white rounded-[16px] text-black border border-border justify-start pb-4  items-center flex-col h-115">
-      <div className="shrink-0 rounded-[4px] overflow-hidden border-b border-b-sypher-light-border w-full h-50 bg-gray-300">
+    <div className="flex p-3 my-3 gap-2 w-full bg-white rounded-[16px] text-black border border-border justify-start pb-4  items-center flex-col h-fit">
+      <section className="shrink-0 rounded-[4px] overflow-hidden border-b border-b-sypher-light-border w-full h-50 bg-gray-300">
         {product?.image?.url && (
           <Image
             height={300}
@@ -35,30 +37,25 @@ const OneProduct = () => {
             className="w-[105%] h-full object-cover"
           />
         )}
-      </div>
-      <div className="flex text-sm bg-am flex-col h-[50%] w-full ">
-        <div className="text-[16px] text-text font-semibold">
-          {product?.price && `₦${product?.price}.00`}
-        </div>
-
-        <div className="w-full flex mb-1 justify-between">
-          <div>{product?.name}</div>
-          <div className="italic">{product?.category}</div>
-        </div>
-
-        <div className="w-full border-b mb-2 border-b-sypher-light-border py-2">
-          Specs
-        </div>
-        <div className="grid row-[1fr, 1fr]">
-          <div>
-            <div></div>Core i5
+      </section>
+      <section className="flex px-2 flex-col h-[50%] w-full ">
+        <div className="flex flex-col gap-2">
+          <div className="text-[16px] text-text font-semibold">
+            {product?.price && `₦${product?.price}.00`}
           </div>
+          <div className="w-full text-[14px] text-[#77777] flex-col flex mb-1 justify-between">
+            <div>{product?.name}</div>
+            <div className="">{product?.category}</div>
+          </div>
+        </div>
 
-          <div>6th Gen</div>
-          <div>500GB SSD</div>
-          <div>Keyboard light</div>
-
-          <div>Keyboard light</div>
+        <div className="grid grid-cols-2 border-t border-border pt-4">
+          {specs.map((spec, index) => (
+            <div className="flex gap-2 items-center" key={index}>
+              <div className="w-2 aspect-square rounded-full bg-primary-400"></div>
+              <p className="text-text text-[14px]">{spec}</p>
+            </div>
+          ))}
         </div>
 
         <div className="fixed -translate-x-[50%] bottom-0 bg-white left-[50%] px-5 pt-3 pb-5 w-full">
@@ -99,7 +96,7 @@ const OneProduct = () => {
             </div>
           )}
         </div>
-      </div>
+      </section>
     </div>
   );
 };
