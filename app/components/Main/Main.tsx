@@ -96,7 +96,7 @@ const Main = ({ session, products }: ChildProps) => {
 
       <div className="">
         {hpProducts?.length > 0 && (
-          <div className="flex pt-3 px-4 flex-col gap-3 w-full">
+          <div className="flex pt-5 px-4 flex-col gap-2 w-full">
             <div className="font-semibold tracking-tight px-2 text-[16px] text-text">
               HP Products
             </div>
@@ -111,7 +111,7 @@ const Main = ({ session, products }: ChildProps) => {
           </div>
         )}
         {dellProducts?.length > 0 && (
-          <div className="flex pt-3 px-4 gap-3 flex-col w-full">
+          <div className="flex pt-2 px-4 gap-2 flex-col w-full">
             <div className="font-semibold tracking-tight px-2 text-[16px] text-text">
               Dell Products
             </div>
@@ -125,7 +125,7 @@ const Main = ({ session, products }: ChildProps) => {
           </div>
         )}
         {lenovoProducts.length > 0 && (
-          <div className="flex pt-3 px-4 gap-3 flex-col w-full">
+          <div className="flex pt-2 px-4 gap-2 flex-col w-full">
             <div className="font-semibold tracking-tight px-2 text-[16px] text-text">
               Lenovo Products
             </div>
@@ -139,7 +139,7 @@ const Main = ({ session, products }: ChildProps) => {
           </div>
         )}
         {macProducts?.length > 0 && (
-          <div className="flex pt-3 gap-3 px-4 flex-col w-full">
+          <div className="flex pt-2 px-4 gap-2 flex-col w-full">
             <div className="font-semibold tracking-tight px-2 text-[16px] text-text">
               MacBooks
             </div>
@@ -153,7 +153,7 @@ const Main = ({ session, products }: ChildProps) => {
           </div>
         )}
         {otherProduct.length > 0 && (
-          <div className="flex pt-3 px-4 gap-3 flex-col w-full">
+          <div className="flex pt-2 px-4 gap-2 flex-col w-full">
             <div className="font-semibold tracking-tight px-2 text-[16px] text-text">
               Others
             </div>

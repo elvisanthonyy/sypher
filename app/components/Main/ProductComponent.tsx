@@ -20,7 +20,7 @@ const ProductComponent = ({ product, mainRange }: ChildProps) => {
   return (
     <div
       onClick={() => router.replace(`/one/product/${product._id}`)}
-      className="flex text-text cursor-pointer justify-start gap-3 pb-4  items-center flex-col w-41.5 "
+      className="flex text-text pb-1 cursor-pointer justify-start gap-3 items-center flex-col w-41.5 "
     >
       <div className="shrink-0 rounded-[8px]  overflow-hidden flex justify-center items-center w-full aspect-square bg-border">
         {product?.image?.url && (
