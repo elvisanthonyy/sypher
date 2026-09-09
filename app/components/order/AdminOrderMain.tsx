@@ -1,12 +1,14 @@
 "use client";
 import { IOrder } from "@/models/order";
 import AdminOrderComponent from "./AdminOrderComponent";
+import { useState } from "react";
 
 interface ChildProps {
   orders: IOrder[];
 }
 
 const AdminOrderMain = ({ orders }: ChildProps) => {
+  const [selectedFilter, setSelectedFilter] = useState("all");
   return (
     <div className="w-full flex flex-col">
       <div className="w-full bg-white font-semibold text-sypher-light-text border-sypher-light-border px-5 h-11 border-b mb-4 items-center justify-end flex">
@@ -18,7 +20,10 @@ const AdminOrderMain = ({ orders }: ChildProps) => {
       <div className="w-full flex flex-col items-center">
         {orders?.map((order: IOrder) => (
           <div className="w-[95%] " key={order._id.toString()}>
-            <AdminOrderComponent order={order} />
+            <AdminOrderComponent
+              order={order}
+              selectedFilter={selectedFilter}
+            />
           </div>
         ))}
       </div>

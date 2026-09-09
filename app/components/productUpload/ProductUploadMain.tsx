@@ -85,13 +85,14 @@ const ProductUploadMain = () => {
         onSubmit={handleSubmit(onSubmit)}
         className="w-full px-5 flex flex-col gap-6"
       >
+        {/* image upload section */}
         <div className="relative mx-auto flex w-full">
           <div className="w-full aspect-[8/6] border-dashed border border-[#B2B2B2] md:w-50 md:h-40 rounded-lg overflow-hidden shrink-0 flex ">
             {preview && (
               <img
                 src={preview}
                 alt="prev img"
-                className="w-full h-40 object-center object-cover"
+                className="w-full h-full object-center object-cover"
               />
             )}
           </div>

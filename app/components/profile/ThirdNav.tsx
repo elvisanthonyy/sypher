@@ -10,7 +10,7 @@ interface ChildProps {
 const ThirdNav = ({ pageName }: ChildProps) => {
   const router = useRouter();
   return (
-    <div className="w-full bg-white flex justify-between px-5 items-center absolute top-0 left-0 h-[64px] border-border border-b">
+    <div className="w-full md:px-[128px] bg-white flex justify-between px-5 items-center absolute top-0 left-0 h-[64px] border-border border-b">
       <div className="flex items-center gap-3">
         <BackButton />
         <h1 className="text-[16px] font-medium">{pageName}</h1>

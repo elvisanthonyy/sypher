@@ -7,9 +7,10 @@ import { FaAngleDown } from "react-icons/fa";
 interface ChildProps {
   mainRange: MainRange;
   setMainRange: React.Dispatch<React.SetStateAction<MainRange>>;
+  key: string;
 }
 
-const FilterComponent = ({ setMainRange }: ChildProps) => {
+const FilterComponent = ({ setMainRange, key }: ChildProps) => {
   const [range, setRange] = useState("");
   const setRangeValues = (e: string) => {
     setRange(e);

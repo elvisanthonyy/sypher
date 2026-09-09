@@ -119,8 +119,8 @@ const OrderMain = ({ user, cartItem }: ChildProps) => {
                   Email
                 </label>
                 <div
-                  {...register("name", {
-                    required: "name is required",
+                  {...register("email", {
+                    required: "Email is required",
                   })}
                   id="name"
                   className="flex font-semibold items-end "

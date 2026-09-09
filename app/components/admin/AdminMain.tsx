@@ -39,19 +39,19 @@ const AdminMain = ({ details }: ChildProps) => {
             <div className="w-fit text-white px-6 gap-2 shrink-0 h-10 bg-text rounded-[8px] flex items-center">
               <p>View all Products</p>
 
-              <ButtonIcon icon="/icons/all-product-icon.svg" />
+              <ButtonIcon size={20} icon="/icons/all-product-icon.svg" />
             </div>
           </Link>
           <Link className={`w-full flex`} href={`/product/upload`}>
             <div className="w-fit text-text px-6 gap-2 shrink-0 h-10 border border-text rounded-[8px] flex items-center">
               <p>Upload Product</p>
-              <ButtonIcon icon="/icons/upload-product-icon.svg" />
+              <ButtonIcon size={20} icon="/icons/upload-product-icon.svg" />
             </div>
           </Link>
           <Link className={`w-full flex`} href={`/user/admin/orders`}>
             <div className="w-fit text-white px-6 gap-2 shrink-0 h-10 bg-gradient-to-r from-[#19AECC] to-[#14879F] rounded-[8px] flex items-center">
               <p>View all Orders</p>
-              <ButtonIcon icon="/icons/all-orders-icon.svg" />
+              <ButtonIcon size={20} icon="/icons/all-orders-icon.svg" />
             </div>
           </Link>
         </div>

@@ -33,14 +33,14 @@ const ProductComponent = ({ product, mainRange }: ChildProps) => {
           ></Image>
         )}
       </div>
-      <div className="flex text-sm gap-1 flex-col h-fit w-full">
-        <div className="flex h-fit justify-between items-start w-full pr-1">
-          <div className="font-semibold text-[16px] text-secondary-700">{`₦${product?.price?.toFixed(2)}`}</div>
-          <div className="text-[8px] text-white bg-text w-5 h-auto aspect-square flex justify-center items-center rounded-full">{`${Number(product?.unitsAvailable)}`}</div>
+      <div className="flex gap-1 flex-col h-fit w-full">
+        <div className="flex h-fit justify-between items-center w-full">
+          <div className="font-semibold flex items-center text-[16px] text-secondary-700">{`₦${product?.price?.toFixed(2)}`}</div>
+          <div className="text-[8px] text-white bg-text w-5 aspect-square flex justify-center items-center rounded-full">{`${Number(product?.unitsAvailable)}`}</div>
         </div>
 
-        <div className="flex flex-col">
-          <h1 className="text-[14px] font-semibold">{product?.name}</h1>
+        <div className="flex flex-col gap-1">
+          <h1 className="text-[14px] font-semibold flex ">{product?.name}</h1>
 
           <div className="text-[14px]">{product?.category}</div>
         </div>

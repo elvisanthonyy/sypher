@@ -2,11 +2,12 @@ import Image from "next/image";
 
 interface ChildProps {
   icon: string;
+  size: number;
 }
 
-const ButtonIcon = ({ icon }: ChildProps) => {
+const ButtonIcon = ({ icon, size }: ChildProps) => {
   return (
-    <div className="h-[20px] aspect-square">
+    <div className="" style={{ height: size, width: size }}>
       <Image
         src={icon}
         height={1000}

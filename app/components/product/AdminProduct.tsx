@@ -4,10 +4,14 @@ import api from "@/libs/api";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import ButtonIcon from "../admin/ButtonIcon";
+import DeleteModal from "../DeleteModal";
 
 interface ChildProps {
   product: IProduct;
   stateProducts: IProduct[];
+  selectedFilter: string;
+  forKey: string;
   setStateProducts: React.Dispatch<React.SetStateAction<IProduct[]>>;
 }
 
@@ -15,9 +19,11 @@ const AdminProduct = ({
   product,
   setStateProducts,
   stateProducts,
+  selectedFilter,
+  forKey,
 }: ChildProps) => {
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const router = useRouter();
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const deleteProduct = () => {
     api
       .post("/api/product/delete", { productId: product._id })
@@ -36,74 +42,53 @@ const AdminProduct = ({
       });
   };
   return (
-    <div className="flex w-full my-1  mb-10 relative text-black border-b border-t border-sypher-light-border justify-start pb-4 bg-white items-center flex-col h-126">
-      <div className="shrink-0 overflow-hidden border-b  border-b-sypher-light-border w-full h-50 ">
-        <div
-          onClick={() => setIsDeleteModalOpen(false)}
-          className={`h-dvh top-0 flex transition-all duration-500 ease-in-out left-0 ${
-            isDeleteModalOpen
-              ? "translate-0 opacity-100"
-              : "-translate-300 opacity-0"
-          } justify-center z-50 isolation-isolate items-center backdrop-blur-xl fixed w-full bg-black/5`}
-        >
-          {" "}
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="w-64 flex justify-center items-center rounded-2xl h-45 z-50 bg-white shadow-lg"
-          >
-            <div className="w-20 text-center" onClick={deleteProduct}>
-              Yes
+    <div
+      key={forKey}
+      className={` w-full p-3 ${selectedFilter === "all" || selectedFilter === product.category.toLowerCase() ? "flex" : "hidden"} flex-col gap-3 rounded-[20px] text-black border border-border justify-center bg-white h-fit`}
+    >
+      <div className="shrink-0 flex flex-col overflow-hidden">
+        <DeleteModal
+          api={deleteProduct}
+          isDeleteModalOpen={isDeleteModalOpen}
+          setIsDeleteModalOpen={setIsDeleteModalOpen}
+        />
+        <section className="flex gap-3 items-center w-full h-full">
+          {product?.image?.url && (
+            <div className="h-[86px] rounded-[8px] bg-red-400 aspect-square overflow-hidden">
+              <Image
+                height={300}
+                width={500}
+                alt="product image"
+                src={product?.image?.url}
+                className="h-full object-cover"
+              />
             </div>
-            <div
-              className="w-20 text-center"
-              onClick={() => setIsDeleteModalOpen(false)}
-            >
-              No
+          )}
+          <div className="flex text-[14px] text-text flex-col">
+            <div className="text-[16px] text-secondary-700 font-semibold">
+              {product?.price && `₦${product?.price}.00`}
             </div>
+            <div className="font-semibold">{product?.name}</div>
+
+            <div className="">{product?.category}</div>
           </div>
-        </div>
-        {product?.image?.url && (
-          <Image
-            height={300}
-            width={500}
-            alt="product image"
-            src={product?.image?.url}
-            className="w-[105%] h-full object-cover"
-          />
-        )}
+        </section>
       </div>
-      <div className="flex text-sm my-5 flex-col h-[50%] px-1 w-[95%] ">
-        <div>{product?.name}</div>
-        <div className="text-lg font-semibold">
-          {product?.price && `₦${product?.price}.00`}
-        </div>
-        <div className="italic">{product?.category}</div>
-        <div className="w-full border-b border-b-sypher-light-border py-2">
-          Specs
-        </div>
-        <div>
-          Core i5
-          <br />
-          6th Gen
-          <br />
-          500GB SSD
-          <br />
-          Keyboard light
-          <br />
-          Windows 10 pro
-        </div>
-        <div className="h-full py-2 border-t mt-3 border-sypher-light-border flex w-full px-0">
+      <div className="flex flex-col text-[14px] w-full ">
+        <div className="h-full flex px-0">
           <div
             onClick={() => router.push(`/product/edit/${product._id}`)}
-            className="w-12 mr-4 h-12 rounded-lg flex justify-center items-center bg-black text-white"
+            className="w-full mr-4 h-10 gap-2 rounded-[32px] flex justify-center items-center bg-text text-white"
           >
-            <FaEdit className="ml-1 text-lg" />
+            Edit{" "}
+            <ButtonIcon size={16} icon="/icons/admin-product-edit-icon.svg" />
           </div>
           <div
             onClick={() => setIsDeleteModalOpen(true)}
-            className="w-12 h-12 rounded-lg flex justify-center items-center bg-blue-400 text-white"
+            className="w-full h-10 rounded-[32px] flex justify-center items-center bg-primary-400 gap-2  text-white"
           >
-            <FaTrash />
+            Delete{" "}
+            <ButtonIcon size={16} icon="/icons/admin-product-delete-icon.svg" />
           </div>
         </div>
       </div>

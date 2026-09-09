@@ -9,6 +9,7 @@ import api from "@/libs/api";
 import { toast } from "react-toastify";
 import Loading from "../loading/Loading";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 
 interface ChildProps {
   user: IUser;
@@ -21,6 +22,8 @@ interface FormFields {
 }
 
 const ProfileMain = ({ user }: ChildProps) => {
+  const searchParams = useSearchParams();
+  const changePassword = searchParams.get("change-password");
   const router = useRouter();
   const [changePass, setChangePass] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -53,7 +56,61 @@ const ProfileMain = ({ user }: ChildProps) => {
   };
   return (
     <div className="w-full px-4">
-      {!changePass && (
+      {changePassword === "true" ? (
+        <form
+          className="w-[90%] flex flex-col gap-10 bg-white p-4 absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 border border-border rounded-[32px]"
+          onChange={() => setPasswordMessage("")}
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <div className="w-full flex flex-col gap-3">
+            <input
+              {...register("oldPassword", {
+                required: "Old password is required",
+              })}
+              type="password"
+              placeholder="Old Password"
+              className="border border-border outline-none px-3 w-full h-[50px] rounded-[16px]"
+            />
+            <input
+              {...register("newPassword", {
+                required: "New password is required",
+              })}
+              type="password"
+              placeholder="New Password"
+              className="border border-border outline-none px-3 w-full h-[50px] rounded-[16px]"
+            />
+            <input
+              {...register("repeatPassword", {
+                required: "Repeat password is required",
+              })}
+              type="password"
+              placeholder="Repeat Password"
+              className="border border-border outline-none px-3 w-full h-[50px] rounded-[16px]"
+            />
+            {passWordMessage && (
+              <div className="w-full text-sm mb-3 text-center text-red-600">
+                {passWordMessage}
+              </div>
+            )}
+          </div>
+          <div className="w-full flex flex-col gap-2">
+            <button
+              disabled={loading ? true : false}
+              className="w-full h-[46px] flex justify-center text-[14px] items-center text-md bg-text rounded-[32px] text-white my2"
+            >
+              {loading ? <Loading /> : "Change Password"}
+            </button>
+            <div className="w-full flex gap-2 justify-center items-center">
+              <div
+                onClick={() => router.push("/user/forgot-password")}
+                className="text-text text-[12px] w-full flex justify-end items-center"
+              >
+                Forgot Password?
+              </div>
+            </div>
+          </div>
+        </form>
+      ) : (
         <div className="w-full flex  flex-col justify-center items-center gap-5">
           <div className="w-full t flex flex-col justify-center items-center">
             <div className="w-40 aspect-square flex items-center justify-center bg-text rounded-full">
@@ -68,7 +125,7 @@ const ProfileMain = ({ user }: ChildProps) => {
               </div>
             </div>
           </div>
-          <div className="text-center flex flex-col gap-2 text-text">
+          <div className="text-center flex flex-col justify-center items-center gap-2 text-text">
             <div className="text-[20px] font-semibold flex gap-2">
               {user?.name}{" "}
               <div className="w-6 aspect-square">
@@ -83,7 +140,7 @@ const ProfileMain = ({ user }: ChildProps) => {
             </div>
             <div className="text-[16px] text-[#b4b4b4]">{user?.email}</div>
           </div>
-          <div className="gap-4 w-full rounded-[24px] p-2 flex flex-col h-auto bg-white">
+          <div className="gap-4 w-full rounded-[24px] p-2 flex flex-col h-auto bg-text">
             <ProfileItemComponent
               iconUrl="/icons/gender-icon.svg"
               title="Gender"
@@ -125,70 +182,15 @@ const ProfileMain = ({ user }: ChildProps) => {
             </div>
           </button>
           <div
-            onClick={() => setChangePass(true)}
+            onClick={() =>
+              router.push(`/profile/${user?.name}?change-password=true`)
+            }
             className="cursor-pointer text-[14px] gap-2 text-text w-full justify-end flex items-center"
           >
             Change Password{" "}
             <FaArrowRight className="text-[14px] text-primary-400" />
           </div>
         </div>
-      )}
-
-      {changePass && (
-        <form
-          onChange={() => setPasswordMessage("")}
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <input
-            {...register("oldPassword", {
-              required: "Old password is required",
-            })}
-            type="password"
-            placeholder="Old Password"
-            className="border border-sypher-light-darkBorder px-4 my-3 w-full h-12 rounded-sm"
-          />
-          <input
-            {...register("newPassword", {
-              required: "New password is required",
-            })}
-            type="password"
-            placeholder="New Password"
-            className="border border-sypher-light-darkBorder px-4 my-3 w-full h-12 rounded-sm"
-          />
-          <input
-            {...register("repeatPassword", {
-              required: "Repeat password is required",
-            })}
-            type="password"
-            placeholder="Repeat Password"
-            className="border border-sypher-light-darkBorder px-4 my-3 w-full h-12 rounded-sm"
-          />
-          {passWordMessage && (
-            <div className="w-full text-sm mb-3 text-center text-red-600">
-              {passWordMessage}
-            </div>
-          )}
-          <button
-            disabled={loading ? true : false}
-            className="w-full h-13 flex justify-center items-center text-md bg-blue-500 rounded-lg text-white my2"
-          >
-            {loading ? <Loading /> : "Change Password"}
-          </button>
-          <div className="w-full flex gap-2 justify-center items-center">
-            <div
-              onClick={() => router.push("/user/forgot-password")}
-              className="text-white rounded-lg mt-10 text-sm bg-black w-full h-13 flex justify-center items-center"
-            >
-              Forgot Password
-            </div>
-          </div>
-          <div
-            onClick={() => setChangePass(false)}
-            className="cursor-pointer text-[14px] text-text w-full justify-end flex items-center"
-          >
-            <FaArrowLeft className="mr-3" /> Back to Profile
-          </div>
-        </form>
       )}
     </div>
   );
