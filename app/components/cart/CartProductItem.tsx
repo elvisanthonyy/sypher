@@ -5,17 +5,17 @@ import Image from "next/image";
 
 interface ChildProps {
   cartItem: CartItem;
-  key: string;
+  forKey: string;
   removeFromCart: () => void;
 }
 
-const CartProductItem = ({ cartItem, removeFromCart, key }: ChildProps) => {
+const CartProductItem = ({ cartItem, removeFromCart, forKey }: ChildProps) => {
   const router = useRouter();
   const total =
     cartItem?.price && cartItem?.qty ? cartItem?.price * cartItem?.qty : 0;
   return (
     <div
-      key={key}
+      key={forKey}
       className="flex rounded-[20px] mx-auto p-3 gap-4 shrink-0 bg-white justify-start border border-border text-black items-center flex-col w-full bg-sypher-compGray"
     >
       <section className="h-[94px] border-border rounded-[8px] bg-[#fafafa] flex w-full items-center gap-4">
@@ -31,7 +31,7 @@ const CartProductItem = ({ cartItem, removeFromCart, key }: ChildProps) => {
           )}
         </div>
         <div>
-          <div className="text-[16px] tracking-tight text-secondary-700 font-semibold">{`N${total}.00`}</div>
+          <div className="text-[16px] tracking-tight text-secondary-700 font-semibold">{`N${total.toLocaleString()}`}</div>
           <div className="text-[#b4b4b4] text-[14px]">{cartItem?.name}</div>
         </div>
       </section>

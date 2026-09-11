@@ -25,7 +25,7 @@ const Nav = async ({ name }: ChildProps) => {
 
         <Link className={`cursor-pointer flex items-center gap-2`} href={"/"}>
           {" "}
-          {session.user.role === "admin" ? (
+          {session?.user?.role === "admin" ? (
             <div className="w-[20px] flex aspect-square ">
               <Image
                 src="/icons/admin-icon.svg"

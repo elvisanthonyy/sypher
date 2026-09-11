@@ -1,5 +1,10 @@
 import { IOrder } from "@/models/order";
 import ProgressBtnComp from "../usersOrders/ProgressBtnComp";
+import Modal from "../Modal";
+import { useState } from "react";
+import api from "@/libs/api";
+import { useRouter } from "next/navigation";
+import ButtonIcon from "../admin/ButtonIcon";
 
 interface ChildProps {
   order: IOrder;
@@ -10,7 +15,7 @@ const progressBtns = [
   {
     label: "pending",
     iconUrl: "/icons/pending.svg",
-    color: "#f4d63e",
+    color: "#FFDE00",
   },
   {
     label: "success",
@@ -30,63 +35,119 @@ const progressBtns = [
 ];
 
 const AdminOrderComponent = ({ order, selectedFilter }: ChildProps) => {
-  const orderedAt = new Date(order.createdAt);
-
+  const router = useRouter();
+  const orderedAt = new Date(order?.createdAt);
+  //getting present btn
   const progressBtn = progressBtns.find(
     (el) => el.label === order?.status.at(-1),
   );
 
+  //variable to open and close delete modal
+  const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
+
+  //cancel order api
+  const cancelOrdeApi = () => {
+    api
+      .put(`/api/order/cancel/${order?._id}`, { orderId: order?._id })
+      .then((res) => {
+        if (res.data.status === "okay") {
+          setIsCancelModalOpen(false);
+          router.refresh();
+        } else {
+        }
+      })
+      .catch((error) => {
+        console.log("Error", error);
+      });
+  };
+
   const fallBack = progressBtns.at(-1);
   return (
-    <div
-      className={`w-full gap-4 text-[14px] p-4 bg-white border rounded-[20px] min-h-60 ${selectedFilter === "all" || selectedFilter === progressBtn.label ? "flex" : "hidden"} flex-col justify-start border-sypher-light-border`}
-    >
-      {/*<div className="border-b text-md mb-3 border-b-sypher-light-border">
+    <>
+      <div
+        className={`w-full gap-4 text-[14px] p-4 bg-white border rounded-[20px] min-h-60 ${selectedFilter === "all" || selectedFilter === progressBtn.label ? "flex" : "hidden"} flex-col justify-start border-sypher-light-border`}
+      >
+        <Modal
+          title={
+            order?.status.at(-1) === "cancelled"
+              ? "Restart Order!"
+              : "Cancel Order!!"
+          }
+          subTitle={
+            order?.status.at(-1) === "cancelled"
+              ? "You are about to restart order"
+              : "Are you sure you want to cancel order?"
+          }
+          cancelButtonTitle={
+            order?.status.at(-1) === "cancelled" ? "Cancel" : "No"
+          }
+          actionButtonTitle={
+            order?.status.at(-1) === "cancelled" ? "Restart" : "Cancel"
+          }
+          api={cancelOrdeApi}
+          isDeleteModalOpen={isCancelModalOpen}
+          setIsDeleteModalOpen={setIsCancelModalOpen}
+        />
+        {/*<div className="border-b text-md mb-3 border-b-sypher-light-border">
           {`Order ID - ${order?._id}`}
         </div>*/}
-      <section className="flex w-full items-start justify-between">
-        <div className="flex flex-col gap-1">
-          <div className="w-full text-[16px] text-text font-semibold flex items-center">
-            <div className="text-sypher-light-text">{order.name}</div>
+        <section className="flex w-full items-start justify-between">
+          <div className="flex items-center gap-2 ">
+            <div className="h-11 aspect-square flex items-center justify-center bg-[#f2f2f2] rounded-full">
+              <ButtonIcon size={24} icon="/icons/admin-icon.svg" />
+            </div>
+            <div className="flex flex-col">
+              <div className="w-full text-[16px] text-text font-semibold flex items-center">
+                {order.name}
+              </div>
+              <div className="w-full text-[12px] flex items-center text-[#b4b4b4]">
+                {order.email}
+              </div>
+            </div>
           </div>
-          <div className="w-full text-[12px] flex items-center">
-            <div className="text-[#b4b4b4]">{order.email}</div>
+
+          <ProgressBtnComp
+            label={progressBtn ? progressBtn?.label : fallBack.label}
+            colour={progressBtn ? progressBtn?.color : fallBack.color}
+            iconUrl={progressBtn ? progressBtn?.iconUrl : "/icons"}
+          />
+        </section>
+
+        <section className="flex rounded-[16px] flex-col gap-1 border-border">
+          <div className="w-full justify-between flex items-center">
+            <div className="text-[#868686]">Product Name:</div>
+            <div className="font-semibold">{order.productName}</div>
           </div>
-        </div>
-
-        <ProgressBtnComp
-          label={progressBtn ? progressBtn?.label : fallBack.label}
-          colour={progressBtn ? progressBtn?.color : fallBack.color}
-          iconUrl={progressBtn ? progressBtn?.iconUrl : "/icons"}
-        />
-      </section>
-
-      <section className="flex bg-[#fafafa] p-2 rounded-[16px] flex-col gap-1 border-border">
-        <div className="w-full justify-between flex items-center">
-          <div className="text-[#868686]">Product Name:</div>
-          <div className="font-semibold">{order.productName}</div>
-        </div>
-        <div className="w-full justify-between flex items-center">
-          <div className="text-[#868686]">Total Price:</div>
-          <div className="font-semibold">{`₦${order.price},000.00`}</div>
-        </div>
-        <div className="w-full justify-between flex items-center">
-          <div className="text-[#868686]">Quantity:</div>
-          <div className="font-semibold">{`${order.qty}`}</div>
-        </div>
-        <div className="w-full justify-between flex items-center">
-          <div className="text-[#868686]">Date Ordered:</div>
-          <div className="font-semibold">{`${orderedAt.toLocaleDateString(
-            "en-GB",
-          )}`}</div>
-        </div>
-      </section>
-      <section className="w-full flex justify-end">
-        <button className="px-10 h-[31px] text-[12px] bg-primary-400 text-white rounded-[16px]">
-          Cancel Order
-        </button>
-      </section>
-    </div>
+          <div className="w-full justify-between flex items-center">
+            <div className="text-[#868686]">Total Price:</div>
+            <div className="font-semibold">{`₦${order.price},000.00`}</div>
+          </div>
+          <div className="w-full justify-between flex items-center">
+            <div className="text-[#868686]">Quantity:</div>
+            <div className="font-semibold">{`${order.qty}`}</div>
+          </div>
+          <div className="w-full justify-between flex items-center">
+            <div className="text-[#868686]">Date Ordered:</div>
+            <div className="font-semibold">{`${orderedAt.toLocaleDateString(
+              "en-GB",
+            )}`}</div>
+          </div>
+        </section>
+        <section className="w-full flex gap-4 justify-start">
+          <button
+            className={`px-10 ${order?.status.at(-1) === "success" ? "hidden" : "flex"} items-center cursor-pointer h-[31px] text-[12px] bg-green-400/30 text-White rounded-[16px]`}
+          >
+            complete
+          </button>
+          <button
+            onClick={() => setIsCancelModalOpen(true)}
+            className={`px-10 ${order?.status.at(-1) === "success" ? "hidden" : "flex"} items-center cursor-pointer h-[31px] text-[12px] bg-primary-400 text-white rounded-[16px]`}
+          >
+            {order?.status.at(-1) === "cancelled" ? "Restart" : "cancel"}
+          </button>
+        </section>
+      </div>
+    </>
   );
 };
 

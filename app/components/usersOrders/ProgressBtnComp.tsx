@@ -11,19 +11,9 @@ const ProgressBtnComp = ({ label, iconUrl, colour }: ChildProps) => {
   const mainColour = `border-[${colour}]`;
   return (
     <div
-      className={`text-[12px] flex items-center gap-2 font-medium px-[8px] h-[26px] border rounded-[32px]`}
-      style={{ borderColor: colour, color: colour }}
+      className={`text-[12px] flex items-center gap-2 font-medium px-[12px] h-[26px] rounded-[32px]`}
+      style={{ backgroundColor: `${colour}20`, color: colour }}
     >
-      <div className="h-[12px] aspect-square">
-        <Image
-          src={`${iconUrl}`}
-          height={30}
-          width={30}
-          alt={`${label}`}
-          className="w-full"
-          draggable={false}
-        />
-      </div>
       {label}
     </div>
   );

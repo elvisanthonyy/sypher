@@ -118,7 +118,7 @@ const SigninForm = () => {
       <form
         onSubmit={handleSubmit(onSubmit)}
         onChange={() => setMessage("")}
-        className="flex w-full gap-6 p-4 py-16 border border-border bg-white rounded-[32px] justify-center h-fit flex-col"
+        className="flex w-full gap-6 p-5 py-16 border border-border bg-white rounded-[32px] justify-center h-fit flex-col"
       >
         <div className="font-semibold tracking-tight px-1 text-[18px] text-text">
           Welcome back!
@@ -139,7 +139,7 @@ const SigninForm = () => {
               {...register("email", {
                 required: "email is required",
               })}
-              placeholder="Email"
+              placeholder="Enter your email"
               type="email"
               className="flex border-border text-[14px] border px-8 text-text focus:outline-none h-12.5 rounded-2xl w-full"
             />
@@ -153,7 +153,7 @@ const SigninForm = () => {
               {...register("password", {
                 required: "password is required",
               })}
-              placeholder="password"
+              placeholder="Enter your password"
               type={isPasswordVisible ? "text" : "password"}
               className="flex border-border text-[14px] border px-8 text-text  focus:outline-none h-12.5 rounded-2xl w-full"
             />

@@ -1,19 +1,24 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import ButtonIcon from "./admin/ButtonIcon";
 
 interface ChildProps {
   title: string;
   subTitle: string;
   buttonTitle: string;
   buttonLink?: string;
+  status: string;
+  errorButtonAction?: () => void;
 }
 
 const CompletedComponent = ({
+  status,
   title,
   subTitle,
   buttonLink,
   buttonTitle,
+  errorButtonAction,
 }: ChildProps) => {
   const [inView, setInView] = useState(false);
 
@@ -28,13 +33,11 @@ const CompletedComponent = ({
       <div
         className={`w-[75px] transition-all ease-in duration-900 ${inView ? "rotate-0 opacity-100" : "-rotate-60 opacity-0"} aspect-square`}
       >
-        <Image
-          src={"/icons/tick.svg"}
-          width={150}
-          height={150}
-          alt="tck"
-          className="w-full"
-        />
+        {status === "error" ? (
+          <ButtonIcon size={75} icon="/icons/failed-tick.svg" />
+        ) : (
+          <ButtonIcon size={75} icon="/icons/tick.svg" />
+        )}
       </div>
       <div
         className={`flex transition-all ease-in duration-900 ${inView ? "opacity-100" : "opacity-0"} items-center flex-col gap-2`}
@@ -42,12 +45,21 @@ const CompletedComponent = ({
         <h1 className="text-[20px] font-semibold">{title}</h1>
         <p className="w-full px-8 text-[14px]">{subTitle}</p>
       </div>
-      <Link
-        className={`text-white transition-all ease-in duration-900 bg-primary-400 ${inView ? "opacity-100" : "opacity-0"} px-4 py-2 rounded-[32px]`}
-        href={`${buttonLink}`}
-      >
-        <p>{buttonTitle}</p>
-      </Link>
+      {status === "error" ? (
+        <button
+          onClick={errorButtonAction}
+          className={`text-white transition-all ease-in duration-900 bg-primary-400 ${inView ? "opacity-100" : "opacity-0"} px-4 py-2 rounded-[32px]`}
+        >
+          {buttonTitle}
+        </button>
+      ) : (
+        <Link
+          className={`text-white transition-all ease-in duration-900 bg-primary-400 ${inView ? "opacity-100" : "opacity-0"} px-4 py-2 rounded-[32px]`}
+          href={`${buttonLink}`}
+        >
+          <p>{buttonTitle}</p>
+        </Link>
+      )}
     </div>
   );
 };

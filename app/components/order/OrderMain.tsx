@@ -8,6 +8,9 @@ import CompletedComponent from "../CompletedComponent";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
+import ButtonIcon from "../admin/ButtonIcon";
+import { error } from "console";
+import FilterButton from "../usersOrders/FilterButton";
 
 interface FormFields {
   name: string;
@@ -32,16 +35,37 @@ const OrderMain = ({ user, cartItem }: ChildProps) => {
   const searchParams = useSearchParams();
   const status = searchParams.get("status");
   const total = (cartItem?.price ?? 0) * (cartItem?.qty ?? 0);
+
+  // variable for message when task is carried out
+  const [messageStatus, setMessageStatus] = useState("");
+  const [totalPrice, setTotalPrice] = useState(cartItem.qty * cartItem.price);
+  const [orderQuantity, setOrderQuantity] = useState<number>(
+    cartItem?.qty ?? 1,
+  );
   const { register, handleSubmit } = useForm<FormFields>({
     defaultValues: {
       name: user?.name,
       email: user?.email,
       productName: cartItem?.name,
-      price: total,
-      qty: cartItem?.qty,
+      price: totalPrice,
+      qty: orderQuantity,
     },
   });
   const router = useRouter();
+
+  //increase quantity
+  const increaseQuantity = () => {
+    if (orderQuantity <= total) {
+      setOrderQuantity((prev) => prev + 1);
+    }
+  };
+
+  //decrease quantity
+  const decreaseQuantity = () => {
+    if (orderQuantity > 1) {
+      setOrderQuantity((prev) => prev - 1);
+    }
+  };
 
   useEffect(() => {}, []);
 
@@ -54,11 +78,13 @@ const OrderMain = ({ user, cartItem }: ChildProps) => {
       })
       .then((res) => {
         if (res.data.status === "okay") {
+          setMessageStatus("okay");
           router.push(`/product/order/${cartItem?.productId}?status=done`);
         }
       })
       .catch((error) => {
         console.error("error", error);
+        setMessageStatus("error");
       });
   };
 
@@ -66,31 +92,58 @@ const OrderMain = ({ user, cartItem }: ChildProps) => {
     <section>
       {status ? (
         <CompletedComponent
-          title="Order Placed!"
-          subTitle="Your order has been placed successfully,
-        check your email for more details"
-          buttonTitle="Orders"
-          buttonLink="/"
+          status={status}
+          title={status === "error" ? "something went wrong" : "Order Placed!"}
+          subTitle={
+            status === "error"
+              ? "Your order couldn't be placed, please try again"
+              : "Your order has been placed successfully, check your email for more details"
+          }
+          buttonTitle={status === "error" ? "retry" : "Orders"}
+          buttonLink="/product/orders"
+          errorButtonAction={() => router.back()}
         />
       ) : (
         <form
-          onClick={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(onSubmit)}
           className="flex gap-3 w-full text-text text-[14px] flex-col px-5"
         >
-          <section className="p-3 flex gap-2 border border-primary-100 bg-white h-[138px] rounded-[20px]">
-            <div className="h-full overflow-hidden aspect-square rounded-[8px]">
-              <Image
-                src={cartItem?.image?.url}
-                height={1000}
-                width={1000}
-                alt="product image"
-                className="h-full"
-                draggable={false}
-              />
+          <section className="p-3 flex justify-between gap-2 border border-primary-100 bg-white h-[138px] rounded-[20px]">
+            <div className="flex gap-3 w-full">
+              <div className="h-full overflow-hidden aspect-square rounded-[8px]">
+                <Image
+                  src={cartItem?.image?.url}
+                  height={1000}
+                  width={1000}
+                  alt="product image"
+                  className="h-full"
+                  draggable={false}
+                />
+              </div>
+              <div className="flex flex-col h-full">
+                <p>{cartItem.name}</p>
+                <p>{cartItem.category}</p>
+                <h1 className="font-bold mt-3 text-[16px] text-secondary-700">
+                  N{cartItem.price.toLocaleString()}
+                </h1>
+              </div>
             </div>
-            <div className="flex flex-col h-full">
-              <p>{cartItem.name}</p>
-              <h1>{cartItem.price}</h1>
+            <div className="flex w-[53px] py-3 flex flex-col items-center justify-between h-full bg-background rounded-[8px] font-semibold">
+              <div onClick={increaseQuantity}>
+                <ButtonIcon size={16} icon="/icons/plus.svg" />
+              </div>
+              <div
+                {...register("qty", {
+                  required: "Quantity is required",
+                })}
+                id="qty"
+                className="flex font-semibold items-end "
+              >
+                {orderQuantity}
+              </div>
+              <div onClick={decreaseQuantity}>
+                <ButtonIcon size={16} icon="/icons/minus.svg" />
+              </div>
             </div>
           </section>
 
@@ -130,7 +183,7 @@ const OrderMain = ({ user, cartItem }: ChildProps) => {
               </div>
             </div>
           </section>
-          <section className="h-full flex pb-8 flex-col p-4 gap-4 bg-white border border-border rounded-[20px]">
+          <section className="h-full flex flex-col p-4 gap-4 bg-white border border-border rounded-[20px]">
             <h1 className="w-full text-[16px] font-semibold pb-2 border-b border-border">
               Order Details
             </h1>
@@ -160,8 +213,14 @@ const OrderMain = ({ user, cartItem }: ChildProps) => {
                   id="name"
                   className="flex font-semibold items-end "
                 >
-                  {cartItem.price}
+                  {`₦${cartItem.price.toLocaleString()}`}
                 </div>
+              </div>
+              <div className="flex border-t border-border pt-2 font-semibold justify-between">
+                <label className="" htmlFor="name">
+                  Total Price
+                </label>
+                <h3>{`₦${totalPrice.toLocaleString()}`}</h3>
               </div>
             </div>
           </section>

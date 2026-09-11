@@ -3,7 +3,7 @@ import dbConnect from "@/libs/dbConnect";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import AdminOrderMain from "@/app/components/order/AdminOrderMain";
-import ProfileNav from "@/app/components/profile/ThirdNav";
+import NavOrder from "@/app/components/nav/NavOrder";
 
 const baseURL = process.env.BASE_URL;
 const page = async () => {
@@ -27,8 +27,8 @@ const page = async () => {
   console.log(data);
 
   return (
-    <div className="w-full h-dvh pt-14 flex flex-col">
-      <ProfileNav />
+    <div className="w-full h-dvh pt-[64px] flex flex-col">
+      <NavOrder ordersNumber={data.allOrders.length} />
       <AdminOrderMain orders={data.allOrders} />
     </div>
   );

@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import ButtonIcon from "../admin/ButtonIcon";
-import DeleteModal from "../DeleteModal";
+import DeleteModal from "../Modal";
 
 interface ChildProps {
   product: IProduct;

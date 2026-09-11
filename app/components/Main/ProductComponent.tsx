@@ -35,7 +35,7 @@ const ProductComponent = ({ product, mainRange }: ChildProps) => {
       </div>
       <div className="flex gap-1 flex-col h-fit w-full">
         <div className="flex h-fit justify-between items-center w-full">
-          <div className="font-semibold flex items-center text-[16px] text-secondary-700">{`₦${product?.price?.toFixed(2)}`}</div>
+          <div className="font-semibold flex items-center text-[16px] text-secondary-700">{`₦${product?.price?.toLocaleString()}`}</div>
           <div className="text-[8px] text-white bg-text w-5 aspect-square flex justify-center items-center rounded-full">{`${Number(product?.unitsAvailable)}`}</div>
         </div>
 

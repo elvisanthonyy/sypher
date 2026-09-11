@@ -1,5 +1,9 @@
 import { IOrder } from "@/models/order";
 import ProgressBtnComp from "./ProgressBtnComp";
+import Modal from "../Modal";
+import { useState } from "react";
+import api from "@/libs/api";
+import { useRouter } from "next/navigation";
 
 interface ChildProps {
   order: IOrder;
@@ -10,7 +14,7 @@ const progressBtns = [
   {
     label: "pending",
     iconUrl: "/icons/pending.svg",
-    color: "#f4d63e",
+    color: "#FFDE00",
   },
   {
     label: "success",
@@ -30,11 +34,31 @@ const progressBtns = [
 ];
 
 const OrderComp = ({ order, selectedFilter }: ChildProps) => {
+  const router = useRouter();
   const orderedAt = new Date(order?.createdAt);
   //getting present btn
   const progressBtn = progressBtns.find(
     (el) => el.label === order?.status.at(-1),
   );
+
+  //variable to open and close delete modal
+  const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
+
+  //cancel order api
+  const cancelOrdeApi = () => {
+    api
+      .put(`/api/order/cancel/${order?._id}`, { orderId: order?._id })
+      .then((res) => {
+        if (res.data.status === "okay") {
+          setIsCancelModalOpen(false);
+          router.refresh();
+        } else {
+        }
+      })
+      .catch((error) => {
+        console.log("Error", error);
+      });
+  };
 
   const fallBack = progressBtns.at(-1);
   return (
@@ -42,6 +66,27 @@ const OrderComp = ({ order, selectedFilter }: ChildProps) => {
       <div
         className={`w-full gap-4 text-[14px] p-4 bg-white border rounded-[20px] min-h-60 ${selectedFilter === "all" || selectedFilter === progressBtn.label ? "flex" : "hidden"} flex-col justify-start border-sypher-light-border`}
       >
+        <Modal
+          title={
+            order?.status.at(-1) === "cancelled"
+              ? "Restart Order!"
+              : "Cancel Order!!"
+          }
+          subTitle={
+            order?.status.at(-1) === "cancelled"
+              ? "You are about to restart order"
+              : "Are you sure you want to cancel order?"
+          }
+          cancelButtonTitle={
+            order?.status.at(-1) === "cancelled" ? "Cancel" : "No"
+          }
+          actionButtonTitle={
+            order?.status.at(-1) === "cancelled" ? "Restart" : "Cancel"
+          }
+          api={cancelOrdeApi}
+          isDeleteModalOpen={isCancelModalOpen}
+          setIsDeleteModalOpen={setIsCancelModalOpen}
+        />
         {/*<div className="border-b text-md mb-3 border-b-sypher-light-border">
           {`Order ID - ${order?._id}`}
         </div>*/}
@@ -62,7 +107,7 @@ const OrderComp = ({ order, selectedFilter }: ChildProps) => {
           />
         </section>
 
-        <section className="flex bg-[#fafafa] p-2 rounded-[16px] flex-col gap-1 border-border">
+        <section className="flex rounded-[16px] flex-col gap-1 border-border">
           <div className="w-full justify-between flex items-center">
             <div className="text-[#868686]">Product Name:</div>
             <div className="font-semibold">{order.productName}</div>
@@ -83,8 +128,11 @@ const OrderComp = ({ order, selectedFilter }: ChildProps) => {
           </div>
         </section>
         <section className="w-full flex justify-end">
-          <button className="px-10 h-[31px] text-[12px] bg-primary-400 text-white rounded-[16px]">
-            Cancel Order
+          <button
+            onClick={() => setIsCancelModalOpen(true)}
+            className={`px-10 ${order?.status.at(-1) === "success" ? "hidden" : "flex"} items-center cursor-pointer h-[31px] text-[12px] bg-primary-400 text-white rounded-[16px]`}
+          >
+            {order?.status.at(-1) === "cancelled" ? "Restart" : "cancel"}
           </button>
         </section>
       </div>

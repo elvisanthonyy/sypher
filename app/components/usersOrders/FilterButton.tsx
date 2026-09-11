@@ -5,7 +5,6 @@ interface ChildProps {
   selectedFilter: string;
   label: string;
   setSelectedFilter: React.Dispatch<React.SetStateAction<string>>;
-  key: number;
 }
 
 //select filter
@@ -13,7 +12,6 @@ const FilterButton = ({
   label,
   selectedFilter,
   setSelectedFilter,
-  key,
 }: ChildProps) => {
   //capitalize first letter
   const splitName = label.split("");
@@ -23,7 +21,6 @@ const FilterButton = ({
   ].join("");
   return (
     <div
-      key={key}
       onClick={() => setSelectedFilter(label)}
       className={`px-8 transition-all ease-in duration-500 cursor-pointer border-border ${label === selectedFilter ? "bg-text text-white" : "text-text"} text-[14px] rounded-[32px] flex py-2 border`}
     >

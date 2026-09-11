@@ -3,13 +3,14 @@ import { IUser } from "@/models/user";
 import ProfileItemComponent from "./ProfileItemComponent";
 import { useRouter } from "next/navigation";
 import { FaArrowRight, FaArrowLeft, FaEdit } from "react-icons/fa";
-import { useState } from "react";
+import { use, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import api from "@/libs/api";
 import { toast } from "react-toastify";
 import Loading from "../loading/Loading";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
+import CompletedComponent from "../CompletedComponent";
 
 interface ChildProps {
   user: IUser;
@@ -25,8 +26,17 @@ const ProfileMain = ({ user }: ChildProps) => {
   const searchParams = useSearchParams();
   const changePassword = searchParams.get("change-password");
   const router = useRouter();
+
+  // to display message
   const [changePass, setChangePass] = useState(false);
+  // to display either error or success
+  const [status, setStatus] = useState("");
+
+  //for error display
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  // task error message
   const [passWordMessage, setPasswordMessage] = useState<string>("");
   const { register, handleSubmit } = useForm<FormFields>();
 
@@ -38,16 +48,18 @@ const ProfileMain = ({ user }: ChildProps) => {
         .then((res) => {
           if (res.data.status === "okay") {
             setLoading(false);
-            toast.success(res.data.message, {
-              theme: "dark",
-              position: "top-center",
-            });
+            setStatus("okay");
+            setChangePass(true);
           } else {
             setLoading(false);
+
             setPasswordMessage(res.data.message);
           }
         })
         .catch((error) => {
+          setLoading(false);
+          setStatus("error");
+          setChangePass(true);
           console.error("error", error);
         });
     } else {
@@ -55,61 +67,82 @@ const ProfileMain = ({ user }: ChildProps) => {
     }
   };
   return (
-    <div className="w-full px-4">
+    <div className="w-full px-4 overflow-x-hidden">
       {changePassword === "true" ? (
-        <form
-          className="w-[90%] flex flex-col gap-10 bg-white p-4 absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 border border-border rounded-[32px]"
-          onChange={() => setPasswordMessage("")}
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <div className="w-full flex flex-col gap-3">
-            <input
-              {...register("oldPassword", {
-                required: "Old password is required",
-              })}
-              type="password"
-              placeholder="Old Password"
-              className="border border-border outline-none px-3 w-full h-[50px] rounded-[16px]"
+        <div className="w-full overflow-hidden flex bg-red-400">
+          {status ? (
+            <CompletedComponent
+              status={status}
+              title={
+                status === "error"
+                  ? "something went wrong"
+                  : "Password Changed!"
+              }
+              subTitle={
+                status === "error"
+                  ? "Your password couldn't be changed, please try again"
+                  : "Your password has been change successfully, click button below to view profile"
+              }
+              buttonTitle={status === "error" ? "retry" : "Profile"}
+              buttonLink="/product/orders"
+              errorButtonAction={() => router.back()}
             />
-            <input
-              {...register("newPassword", {
-                required: "New password is required",
-              })}
-              type="password"
-              placeholder="New Password"
-              className="border border-border outline-none px-3 w-full h-[50px] rounded-[16px]"
-            />
-            <input
-              {...register("repeatPassword", {
-                required: "Repeat password is required",
-              })}
-              type="password"
-              placeholder="Repeat Password"
-              className="border border-border outline-none px-3 w-full h-[50px] rounded-[16px]"
-            />
-            {passWordMessage && (
-              <div className="w-full text-sm mb-3 text-center text-red-600">
-                {passWordMessage}
-              </div>
-            )}
-          </div>
-          <div className="w-full flex flex-col gap-2">
-            <button
-              disabled={loading ? true : false}
-              className="w-full h-[46px] flex justify-center text-[14px] items-center text-md bg-text rounded-[32px] text-white my2"
+          ) : (
+            <form
+              className="w-[90%] flex flex-col gap-10 bg-white p-4 absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 border border-border rounded-[32px]"
+              onChange={() => setPasswordMessage("")}
+              onSubmit={handleSubmit(onSubmit)}
             >
-              {loading ? <Loading /> : "Change Password"}
-            </button>
-            <div className="w-full flex gap-2 justify-center items-center">
-              <div
-                onClick={() => router.push("/user/forgot-password")}
-                className="text-text text-[12px] w-full flex justify-end items-center"
-              >
-                Forgot Password?
+              <div className="w-full flex flex-col gap-3">
+                {passWordMessage && (
+                  <div className="w-full my-2 text-[14px] text-[red]">
+                    {passWordMessage}
+                  </div>
+                )}
+                <input
+                  {...register("oldPassword", {
+                    required: "Old password is required",
+                  })}
+                  type="password"
+                  placeholder="Old Password"
+                  className="border border-border outline-none px-3 w-full h-[50px] rounded-[16px]"
+                />
+                <input
+                  {...register("newPassword", {
+                    required: "New password is required",
+                  })}
+                  type="password"
+                  placeholder="New Password"
+                  className="border border-border outline-none px-3 w-full h-[50px] rounded-[16px]"
+                />
+                <input
+                  {...register("repeatPassword", {
+                    required: "Repeat password is required",
+                  })}
+                  type="password"
+                  placeholder="Repeat Password"
+                  className="border border-border outline-none px-3 w-full h-[50px] rounded-[16px]"
+                />
               </div>
-            </div>
-          </div>
-        </form>
+              <div className="w-full flex flex-col gap-2">
+                <button
+                  disabled={loading ? true : false}
+                  className="w-full h-[46px] flex justify-center text-[14px] items-center text-md bg-text rounded-[32px] text-white my2"
+                >
+                  {loading ? <Loading /> : "Change Password"}
+                </button>
+                <div className="w-full flex gap-2 justify-center items-center">
+                  <div
+                    onClick={() => router.push("/user/forgot-password")}
+                    className="text-text text-[12px] w-full flex justify-end items-center"
+                  >
+                    Forgot Password?
+                  </div>
+                </div>
+              </div>
+            </form>
+          )}
+        </div>
       ) : (
         <div className="w-full flex  flex-col justify-center items-center gap-5">
           <div className="w-full t flex flex-col justify-center items-center">

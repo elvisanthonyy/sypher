@@ -20,7 +20,7 @@ const UserOrdersMain = ({ orders }: ChildProps) => {
         {filterButtons.map((btn, index) => (
           <FilterButton
             label={btn}
-            key={index}
+            key={index.toString()}
             setSelectedFilter={setSelectedFilter}
             selectedFilter={selectedFilter}
           />
