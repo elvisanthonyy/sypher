@@ -22,7 +22,7 @@ const Menu = ({ name }: ChildProps) => {
   console.log(session);
 
   return (
-    <div className="z-100 h-full mg:fixed md:top-0 left-0  flex items-center relative">
+    <div className="z-100 md:hidden h-full left-0 flex items-center relative">
       <div
         onClick={() => setIsMenuOpen(true)}
         className={`flex z-120 ${isMenuOpen && "hidden"} w-full left-0`}
@@ -51,7 +51,7 @@ const Menu = ({ name }: ChildProps) => {
           </div>
 
           <Link className="w-full" href={"/"}>
-            <div className="w-full pt-8  text-sypher-light-text shrink-0 py-5 gap-6 h-7 flex items-center">
+            <div className="w-full  text-sypher-light-text shrink-0 py-5 gap-6 h-7 flex items-center">
               <MenuIconComponent iconUrl="/icons/home-icon.svg" />
               Home
             </div>

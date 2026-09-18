@@ -3,11 +3,10 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import dbConnect from "@/libs/dbConnect";
 import Link from "next/link";
-import { RiVerifiedBadgeFill } from "react-icons/ri";
 import Menu from "./Menu";
-import { RiAdminFill } from "react-icons/ri";
-import { FaUser } from "react-icons/fa";
 import Image from "next/image";
+import DesktopMenuComponent from "./DesktopMenuComponent";
+import SignInButton from "./SignInButton";
 
 interface ChildProps {
   name?: string;
@@ -19,7 +18,7 @@ const Nav = async ({ name }: ChildProps) => {
   const session = await getServerSession(authOptions);
 
   return (
-    <div className=" z-30 fixed bg-white top-0 text-text left-0 flex items-center justify-between px-[5%] w-full h-16 border-b border-b-border">
+    <div className=" z-30 fixed bg-white top-0 text-text left-0 flex items-center justify-between px-4 md:px-[128px] w-full h-16 border-b border-b-border">
       <div className="flex items-center gap-4">
         <Menu name={name} />
 
@@ -55,7 +54,8 @@ const Nav = async ({ name }: ChildProps) => {
           </div>
         </Link>
       </div>
-
+      <DesktopMenuComponent name={name} />
+      <SignInButton />
       <Cart />
     </div>
   );

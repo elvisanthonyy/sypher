@@ -22,7 +22,7 @@ const CartMain = () => {
         <section className="mt-3 flex flex-col gap-3 px-4">
           {cart?.map((cartItem) => (
             <CartProductItem
-              forKey={cartItem?._id}
+              key={cartItem._id}
               cartItem={cartItem}
               removeFromCart={() =>
                 removeFromCart(cartItem?._id, cartItem.productId)

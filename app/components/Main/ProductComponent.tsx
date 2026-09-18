@@ -20,9 +20,9 @@ const ProductComponent = ({ product, mainRange }: ChildProps) => {
   return (
     <div
       onClick={() => router.replace(`/one/product/${product._id}`)}
-      className="flex text-text pb-1 cursor-pointer justify-start gap-3 items-center flex-col w-41.5 "
+      className={`flex text-text pb-1 md:pb-0 cursor-pointer justify-start gap-3 items-center flex-col md:bg-white md:rounded-[8px] md:border md:border-[#d8d8d8] md:flex-row md:h-[180px] w-41.5 md:w-[400px]`}
     >
-      <div className="shrink-0 rounded-[8px]  overflow-hidden flex justify-center items-center w-full aspect-square bg-border">
+      <div className="shrink-0 rounded-[8px] overflow-hidden flex justify-center items-center w-full md:w-[50%] md:h-full aspect-square bg-border">
         {product?.image?.url && (
           <Image
             src={product.image?.url}
@@ -33,10 +33,13 @@ const ProductComponent = ({ product, mainRange }: ChildProps) => {
           ></Image>
         )}
       </div>
-      <div className="flex gap-1 flex-col h-fit w-full">
-        <div className="flex h-fit justify-between items-center w-full">
+      <div className="flex relative gap-1 md:h-full md:py-2 flex-col h-fit w-full">
+        <div className="flex h-fit pt-4 justify-between items-center w-full">
           <div className="font-semibold flex items-center text-[16px] text-secondary-700">{`₦${product?.price?.toLocaleString()}`}</div>
-          <div className="text-[8px] text-white bg-text w-5 aspect-square flex justify-center items-center rounded-full">{`${Number(product?.unitsAvailable)}`}</div>
+          <div className="md:absolute md:bottom-2 md:left-0 flex md:items-center bg-[#f2f2f2] md:p-1 md:pl-2 rounded-[32px] gap-2">
+            <p className="hidden md:flex text-[12px]">Available Units</p>
+            <div className="text-[8px] text-white bg-text w-5 aspect-square flex justify-center items-center md:bg-primary-400 rounded-full">{`${Number(product?.unitsAvailable)}`}</div>
+          </div>
         </div>
 
         <div className="flex flex-col gap-1">

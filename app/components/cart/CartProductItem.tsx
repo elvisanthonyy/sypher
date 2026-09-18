@@ -5,19 +5,16 @@ import Image from "next/image";
 
 interface ChildProps {
   cartItem: CartItem;
-  forKey: string;
+
   removeFromCart: () => void;
 }
 
-const CartProductItem = ({ cartItem, removeFromCart, forKey }: ChildProps) => {
+const CartProductItem = ({ cartItem, removeFromCart }: ChildProps) => {
   const router = useRouter();
   const total =
     cartItem?.price && cartItem?.qty ? cartItem?.price * cartItem?.qty : 0;
   return (
-    <div
-      key={forKey}
-      className="flex rounded-[20px] mx-auto p-3 gap-4 shrink-0 bg-white justify-start border border-border text-black items-center flex-col w-full bg-sypher-compGray"
-    >
+    <div className="flex rounded-[20px] mx-auto p-3 gap-4 shrink-0 bg-white justify-start border border-border text-black items-center flex-col w-full bg-sypher-compGray">
       <section className="h-[94px] border-border rounded-[8px] bg-[#fafafa] flex w-full items-center gap-4">
         <div className="h-full aspect-square rounded-[8px] overflow-hidden border-b border-b-sypher-light-darkBorder bg-sypher-light-border h-45 ">
           {cartItem?.image?.url && (

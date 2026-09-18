@@ -12,6 +12,7 @@ import { useCart } from "../context/CartContext";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
+import ButtonIcon from "./admin/ButtonIcon";
 
 interface FormFields {
   email: string;
@@ -100,8 +101,8 @@ const SigninForm = () => {
     }
   };
   return (
-    <div className="w-full px-5 absolute top-[50%] translate-y-[-50%]">
-      <div className="flex gap-1 items-center w-full mb-7">
+    <div className="w-full lg:order-1 lg:flex lg:flex-col lg:h-dvh lg:items-center lg:justify-center lg:static lg:top-0 lg:translate-y-0 lg:w-[50%] px-5 absolute top-[50%] translate-y-[-50%]">
+      <div className="flex gap-1 items-center lg:justify-center w-full mb-7">
         <div className="w-[40px] aspect-square">
           <Image
             src="/icons/logo.svg"
@@ -118,7 +119,7 @@ const SigninForm = () => {
       <form
         onSubmit={handleSubmit(onSubmit)}
         onChange={() => setMessage("")}
-        className="flex w-full gap-6 p-5 py-16 border border-border bg-white rounded-[32px] justify-center h-fit flex-col"
+        className="flex w-full lg:w-[404px] lg:min-h-[404px] gap-5 px-5 lg:px-7 py-13 border border-border bg-white rounded-[32px] justify-center h-fit flex-col"
       >
         <div className="font-semibold tracking-tight px-1 text-[18px] text-text">
           Welcome back!
@@ -132,7 +133,7 @@ const SigninForm = () => {
 
           <div className="w-full items-center height-auto relative flex">
             <div className="absolute h-full flex items-center left-3 top-0 text-sypher-light-darkBorder">
-              <FaUser className="text-[14px]" />
+              <ButtonIcon icon="/icons/email-icon.svg" size={20} />
             </div>
 
             <input
@@ -141,12 +142,12 @@ const SigninForm = () => {
               })}
               placeholder="Enter your email"
               type="email"
-              className="flex border-border text-[14px] border px-8 text-text focus:outline-none h-12.5 rounded-2xl w-full"
+              className="flex border-border text-[14px] border px-10 text-text focus:outline-none h-12.5 rounded-2xl w-full"
             />
           </div>
           <div className="w-full items-center height-auto relative flex">
             <div className="absolute h-full flex items-center left-3 top-0 text-sypher-light-darkBorder">
-              <FaLock className="text-[14px]" />
+              <ButtonIcon icon="/icons/password-icon.svg" size={20} />
             </div>
 
             <input
@@ -155,7 +156,7 @@ const SigninForm = () => {
               })}
               placeholder="Enter your password"
               type={isPasswordVisible ? "text" : "password"}
-              className="flex border-border text-[14px] border px-8 text-text  focus:outline-none h-12.5 rounded-2xl w-full"
+              className="flex border-border text-[14px] border px-10 text-text  focus:outline-none h-12.5 rounded-2xl w-full"
             />
             <div
               onClick={() =>
@@ -166,9 +167,9 @@ const SigninForm = () => {
               className="absolute cursor-pointer h-full flex items-center right-4 top-0 text-sypher-light-darkBorder"
             >
               {isPasswordVisible ? (
-                <FaEye className="" />
+                <ButtonIcon icon="/icons/eye-icon.svg" size={20} />
               ) : (
-                <FaEyeSlash className="" />
+                <ButtonIcon icon="/icons/eye-off-icon.svg" size={20} />
               )}
             </div>
           </div>
@@ -181,7 +182,7 @@ const SigninForm = () => {
         </div>
         <button
           disabled={loading ? true : false}
-          className="w-full cursor-pointer text-[14px] flex justify-center items-center text-white rounded-[32px] h-13 bg-text"
+          className="w-full cursor-pointer text-[14px] flex justify-center items-center text-white tracking-[-2%] rounded-[32px] h-13 bg-text"
         >
           {loading ? <Loading /> : "Sign In"}
         </button>

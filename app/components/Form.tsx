@@ -7,6 +7,7 @@ import { FaUser, FaEye, FaEyeSlash, FaEnvelope, FaLock } from "react-icons/fa";
 import Loading from "./loading/Loading";
 import { toast } from "react-toastify";
 import Image from "next/image";
+import ButtonIcon from "./admin/ButtonIcon";
 
 interface FormFields {
   name: string;
@@ -48,8 +49,8 @@ const Form = () => {
     }
   };
   return (
-    <div className="px-4 w-full absolute top-[50%] translate-y-[-50%]">
-      <div className="flex gap-1 items-center w-full mb-7">
+    <div className="w-full lg:order-1 lg:flex lg:flex-col lg:h-dvh lg:items-center lg:justify-center lg:static lg:top-0 lg:translate-y-0 lg:w-[50%] px-5 absolute top-[50%] translate-y-[-50%]">
+      <div className="flex gap-1 items-center lg:justify-center w-full mb-7">
         <div className="w-[40px] aspect-square">
           <Image
             src="/icons/logo.svg"
@@ -66,16 +67,16 @@ const Form = () => {
       <form
         onChange={() => setMessage("")}
         onSubmit={handleSubmit(onSubmit)}
-        className="flex w-full gap-6 p-5 py-14 border border-border bg-white rounded-[32px] justify-center h-fit flex-col"
+        className="flex w-full lg:w-[430px] lg:min-h-[404px] gap-6 px-5 lg:px-7 py-13 border border-border bg-white rounded-[32px] justify-center h-fit flex-col"
       >
-        <div className="font-semibold  tracking-tight px-2 text-[18px] text-text">
+        <div className="font-semibold  tracking-[-2%] px-2 text-[18px] text-text">
           Create your account for free
         </div>
         <div className="gap-3 flex flex-col">
           {message && <div className="text-red-600 mb-1">{message}</div>}
           <div className="w-full items-center height-auto relative flex">
             <div className="absolute h-full flex items-center left-3 top-0 text-sypher-light-darkBorder">
-              <FaUser className="text-[14px]" />
+              <ButtonIcon icon="/icons/user-icon.svg" size={20} />
             </div>
 
             <input
@@ -84,13 +85,13 @@ const Form = () => {
               })}
               placeholder="Full name"
               type="text"
-              className="flex border border-border text-[14px] text-text px-8 focus:outline-none h-13 rounded-2xl w-full"
+              className="flex border border-border text-[14px] text-text px-10 focus:outline-none h-13 rounded-2xl w-full"
             />
           </div>
 
           <div className="w-full items-center height-auto relative flex">
             <div className="absolute h-full flex items-center left-3 top-0 text-sypher-light-darkBorder">
-              <FaEnvelope className="text-[14px]" />
+              <ButtonIcon icon="/icons/email-icon.svg" size={20} />
             </div>
 
             <input
@@ -99,12 +100,12 @@ const Form = () => {
               })}
               placeholder="Email"
               type="email"
-              className="flex border border-border text-[14px] text-text px-8 focus:outline-none h-13 rounded-2xl w-full"
+              className="flex border border-border text-[14px] text-text px-10 focus:outline-none h-13 rounded-2xl w-full"
             />
           </div>
           <div className="w-full items-center height-auto relative flex">
             <div className="absolute h-full flex items-center left-3 top-0 text-sypher-light-darkBorder">
-              <FaLock className="text-[14px]" />
+              <ButtonIcon icon="/icons/password-icon.svg" size={20} />
             </div>
 
             <input
@@ -113,7 +114,7 @@ const Form = () => {
               })}
               placeholder="Enter your Password"
               type={isPasswordVisible ? "text" : "password"}
-              className="flex border border-border text-[14px] text-text px-8 focus:outline-none h-13 rounded-2xl w-full"
+              className="flex border border-border text-[14px] text-text px-10 focus:outline-none h-13 rounded-2xl w-full"
             />
 
             <div
@@ -125,15 +126,15 @@ const Form = () => {
               className="absolute cursor-pointer h-full flex items-center right-4 top-0 text-sypher-light-darkBorder"
             >
               {isPasswordVisible ? (
-                <FaEye className="" />
+                <ButtonIcon icon="/icons/eye-icon.svg" size={20} />
               ) : (
-                <FaEyeSlash className="" />
+                <ButtonIcon icon="/icons/eye-off-icon.svg" size={20} />
               )}
             </div>
           </div>
           <div className="w-full items-center height-auto relative flex">
             <div className="absolute h-full flex items-center left-3 top-0 text-sypher-light-darkBorder">
-              <FaLock className="text-[14px]" />
+              <ButtonIcon icon="/icons/password-icon.svg" size={20} />
             </div>
 
             <input
@@ -142,7 +143,7 @@ const Form = () => {
               })}
               placeholder=" Repeat password"
               type={isPasswordVisible ? "text" : "password"}
-              className="flex border border-border text-[14px] text-text px-8 focus:outline-none h-13 rounded-2xl w-full"
+              className="flex border border-border text-[14px] text-text px-10 focus:outline-none h-13 rounded-2xl w-full"
             />
 
             <div
@@ -154,15 +155,15 @@ const Form = () => {
               className="absolute cursor-pointer h-full flex items-center right-4 top-0 text-sypher-light-darkBorder"
             >
               {isPasswordVisible ? (
-                <FaEye className="" />
+                <ButtonIcon icon="/icons/eye-icon.svg" size={20} />
               ) : (
-                <FaEyeSlash className="" />
+                <ButtonIcon icon="/icons/eye-off-icon.svg" size={20} />
               )}
             </div>
           </div>
         </div>
-        <button className="w-full cursor-pointer flex justify-center items-center text-white rounded-[32px] my-4 h-13 bg-text">
-          {loading ? <Loading /> : "sign up"}
+        <button className="w-full tracking-[-2%] cursor-pointer flex justify-center items-center text-white rounded-[32px] my-4 h-13 bg-text">
+          {loading ? <Loading /> : "Sign Up"}
         </button>
         <div className="w-full flex justify-center items-center gap-2 items-center px-5">
           <div>Have an account?</div>

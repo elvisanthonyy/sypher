@@ -67,7 +67,7 @@ const ProfileMain = ({ user }: ChildProps) => {
     }
   };
   return (
-    <div className="w-full px-4 overflow-x-hidden">
+    <div className="w-full px-4 lg:px-[128px] overflow-x-hidden">
       {changePassword === "true" ? (
         <div className="w-full overflow-hidden flex bg-red-400">
           {status ? (
@@ -144,86 +144,92 @@ const ProfileMain = ({ user }: ChildProps) => {
           )}
         </div>
       ) : (
-        <div className="w-full flex  flex-col justify-center items-center gap-5">
-          <div className="w-full t flex flex-col justify-center items-center">
-            <div className="w-40 aspect-square flex items-center justify-center bg-text rounded-full">
-              <div className="w-25 aspect-square">
+        <section className="w-full h-fit flex lg:flex-row flex-col justify-center items-center gap-5">
+          {/* Profile picture section */}
+          <div className="flex flex-col lg:justify-center lg:bg-white lg:rounded-[24px] lg:border lg:border-border lg:h-[492px] lg:w-[50%]">
+            <div className="w-full t flex flex-col justify-center items-center">
+              <div className="w-40 lg:w-[253px] aspect-square flex items-center justify-center bg-text rounded-full">
+                <div className="w-25 aspect-square">
+                  <Image
+                    src="/icons/profile-head-icon.svg"
+                    alt="Profile"
+                    width={160}
+                    height={160}
+                    className="w-full h-full"
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="text-center flex flex-col justify-center items-center gap-2 text-text">
+              <div className="text-[20px] font-semibold flex gap-2">
+                {user?.name}{" "}
+                <div className="w-6 aspect-square">
+                  <Image
+                    src="/icons/verified-icon.svg"
+                    alt="Edit"
+                    width={60}
+                    height={60}
+                    className="w-full h-full"
+                  />{" "}
+                </div>
+              </div>
+              <div className="text-[16px] text-[#b4b4b4]">{user?.email}</div>
+            </div>
+          </div>
+          {/*Detail section */}
+          <div className="flex lg:px-4 lg:justify-center flex-col lg:h-[492px] w-full lg:bg-text lg:rounded-[24px] lg:w-[50%]">
+            <div className="gap-4 w-full rounded-[24px] p-2 flex flex-col h-auto bg-text">
+              <ProfileItemComponent
+                iconUrl="/icons/gender-icon.svg"
+                title="Gender"
+                type="string"
+                body={user?.gender}
+              />
+              <ProfileItemComponent
+                iconUrl="/icons/date-of-birth-icon.svg"
+                title="Date of birth"
+                type="date"
+                bodyDate={user?.dateOfBirth?.toString().split("T")[0]}
+              />
+              <ProfileItemComponent
+                iconUrl="/icons/location-icon.svg"
+                title="Address"
+                type="string"
+                body={user?.address}
+              />
+              <ProfileItemComponent
+                iconUrl="/icons/phone-icon.svg"
+                title="Number"
+                type="string"
+                bodyNum={`+234 ${user?.number}`}
+              />
+            </div>
+            <button
+              onClick={() => router.push(`/profile/${user?.name}/edit`)}
+              className="h-13 flex text-[14px] gap-2 items-center justify-center mt-8 rounded-[32px] cursor-pointer text-white w-full bg-primary-400"
+            >
+              Edit{" "}
+              <div className="w-4 aspect-square">
                 <Image
-                  src="/icons/profile-head-icon.svg"
-                  alt="Profile"
-                  width={160}
-                  height={160}
+                  src="/icons/edit-icon.svg"
+                  alt="Edit"
+                  width={20}
+                  height={20}
                   className="w-full h-full"
                 />
               </div>
+            </button>
+            <div
+              onClick={() =>
+                router.push(`/profile/${user?.name}?change-password=true`)
+              }
+              className="cursor-pointer lg:text-white text-[14px] gap-2 text-text w-full justify-end flex items-center"
+            >
+              Change Password{" "}
+              <FaArrowRight className="text-[14px] text-primary-400" />
             </div>
           </div>
-          <div className="text-center flex flex-col justify-center items-center gap-2 text-text">
-            <div className="text-[20px] font-semibold flex gap-2">
-              {user?.name}{" "}
-              <div className="w-6 aspect-square">
-                <Image
-                  src="/icons/verified-icon.svg"
-                  alt="Edit"
-                  width={60}
-                  height={60}
-                  className="w-full h-full"
-                />{" "}
-              </div>
-            </div>
-            <div className="text-[16px] text-[#b4b4b4]">{user?.email}</div>
-          </div>
-          <div className="gap-4 w-full rounded-[24px] p-2 flex flex-col h-auto bg-text">
-            <ProfileItemComponent
-              iconUrl="/icons/gender-icon.svg"
-              title="Gender"
-              type="string"
-              body={user?.gender}
-            />
-            <ProfileItemComponent
-              iconUrl="/icons/date-of-birth-icon.svg"
-              title="Date of birth"
-              type="date"
-              bodyDate={user?.dateOfBirth?.toString().split("T")[0]}
-            />
-            <ProfileItemComponent
-              iconUrl="/icons/location-icon.svg"
-              title="Address"
-              type="string"
-              body={user?.address}
-            />
-            <ProfileItemComponent
-              iconUrl="/icons/phone-icon.svg"
-              title="Number"
-              type="string"
-              bodyNum={`+234 ${user?.number}`}
-            />
-          </div>
-          <button
-            onClick={() => router.push(`/profile/${user?.name}/edit`)}
-            className="h-13 flex text-[14px] gap-2 items-center justify-center mt-8 rounded-[32px] cursor-pointer text-white w-full bg-primary-400"
-          >
-            Edit{" "}
-            <div className="w-4 aspect-square">
-              <Image
-                src="/icons/edit-icon.svg"
-                alt="Edit"
-                width={20}
-                height={20}
-                className="w-full h-full"
-              />
-            </div>
-          </button>
-          <div
-            onClick={() =>
-              router.push(`/profile/${user?.name}?change-password=true`)
-            }
-            className="cursor-pointer text-[14px] gap-2 text-text w-full justify-end flex items-center"
-          >
-            Change Password{" "}
-            <FaArrowRight className="text-[14px] text-primary-400" />
-          </div>
-        </div>
+        </section>
       )}
     </div>
   );
