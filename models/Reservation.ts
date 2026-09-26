@@ -1,6 +1,6 @@
 import mongoose, { Document, models, Schema, Model, Types } from "mongoose";
 
-export interface IOrder extends Document {
+export interface IReservation extends Document {
   _id: Types.ObjectId;
   userId: Types.ObjectId;
   name: string;
@@ -14,7 +14,7 @@ export interface IOrder extends Document {
   status: [string];
 }
 
-const OrderSchema = new mongoose.Schema<IOrder>(
+const ReservationSchema = new mongoose.Schema<IReservation>(
   {
     userId: {
       type: Schema.Types.ObjectId,
@@ -62,5 +62,6 @@ const OrderSchema = new mongoose.Schema<IOrder>(
   },
 );
 
-export const Order: Model<IOrder> =
-  models.Order || mongoose.model<IOrder>("Order", OrderSchema);
+export const Reservation: Model<IReservation> =
+  models.Reservation ||
+  mongoose.model<IReservation>("Reservation", ReservationSchema);

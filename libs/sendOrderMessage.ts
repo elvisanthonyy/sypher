@@ -1,9 +1,14 @@
 import nodemailer from "nodemailer";
-import { IOrder } from "@/models/order";
+import { IReservation } from "@/models/Reservation";
 import path from "path";
 
-export async function sendOrderMessage(order: IOrder) {
+export async function sendOrderMessage(order: IReservation) {
   const orderDate = new Date(order.createdAt);
+  const formartedDate = orderDate.toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
   try {
     const transporter = nodemailer.createTransport({
       service: "Gmail",
@@ -76,7 +81,7 @@ export async function sendOrderMessage(order: IOrder) {
       order has been placed successfully.
     </div>
     <div style="margin-bottom:">
-      <h5 style="color: #fd755a; margin-bottom: 8px">Order Summary</h5>
+      <h5 style="color: #fd755a; font: 14px; margin-bottom: 8px">Order Summary</h5>
       <div
         style="
           background-color: rgb(49, 49, 49);
@@ -91,19 +96,19 @@ export async function sendOrderMessage(order: IOrder) {
           </li>
           <li style="margin-bottom: 4px">
             Order Date:
-            <span style="font-weight: 600; color: #cecece">${order?.createdAt}</span>
+            <span style="font-weight: 600; color: #cecece">${formartedDate}</span>
           </li>
           <li style="margin-bottom: 4px">
             Address:
             <span style="font-weight: 600; color: #cecece"
-              >${order?.location}</span
+              >${order?.location ? order?.location : "Not specified"}</span
             >
           </li>
         </ul>
       </div>
     </div>
     <div style="margin-bottom: 20px">
-      <h5 style="color: #fd755a; margin-bottom: 8px">Items Ordered</h5>
+      <h5 style="color: #fd755a; font: 14px; margin-bottom: 8px">Items Ordered</h5>
       <div
         style="
           background-color: rgb(49, 49, 49);
@@ -115,12 +120,12 @@ export async function sendOrderMessage(order: IOrder) {
           <li style="margin-bottom: 4px">
             Product Name:
             <span style="font-weight: 600; color: #cecece"
-              >${order?._id} X ${order?.qty}</span
+              >${order?.productName} X ${order?.qty}</span
             >
           </li>
           <li style="margin-bottom: 4px">
             Total Amound:
-            <span style="font-weight: 600; color: #cecece">${order?.price}</span>
+            <span style="font-weight: 600; color: #cecece">${order?.price?.toLocaleString()}</span>
           </li>
         </ul>
       </div>

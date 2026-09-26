@@ -83,11 +83,11 @@ const ProductUploadMain = () => {
     <div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-full px-5 flex flex-col gap-6"
+        className="w-full px-5 lg:px-[128px] lg:justify-start flex flex-col lg:flex-row gap-6"
       >
         {/* image upload section */}
-        <div className="relative mx-auto flex w-full">
-          <div className="w-full aspect-[8/6] border-dashed border border-[#B2B2B2] md:w-50 md:h-40 rounded-lg overflow-hidden shrink-0 flex ">
+        <div className="relative lg:h-full lg:w-[60%] mx-auto lg:mx-0 flex w-full">
+          <div className="w-full lg:aspect-none lg:h-full aspect-[8/6] border-dashed border border-[#B2B2B2] rounded-lg overflow-hidden shrink-0 flex ">
             {preview && (
               <img
                 src={preview}
@@ -137,19 +137,22 @@ const ProductUploadMain = () => {
           </label>
         </div>
 
-        {/* indicator */}
-        <section className="flex gap-1">
-          {pages.map((page, index) => (
-            <div
-              key={index}
-              className={`h-1 w-full rounded-full ${pageNumber >= index + 1 ? "bg-primary-400" : "bg-[#f2f2f2]"}`}
-            />
-          ))}
-        </section>
+        <div className="w-full h-full lg:justify-center lg:my-auto flex flex-col lg:w-[30%]">
+          {/* indicator */}
+          <section className="flex gap-1 lg:hidden w-full ">
+            {pages.map((page, index) => (
+              <div
+                key={index}
+                className={`h-1 w-full rounded-full ${pageNumber >= index + 1 ? "bg-primary-400" : "bg-[#f2f2f2]"}`}
+              />
+            ))}
+          </section>
 
-        {/* first product details section */}
-        {pageNumber === 1 && (
-          <section className="flex flex-col gap-3">
+          {/* first product details section */}
+
+          <section
+            className={`w-full ${pageNumber === 1 ? "flex" : "hidden lg:flex"} flex-col gap-3`}
+          >
             <div className="flex flex-col gap-1">
               <label
                 htmlFor="name"
@@ -201,7 +204,7 @@ const ProductUploadMain = () => {
             </div>
             <button
               onClick={() => nextPage({ name, type, category } as FormFields)}
-              className="w-full text-[14px] flex justify-center gap-2 mt-3 items-center bg-text h-[46px] bg-black text-white rounded-[32px]"
+              className="w-full text-[14px] flex justify-center gap-2 mt-3 items-center bg-text h-[46px] lg:hidden bg-black text-white rounded-[32px]"
             >
               Next
               <div className="w-[20px] rotate-180 aspect-square">
@@ -216,12 +219,12 @@ const ProductUploadMain = () => {
               </div>
             </button>
           </section>
-        )}
 
-        {/* Second product details section */}
+          {/* Second product details section */}
 
-        {pageNumber === 2 && (
-          <section className="flex flex-col gap-3">
+          <section
+            className={`w-full ${pageNumber === 2 ? "flex" : "hidden lg:flex"} flex-col gap-3`}
+          >
             <div className="flex flex-col gap-1">
               <label
                 htmlFor="price"
@@ -257,7 +260,7 @@ const ProductUploadMain = () => {
             <div className="flex gap-2">
               <button
                 onClick={() => setPageNumber(1)}
-                className="flex justify-center w-[60px] mt-3 items-center bg-text h-[46px] bg-black text-white rounded-[32px]"
+                className="flex lg:hidden justify-center w-[60px] mt-3 items-center bg-text h-[46px] bg-black text-white rounded-[32px]"
               >
                 <div className="w-[20px] aspect-square">
                   <Image
@@ -294,7 +297,7 @@ const ProductUploadMain = () => {
               </button>
             </div>
           </section>
-        )}
+        </div>
       </form>
     </div>
   );

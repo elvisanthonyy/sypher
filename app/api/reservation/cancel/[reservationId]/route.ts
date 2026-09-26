@@ -1,25 +1,25 @@
 import { NextResponse } from "next/server";
-import { Order } from "@/models/order";
+import { Reservation } from "@/models/Reservation";
 import dbConnect from "@/libs/dbConnect";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { IUser } from "@/models/user";
 
 interface ReqBody {
-  orderId: string;
+  reservationId: string;
 }
 
 const handler = async (req: Request) => {
   await dbConnect();
   const session = await getServerSession(authOptions);
-  const { orderId } = (await req.json()) as ReqBody;
+  const { reservationId } = (await req.json()) as ReqBody;
 
   if (!session) {
     return NextResponse.json({ message: "session not found" }, { status: 401 });
   }
 
   try {
-    const order = await Order.findOne({ _id: orderId });
+    const order = await Reservation.findOne({ _id: reservationId });
 
     if (!order) {
       return NextResponse.json(
@@ -34,7 +34,10 @@ const handler = async (req: Request) => {
       await order.save();
 
       return NextResponse.json(
-        { message: "Order has been cancelled successfully", status: "okay" },
+        {
+          message: "Reservation has been cancelled successfully",
+          status: "okay",
+        },
         { status: 200 },
       );
     }

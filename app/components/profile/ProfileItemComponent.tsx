@@ -1,21 +1,26 @@
 import Image from "next/image";
 interface ChildProps {
-  title: string;
-  body?: string;
-  bodyNum?: string;
+  details?: string;
+  iconUrl?: string;
   bodyDate?: string;
   type: string;
-  iconUrl?: string;
+  title: string;
 }
 
 const ProfileItemComponent = ({
-  title,
-  body,
-  bodyNum,
+  details,
   bodyDate,
-  type,
   iconUrl,
+  type,
+  title,
 }: ChildProps) => {
+  const userDOB = bodyDate ? bodyDate : "";
+  const makeDate = new Date(userDOB);
+  const formartedDate = makeDate.toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
   return (
     <div className="bg-background px-4 gap-4 rounded-[16px] text-text text-[14px] font-semibold flex items-center h-12.5 flex">
       <div className="w-5 aspect-square">
@@ -28,10 +33,10 @@ const ProfileItemComponent = ({
         />
       </div>
       <div className="w-full">
-        {type === "string" && <div className="">{body}</div>}
-        {type === "string" && <div className="">{bodyNum}</div>}
+        {type !== "date" && <div className="">{details ? details : title}</div>}
+
         {type === "date" && (
-          <div className="">{bodyDate ? bodyDate?.toString() : title}</div>
+          <div className="">{bodyDate ? formartedDate : title}</div>
         )}
       </div>
     </div>

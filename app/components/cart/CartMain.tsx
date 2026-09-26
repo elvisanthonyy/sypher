@@ -12,14 +12,14 @@ const CartMain = () => {
       <section className="w-full md:px-[128px] bg-white h-[52px] justify-between px-4 border-b flex border-border items-center">
         <div
           onClick={clearCart}
-          className="text-[14px] rounded-[32px] bg-text text-white px-4 py-2 flex justify-center items-center"
+          className="text-[14px] rounded-[32px] bg-text text-white px-4 py-1 flex justify-center items-center"
         >
           Clear
         </div>
       </section>
 
       {cart?.length > 0 ? (
-        <section className="mt-3 flex flex-col gap-3 px-4">
+        <section className="mt-3 flex flex-col lg:grid lg:grid-cols-3 gap-3 px-4 lg:px-[128px]">
           {cart?.map((cartItem) => (
             <CartProductItem
               key={cartItem._id}

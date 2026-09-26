@@ -7,6 +7,7 @@ import Menu from "./Menu";
 import Image from "next/image";
 import DesktopMenuComponent from "./DesktopMenuComponent";
 import SignInButton from "./SignInButton";
+import SignOutButton from "./SignOutButton";
 
 interface ChildProps {
   name?: string;
@@ -54,8 +55,9 @@ const Nav = async ({ name }: ChildProps) => {
           </div>
         </Link>
       </div>
+
       <DesktopMenuComponent name={name} />
-      <SignInButton />
+      {session ? <SignOutButton /> : <SignInButton />}
       <Cart />
     </div>
   );

@@ -5,7 +5,7 @@ import { Product } from "@/models/product";
 //getting one product
 const handler = async (
   req: Request,
-  context: { params: Promise<{ productId: string }> }
+  context: { params: Promise<{ productId: string }> },
 ) => {
   const { productId } = await context.params;
 

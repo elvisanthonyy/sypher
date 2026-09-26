@@ -6,6 +6,7 @@ import Loading from "../loading/Loading";
 import { FaLock } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import ButtonIcon from "../admin/ButtonIcon";
 
 interface FormFields {
   password: string;
@@ -64,6 +65,7 @@ const ResetPassMain = ({ token }: ChildProps) => {
             className="flex bg-sypher-navGray px-12 text-sypher-light-text focus:outline-none h-13 rounded-2xl w-full"
           />
         </div>
+        <div>00:00</div>
         <button
           disabled={loading ? true : false}
           className="w-full cursor-pointer flex justify-center items-center text-white rounded-2xl my-4 h-13 bg-black"

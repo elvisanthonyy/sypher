@@ -2,8 +2,9 @@ import { getSession } from "@/app/utils/getSession";
 import dbConnect from "@/libs/dbConnect";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
-import UserOrdersMain from "@/app/components/usersOrders/UserOrdersMain";
-import NavOrder from "@/app/components/nav/NavOrder";
+import UserReservationMain from "@/app/components/usersReservations/UserReservationMain";
+import ReservationNav from "@/app/components/nav/ReservationNav";
+import { User } from "@/models/user";
 
 const baseURL = process.env.BASE_URL;
 
@@ -18,7 +19,7 @@ const page = async () => {
     redirect("/");
   }
 
-  const res = await fetch(`${baseURL}/api/order/getall`, {
+  const res = await fetch(`${baseURL}/api/reservation/getall`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -30,8 +31,8 @@ const page = async () => {
   console.log(data);
   return (
     <div className="w-full min-h-dvh pt-16">
-      <NavOrder ordersNumber={data.orders.length} />
-      <UserOrdersMain orders={data.orders} />
+      <ReservationNav reservationNumber={data.reservation.length} />
+      <UserReservationMain reservation={data.reservation} />
     </div>
   );
 };

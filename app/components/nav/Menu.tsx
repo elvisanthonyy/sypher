@@ -67,10 +67,10 @@ const Menu = ({ name }: ChildProps) => {
             </div>
           </Link>
 
-          <Link className="w-full" href={"/product/orders"}>
+          <Link className="w-full" href={"/product/reservations"}>
             <div className="w-full text-sypher-light-text shrink-0 py-5 gap-6 h-10 flex items-center">
               <MenuIconComponent iconUrl="/icons/orders-icon.svg" />
-              Orders
+              Reservations
             </div>
           </Link>
 

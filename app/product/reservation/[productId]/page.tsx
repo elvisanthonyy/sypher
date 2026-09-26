@@ -2,9 +2,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import ThirdNav from "@/app/components/profile/ThirdNav";
-import OrderMain from "@/app/components/order/OrderMain";
-import { NextRequest } from "next/server";
-import { Product } from "@/models/product";
+import ReservationMain from "@/app/components/reservation/ReservationMain";
 const baseURL = process.env.BASE_URL;
 
 export const metadata = {
@@ -17,7 +15,7 @@ const page = async ({ params }: { params: { productId: string } }) => {
   console.log(req);
 
   if (!session) {
-    redirect(`/auth/signin?redirectUrl=/product/order/${req.productId}`);
+    redirect(`/auth/signin?redirectUrl=/product/reservation/${req.productId}`);
   }
 
   const res = await fetch(`${baseURL}/api/cart/item`, {
@@ -30,12 +28,19 @@ const page = async ({ params }: { params: { productId: string } }) => {
       itemId: req.productId,
     }),
   });
+
+  const prodRes = await fetch(`${baseURL}/api/product/${req.productId}`);
   const data = await res.json();
-  console.log(data);
+  const productData = await prodRes.json();
+
   return (
-    <div className="w-full pt-[80px] h-dvh justify-center">
-      <ThirdNav pageName="Order" />
-      <OrderMain user={session?.user} cartItem={data.cartItem} />
+    <div className="w-full h-dvh justify-center">
+      <ThirdNav pageName="Reservation" />
+      <ReservationMain
+        user={session?.user}
+        product={productData?.product}
+        cartItem={data.cartItem}
+      />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { IOrder } from "@/models/order";
+import { IReservation } from "@/models/Reservation";
 import ProgressBtnComp from "./ProgressBtnComp";
 import Modal from "../Modal";
 import { useState } from "react";
@@ -6,7 +6,7 @@ import api from "@/libs/api";
 import { useRouter } from "next/navigation";
 
 interface ChildProps {
-  order: IOrder;
+  reservation: IReservation;
   selectedFilter: string;
 }
 
@@ -33,26 +33,29 @@ const progressBtns = [
   },
 ];
 
-const OrderComp = ({ order, selectedFilter }: ChildProps) => {
+const ReservationComp = ({ reservation, selectedFilter }: ChildProps) => {
   const router = useRouter();
-  const orderedAt = new Date(order?.createdAt);
+  const reservedAt = new Date(reservation?.createdAt);
   //getting present btn
   const progressBtn = progressBtns.find(
-    (el) => el.label === order?.status.at(-1),
+    (el) => el.label === reservation?.status.at(-1),
   );
 
   //variable to open and close delete modal
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
 
-  //cancel order api
+  //cancel reserve api
   const cancelOrdeApi = () => {
     api
-      .put(`/api/order/cancel/${order?._id}`, { orderId: order?._id })
+      .put(`/api/reservation/cancel/${reservation?._id}`, {
+        reservationId: reservation?._id,
+      })
       .then((res) => {
         if (res.data.status === "okay") {
           setIsCancelModalOpen(false);
           router.refresh();
         } else {
+          alert("Something went wrong");
         }
       })
       .catch((error) => {
@@ -64,39 +67,39 @@ const OrderComp = ({ order, selectedFilter }: ChildProps) => {
   return (
     <>
       <div
-        className={`w-full gap-4 text-[14px] p-4 bg-white border rounded-[20px] min-h-60 ${selectedFilter === "all" || selectedFilter === progressBtn.label ? "flex" : "hidden"} flex-col justify-start border-sypher-light-border`}
+        className={`w-full gap-4 text-[14px] p-4 bg-white border rounded-[20px] h-fit ${selectedFilter === "all" || selectedFilter === progressBtn.label ? "flex" : "hidden"} flex-col justify-start border-border`}
       >
         <Modal
           title={
-            order?.status.at(-1) === "cancelled"
-              ? "Restart Order!"
-              : "Cancel Order!!"
+            reservation?.status.at(-1) === "cancelled"
+              ? "Restart Reserver!"
+              : "Cancel Reserver!!"
           }
           subTitle={
-            order?.status.at(-1) === "cancelled"
-              ? "You are about to restart order"
-              : "Are you sure you want to cancel order?"
+            reservation?.status.at(-1) === "cancelled"
+              ? "You are about to restart reservatioins"
+              : "Are you sure you want to cancel reservation?"
           }
           cancelButtonTitle={
-            order?.status.at(-1) === "cancelled" ? "Cancel" : "No"
+            reservation?.status.at(-1) === "cancelled" ? "Cancel" : "No"
           }
           actionButtonTitle={
-            order?.status.at(-1) === "cancelled" ? "Restart" : "Cancel"
+            reservation?.status.at(-1) === "cancelled" ? "Restart" : "Cancel"
           }
           api={cancelOrdeApi}
           isDeleteModalOpen={isCancelModalOpen}
           setIsDeleteModalOpen={setIsCancelModalOpen}
         />
         {/*<div className="border-b text-md mb-3 border-b-sypher-light-border">
-          {`Order ID - ${order?._id}`}
+          {`Order ID - ${reserve?._id}`}
         </div>*/}
         <section className="flex w-full items-start justify-between">
           <div className="flex flex-col gap-1">
             <div className="w-full text-[16px] text-text font-semibold flex items-center">
-              <div className="text-sypher-light-text">{order.name}</div>
+              <div className="text-sypher-light-text">{reservation.name}</div>
             </div>
             <div className="w-full text-[12px] flex items-center">
-              <div className="text-[#b4b4b4]">{order.email}</div>
+              <div className="text-[#b4b4b4]">{reservation.email}</div>
             </div>
           </div>
 
@@ -110,19 +113,19 @@ const OrderComp = ({ order, selectedFilter }: ChildProps) => {
         <section className="flex rounded-[16px] flex-col gap-1 border-border">
           <div className="w-full justify-between flex items-center">
             <div className="text-[#868686]">Product Name:</div>
-            <div className="font-semibold">{order.productName}</div>
+            <div className="font-semibold">{reservation.productName}</div>
           </div>
           <div className="w-full justify-between flex items-center">
             <div className="text-[#868686]">Total Price:</div>
-            <div className="font-semibold">{`₦${order.price},000.00`}</div>
+            <div className="font-semibold">{`₦${reservation.price.toLocaleString()}.00`}</div>
           </div>
           <div className="w-full justify-between flex items-center">
             <div className="text-[#868686]">Quantity:</div>
-            <div className="font-semibold">{`${order.qty}`}</div>
+            <div className="font-semibold">{`${reservation.qty}`}</div>
           </div>
           <div className="w-full justify-between flex items-center">
             <div className="text-[#868686]">Date Ordered:</div>
-            <div className="font-semibold">{`${orderedAt.toLocaleDateString(
+            <div className="font-semibold">{`${reservedAt.toLocaleDateString(
               "en-GB",
             )}`}</div>
           </div>
@@ -130,9 +133,9 @@ const OrderComp = ({ order, selectedFilter }: ChildProps) => {
         <section className="w-full flex justify-end">
           <button
             onClick={() => setIsCancelModalOpen(true)}
-            className={`px-10 ${order?.status.at(-1) === "success" ? "hidden" : "flex"} items-center cursor-pointer h-[31px] text-[12px] bg-primary-400 text-white rounded-[16px]`}
+            className={`px-10 ${reservation?.status.at(-1) === "success" ? "hidden" : "flex"} items-center cursor-pointer tracking-[-2%] h-[31px] text-[12px] bg-primary-400 text-white rounded-[16px]`}
           >
-            {order?.status.at(-1) === "cancelled" ? "Restart" : "cancel"}
+            {reservation?.status.at(-1) === "cancelled" ? "Restart" : "cancel"}
           </button>
         </section>
       </div>
@@ -140,4 +143,4 @@ const OrderComp = ({ order, selectedFilter }: ChildProps) => {
   );
 };
 
-export default OrderComp;
+export default ReservationComp;

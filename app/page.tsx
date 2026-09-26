@@ -19,7 +19,7 @@ export default async function Home() {
   const res = await fetch(`${baseURL}/api/product/get`);
 
   const data = await res.json();
-  console.log(data);
+
   return (
     <div className="">
       <Nav />

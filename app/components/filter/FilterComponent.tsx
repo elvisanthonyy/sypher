@@ -16,7 +16,7 @@ const values = [
   { label: "N200k - N350k", value: "200000-350000" },
   { label: "N350k - N500k", value: "350000-500000" },
   { label: "N500k - 1M", value: "500000-1000000" },
-  { label: "1M - 3M", value: "1000000-3000000" },
+  { label: "1M - 10M", value: "1000000-10000000" },
 ];
 
 const FilterComponent = ({ setMainRange }: ChildProps) => {
@@ -32,7 +32,7 @@ const FilterComponent = ({ setMainRange }: ChildProps) => {
         <select
           value={range}
           onChange={(e) => setRangeValues(e.target.value)}
-          className="flex appearance-none justify-center h-[44px] focus:outline-0 text-sm px-4 bg-sypher-light-compGray border-sypher-light-border md:max-w-80 w-full h-8 rounded-[16px]"
+          className="flex appearance-none justify-center h-[36px] lg:h-[36px] focus:outline-0 text-sm px-4 bg-sypher-light-compGray border-sypher-light-border md:max-w-80 w-full rounded-[16px]"
         >
           {/*Map values to options*/}
           {values.map((value, index) => [

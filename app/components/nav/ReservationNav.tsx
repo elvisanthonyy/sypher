@@ -9,19 +9,20 @@ import { RiAdminFill } from "react-icons/ri";
 import { FaUser } from "react-icons/fa";
 import Image from "next/image";
 import BackButton from "../BackButton";
+import DesktopMenuComponent from "./DesktopMenuComponent";
 
 interface ChildProps {
   name?: string;
-  ordersNumber: number;
+  reservationNumber: number;
 }
 
-const NavOrder = async ({ name, ordersNumber }: ChildProps) => {
+const ReservationNav = async ({ name, reservationNumber }: ChildProps) => {
   // get user session
   await dbConnect();
   const session = await getServerSession(authOptions);
 
   return (
-    <div className=" z-30 fixed bg-white top-0 text-text left-0 flex items-center justify-between px-[5%] w-full h-16 border-b border-b-border">
+    <div className=" z-30 fixed bg-white top-0 text-text left-0 flex items-center justify-between px-4 lg:px-[128px] w-full h-16 border-b border-b-border">
       <div className="flex items-center gap-4">
         <BackButton />
         {session ? (
@@ -40,15 +41,17 @@ const NavOrder = async ({ name, ordersNumber }: ChildProps) => {
           </Link>
         )}
       </div>
-      <div className="flex gap-2">
-        <div className="text-[16px] font-semibold">Orders</div>
-        <div className="text-[12px] flex h-[24px] aspect-square items-center justify-center bg-primary-400 text-white rounded-full">
-          {ordersNumber}
-        </div>
+      <div className="flex items-center gap-2 justify-center">
+        Reservations
+        <span className="flex h-5 text-[12px] aspect-square rounded-full text-white items-center justify-center bg-primary-400">
+          {reservationNumber}
+        </span>
       </div>
+
       <Menu name={name} />
+      <DesktopMenuComponent />
     </div>
   );
 };
 
-export default NavOrder;
+export default ReservationNav;

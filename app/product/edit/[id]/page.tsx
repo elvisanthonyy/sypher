@@ -1,11 +1,12 @@
 import EditProductMain from "@/app/components/edit/EditProductMain";
-import ProfileNav from "@/app/components/profile/ThirdNav";
-import dbConnect from "@/libs/dbConnect";
+import AdminNav from "@/app/components/admin/AdminNav";
 import { getSession } from "@/app/utils/getSession";
 import { redirect } from "next/navigation";
 
+//get base url
 const baseURL = process.env.BASE_URL;
 
+//upadate title
 export async function generateMetadata({ params }) {
   const reqBody = await params;
   return {
@@ -13,7 +14,9 @@ export async function generateMetadata({ params }) {
   };
 }
 
+//page to edit product
 const page = async ({ params }: { params: { id: string } }) => {
+  //check if user is logged in
   const session = await getSession();
   const paramReq = await params;
 
@@ -21,6 +24,7 @@ const page = async ({ params }: { params: { id: string } }) => {
     redirect("/auth/signin");
   }
 
+  //check if user is an admin
   if (session?.user?.role === "user") {
     redirect("/");
   }
@@ -31,7 +35,7 @@ const page = async ({ params }: { params: { id: string } }) => {
 
   return (
     <div className="w-full min-h-dvh pt-22">
-      <ProfileNav />
+      <AdminNav />
       <EditProductMain product={data.product} />
     </div>
   );

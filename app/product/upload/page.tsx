@@ -1,5 +1,5 @@
 import ProductUploadMain from "@/app/components/productUpload/ProductUploadMain";
-import ProfileNav from "@/app/components/profile/ThirdNav";
+import AdminNav from "@/app/components/admin/AdminNav";
 import { getSession } from "@/app/utils/getSession";
 import dbConnect from "@/libs/dbConnect";
 import { redirect } from "next/navigation";
@@ -16,7 +16,7 @@ const page = async () => {
   }
   return (
     <div className="w-full h-dvh pt-[80px]">
-      <ProfileNav />
+      <AdminNav />
       <ProductUploadMain />
     </div>
   );

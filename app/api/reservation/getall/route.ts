@@ -1,35 +1,36 @@
 import { NextResponse } from "next/server";
-import { Order } from "@/models/order";
+import { Reservation } from "@/models/Reservation";
 import dbConnect from "@/libs/dbConnect";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "../../auth/[...nextauth]/route";
+
+interface ReqBody {
+  userId: string;
+}
 
 const handler = async (req: Request) => {
   await dbConnect();
   const session = await getServerSession(authOptions);
+  const { userId } = (await req.json()) as ReqBody;
 
   if (!session) {
     return NextResponse.json({ message: "session not found" }, { status: 401 });
   }
 
-  if (session.user.role === "user") {
-    return NextResponse.json({ message: "session not found" }, { status: 401 });
-  }
-
   try {
-    const allOrders = await Order.find();
+    const reservation = await Reservation.find({ userId: userId });
 
     return NextResponse.json(
-      { message: "orders gotten", allOrders },
-      { status: 200 }
+      { message: "Reservations gotten", reservation, userId },
+      { status: 200 },
     );
   } catch (error) {
     console.error("error", error);
     return NextResponse.json(
       { message: "something went wrong" },
-      { status: 401 }
+      { status: 401 },
     );
   }
 };
 
-export { handler as GET };
+export { handler as POST };

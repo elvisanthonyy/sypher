@@ -6,16 +6,16 @@ import ButtonIcon from "./ButtonIcon";
 interface ChildProps {
   details: {
     totalProducts: number;
-    totalOrders: number;
+    totalReservations: number;
     totalUsers: number;
   };
 }
 
 const AdminMain = ({ details }: ChildProps) => {
   return (
-    <div className="w-full flex flex-col gap-4 px-4">
+    <div className="w-full lg:px-[128px] lg:flex-row flex flex-col gap-4 px-4">
       {/* Website details section */}
-      <section className="bg-primary-500 flex flex-col gap-8 rounded-[16px] p-4">
+      <section className="bg-primary-500 shrink-0 lg:w-[398px] flex flex-col gap-8 rounded-[16px] p-4">
         <h1 className="text-[18px] font-semibold text-[#FDF8F7]">
           Website details
         </h1>
@@ -24,13 +24,19 @@ const AdminMain = ({ details }: ChildProps) => {
             label="Total Products"
             value={details.totalProducts}
           />
-          <AdminDetailsComp label="Total Orders" value={details.totalOrders} />
-          <AdminDetailsComp label="Total Users" value={details.totalUsers} />
+          <AdminDetailsComp
+            label="Total Orders"
+            value={details.totalReservations}
+          />
+          <AdminDetailsComp
+            label="Total Reservations"
+            value={details.totalUsers}
+          />
         </div>
       </section>
 
       {/* Actions section */}
-      <section className="flex flex-col gap-3">
+      <section className="flex lg:w-full flex-col gap-3">
         <h1 className="text-[18px] font-semibold border-b border-border pb-2 text-text">
           Actions
         </h1>
@@ -48,9 +54,9 @@ const AdminMain = ({ details }: ChildProps) => {
               <ButtonIcon size={20} icon="/icons/upload-product-icon.svg" />
             </div>
           </Link>
-          <Link className={`w-full flex`} href={`/user/admin/orders`}>
+          <Link className={`w-full flex`} href={`/user/admin/reservations`}>
             <div className="w-fit text-white px-6 gap-2 shrink-0 h-10 bg-gradient-to-r from-[#19AECC] to-[#14879F] rounded-[8px] flex items-center">
-              <p>View all Orders</p>
+              <p>View all Reservations</p>
               <ButtonIcon size={20} icon="/icons/all-orders-icon.svg" />
             </div>
           </Link>

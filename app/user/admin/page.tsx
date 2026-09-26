@@ -26,6 +26,8 @@ const page = async () => {
 
   const data = await res.json();
 
+  console.log(data);
+
   return (
     <div className="w-full pt-20 min-h-dvh flex flex-col justify-start items-center gap-4">
       <AdminNav />

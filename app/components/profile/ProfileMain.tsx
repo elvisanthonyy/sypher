@@ -89,7 +89,7 @@ const ProfileMain = ({ user }: ChildProps) => {
             />
           ) : (
             <form
-              className="w-[90%] flex flex-col gap-10 bg-white p-4 absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 border border-border rounded-[32px]"
+              className="w-[90%] lg:w-[400px] flex flex-col gap-10 bg-white p-4 lg:p-8 absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 border border-border rounded-[32px]"
               onChange={() => setPasswordMessage("")}
               onSubmit={handleSubmit(onSubmit)}
             >
@@ -124,7 +124,7 @@ const ProfileMain = ({ user }: ChildProps) => {
                   className="border border-border outline-none px-3 w-full h-[50px] rounded-[16px]"
                 />
               </div>
-              <div className="w-full flex flex-col gap-2">
+              <div className="w-full flex flex-col gap-4">
                 <button
                   disabled={loading ? true : false}
                   className="w-full h-[46px] flex justify-center text-[14px] items-center text-md bg-text rounded-[32px] text-white my2"
@@ -183,7 +183,7 @@ const ProfileMain = ({ user }: ChildProps) => {
                 iconUrl="/icons/gender-icon.svg"
                 title="Gender"
                 type="string"
-                body={user?.gender}
+                details={user?.gender}
               />
               <ProfileItemComponent
                 iconUrl="/icons/date-of-birth-icon.svg"
@@ -195,13 +195,13 @@ const ProfileMain = ({ user }: ChildProps) => {
                 iconUrl="/icons/location-icon.svg"
                 title="Address"
                 type="string"
-                body={user?.address}
+                details={user?.address}
               />
               <ProfileItemComponent
                 iconUrl="/icons/phone-icon.svg"
                 title="Number"
                 type="string"
-                bodyNum={`+234 ${user?.number}`}
+                details={user?.number ? `+234 ${user?.number}` : ""}
               />
             </div>
             <button
@@ -223,7 +223,7 @@ const ProfileMain = ({ user }: ChildProps) => {
               onClick={() =>
                 router.push(`/profile/${user?.name}?change-password=true`)
               }
-              className="cursor-pointer lg:text-white text-[14px] gap-2 text-text w-full justify-end flex items-center"
+              className="cursor-pointer mt-3 lg:text-white text-[14px] gap-2 text-text w-full justify-end flex items-center"
             >
               Change Password{" "}
               <FaArrowRight className="text-[14px] text-primary-400" />
