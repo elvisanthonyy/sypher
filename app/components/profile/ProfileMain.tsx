@@ -146,7 +146,7 @@ const ProfileMain = ({ user }: ChildProps) => {
       ) : (
         <section className="w-full h-fit flex lg:flex-row flex-col justify-center items-center gap-5">
           {/* Profile picture section */}
-          <div className="flex flex-col lg:justify-center lg:bg-white lg:rounded-[24px] lg:border lg:border-border lg:h-[492px] lg:w-[50%]">
+          <div className="flex flex-col gap-3 my-4 lg:justify-center lg:bg-white lg:rounded-[24px] lg:border lg:border-border lg:h-[492px] lg:w-[50%]">
             <div className="w-full t flex flex-col justify-center items-center">
               <div className="w-40 lg:w-[253px] aspect-square flex items-center justify-center bg-text rounded-full">
                 <div className="w-25 aspect-square">
@@ -160,7 +160,7 @@ const ProfileMain = ({ user }: ChildProps) => {
                 </div>
               </div>
             </div>
-            <div className="text-center flex flex-col justify-center items-center gap-2 text-text">
+            <div className="text-center gap-1 flex flex-col justify-center items-center text-text">
               <div className="text-[20px] font-semibold flex gap-2">
                 {user?.name}{" "}
                 <div className="w-6 aspect-square">

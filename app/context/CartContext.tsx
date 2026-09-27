@@ -24,7 +24,7 @@ interface CartContextType {
   addToCart: (item: CartItem) => void;
   removeFromCart: (
     id: string | undefined,
-    productId: string | undefined
+    productId: string | undefined,
   ) => void;
   updateQuantity: (id: string, qty: number) => void;
   clearCart: () => void;
@@ -41,12 +41,14 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const addToCart = (item: CartItem) => {
     setCart((prev) => {
       const existing = prev.find(
-        (i) => i.productId === item._id || i._id === item._id
+        (i) => i.productId === item._id || i._id === item._id,
       );
 
       if (existing) {
         return prev.map((i) =>
-          i._id === item._id ? { ...i, qty: (i.qty ?? 0) + (item.qty ?? 0) } : i
+          i._id === item._id
+            ? { ...i, qty: (i.qty ?? 0) + (item.qty ?? 0) }
+            : i,
         );
       }
       return [...prev, item];
@@ -64,17 +66,21 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
           qty: item.qty,
           imageURL: item?.image?.url,
         })
-        .then((res) => {})
+        .then((res) => {
+          window.location.reload();
+        })
         .catch((error) => {
           console.error("error", error);
         });
     }
+
+    window.location.reload();
   };
 
   // id for localstorage || productId for database
   const removeFromCart = (
     id: string | undefined,
-    productId: string | undefined
+    productId: string | undefined,
   ) => {
     if (cookie || session) {
       api

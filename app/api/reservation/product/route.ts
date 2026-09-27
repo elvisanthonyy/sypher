@@ -17,6 +17,7 @@ const handler = async (req: Request) => {
   }
 
   try {
+    const product = await Product.findById(productId);
     const reservation = new Reservation({
       userId,
       name,
@@ -27,9 +28,15 @@ const handler = async (req: Request) => {
       qty,
     });
 
+    if (Number(product.unitsAvailable) < qty) {
+      return NextResponse.json({
+        status: "error",
+        message: "Reservation quantity is less than available",
+      });
+    }
     await reservation.save();
     await sendOrderMessage(reservation);
-    const product = await Product.findById(productId);
+
     if (product) {
       let productQty: any = product.unitsAvailable;
       product.unitsAvailable = productQty - qty;

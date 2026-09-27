@@ -151,7 +151,7 @@ const ProductUploadMain = () => {
           {/* first product details section */}
 
           <section
-            className={`w-full ${pageNumber === 1 ? "flex" : "hidden lg:flex"} flex-col gap-3`}
+            className={`w-full mb-2 ${pageNumber === 1 ? "flex" : "hidden lg:flex"} flex-col gap-3`}
           >
             <div className="flex flex-col gap-1">
               <label
@@ -203,6 +203,7 @@ const ProductUploadMain = () => {
               />
             </div>
             <button
+              type="button"
               onClick={() => nextPage({ name, type, category } as FormFields)}
               className="w-full text-[14px] flex justify-center gap-2 mt-3 items-center bg-text h-[46px] lg:hidden bg-black text-white rounded-[32px]"
             >
@@ -259,6 +260,7 @@ const ProductUploadMain = () => {
             </div>
             <div className="flex gap-2">
               <button
+                type="button"
                 onClick={() => setPageNumber(1)}
                 className="flex lg:hidden justify-center w-[60px] mt-3 items-center bg-text h-[46px] bg-black text-white rounded-[32px]"
               >
@@ -274,6 +276,7 @@ const ProductUploadMain = () => {
                 </div>
               </button>
               <button
+                type="submit"
                 className={`w-full flex justify-center mt-3 items-center bg-primary-400 text-[14px] h-[46px] bg-black ${isUploading ? "opacity-50 cursor-not-allowed" : "hover:bg-opacity-90"} text-white rounded-[32px]`}
                 disabled={isUploading} // Disable the button when uploading
               >

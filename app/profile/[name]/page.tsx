@@ -18,7 +18,7 @@ const page = async () => {
   await dbConnect();
   const session = await getServerSession(authOptions);
   if (!session) {
-    redirect("/auth/signin?redirectUrl=/profile/");
+    redirect(`/auth/signin?redirectUrl=/profile/check/redirect`);
   }
 
   const res = await fetch(`${baseURL}/api/profile/user/${session?.user?.id}`);

@@ -38,6 +38,7 @@ const ReservationMain = ({ user, cartItem, product }: ChildProps) => {
 
   // variable for message when task is carried out
   const [messageStatus, setMessageStatus] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [orderQuantity, setOrderQuantity] = useState<number>(
     cartItem?.qty ?? 1,
   );
@@ -80,6 +81,9 @@ const ReservationMain = ({ user, cartItem, product }: ChildProps) => {
         productId: cartItem?.productId,
       })
       .then((res) => {
+        if (res.data.status === "error") {
+          return setErrorMessage(res.data.message);
+        }
         if (res.data.status === "okay") {
           setMessageStatus("okay");
           router.push(
@@ -113,10 +117,10 @@ const ReservationMain = ({ user, cartItem, product }: ChildProps) => {
       ) : (
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex gap-3 lg:flex-row w-full text-text text-[14px] flex-col px-5 lg:px-[128px]"
+          className="flex gap-3 lg:flex-row relative w-full text-text text-[14px] flex-col px-5 lg:px-[128px]"
         >
-          <section className="p-3 flex justify-between gap-2 border border-primary-100 bg-white h-[138px] lg:h-auto lg:w-[50%] lg:aspect-square rounded-[20px]">
-            <div className="flex gap-3 w-full">
+          <section className="p-3 flex justify-between gap-3 border border-primary-100 bg-white h-[138px] lg:h-auto lg:w-[50%] lg:aspect-square rounded-[20px]">
+            <div className="flex gap-3 h-full">
               <div className="h-full overflow-hidden aspect-square rounded-[8px]">
                 <Image
                   src={cartItem?.image?.url}
@@ -128,11 +132,11 @@ const ReservationMain = ({ user, cartItem, product }: ChildProps) => {
                 />
               </div>
             </div>
-            <div className="w-full rounded-[20px] lg:h-[calc(200px-12px)] lg:border lg:border-border lg:p-3 lg:absolute items-center lg:right-[128px] lg:top-0 lg:bg-white lg:w-[calc(50%-128px-8px)] flex justify-between">
-              <div className="flex flex-col h-full lg:h-fit">
+            <div className="w-full  lg:rounded-[20px] lg:h-[calc(200px-12px)] lg:border lg:border-border lg:p-3 lg:absolute items-center lg:right-[128px] lg:top-0 lg:bg-white lg:w-[calc(50%-128px-8px)] flex justify-between">
+              <div className="flex flex-col h-fit">
                 <p>{cartItem.name}</p>
                 <p>{cartItem.category}</p>
-                <h1 className="font-bold mt-3 text-[16px] text-secondary-700">
+                <h1 className="font-bold  mt-3 text-[16px] text-secondary-700">
                   N{cartItem.price.toLocaleString()}
                 </h1>
               </div>
@@ -234,7 +238,11 @@ const ReservationMain = ({ user, cartItem, product }: ChildProps) => {
                 </div>
               </div>
             </section>
-
+            {errorMessage && (
+              <p className="w-full text-[14px] text-[#e60303]">
+                {errorMessage}
+              </p>
+            )}
             <button className="bg-primary-400 w-full cursor-pointer h-12 rounded-[8px] my-2 text-white">
               Reserve
             </button>

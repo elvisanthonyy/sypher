@@ -6,7 +6,10 @@ const BackButton = () => {
   const router = useRouter();
   return (
     <div>
-      <div className="w-7 aspect-square" onClick={() => router.back()}>
+      <div
+        className="w-7 z-90 cursor-pointer aspect-square"
+        onClick={() => router.back()}
+      >
         <Image
           src="/icons/back-icon.svg"
           width={1000}

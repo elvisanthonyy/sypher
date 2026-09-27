@@ -46,7 +46,7 @@ const CartProductItem = ({ cartItem, removeFromCart }: ChildProps) => {
         </button>
         <button
           onClick={removeFromCart}
-          className="w-full cursor-pointer h-[34px] bg-primary-400 text-[14px] text-white border rounded-[16px] lg:rounded-[8px]"
+          className="w-full cursor-pointer h-[34px] bg-primary-400 text-[14px] text-white border rounded-[8px] lg:rounded-[8px]"
         >
           Delete
         </button>

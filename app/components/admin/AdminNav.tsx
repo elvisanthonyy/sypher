@@ -10,7 +10,7 @@ interface ChildProps {
 
 const AdminNav = ({ reservationNumber, pageName }: ChildProps) => {
   return (
-    <div className="flex z-30 lg:px-[128px] fixed top-0 left-0 h-[64px] w-full px-4 bg-white justify-between border-b border-border items-center gap-4">
+    <div className="flex z-90 lg:px-[128px] fixed top-0 left-0 h-[64px] w-full px-4 bg-white justify-between border-b border-border items-center gap-4">
       <BackButton />
       {pageName !== "Reservations" && (
         <Link

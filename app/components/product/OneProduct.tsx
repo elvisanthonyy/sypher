@@ -54,7 +54,7 @@ const OneProduct = () => {
               <div className="">{`Units Available - ${product?.unitsAvailable}`}</div>
             </div>
           </div>
-          <div className="fixed lg:absolute lg:bottom-0 lg:translate-x-0 lg:left-0 -translate-x-[50%] bottom-0 bg-white left-[50%] lg:px-0 px-5 pt-3 pb-5 w-full">
+          <div className="fixed bg-white z-60 lg:absolute lg:bottom-0 lg:translate-x-0 lg:left-0 -translate-x-[50%] bottom-0 bg-white left-[50%] lg:px-0 px-5 pt-3 pb-5 w-full">
             {isInCart ? (
               <div className="w-full h-18 rounded-lg flex justify-between items-center ">
                 <div
@@ -87,7 +87,6 @@ const OneProduct = () => {
               <div
                 onClick={() => {
                   addToCart({ ...product, qty });
-                  window.location.reload();
                 }}
                 className="text-white transition-all ease-in duration-500 cursor-pointer hover:opacity-70 h-[49px] text-[14px] rounded-[16px] flex justify-center items-center bg-primary-400"
               >

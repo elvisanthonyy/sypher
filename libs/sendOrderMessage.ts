@@ -27,7 +27,7 @@ export async function sendOrderMessage(order: IReservation) {
     await transporter.sendMail({
       from: `"Max Gadgets" <${process.env.EMAIL_USER}>`,
       to: order.email,
-      subject: `Order confirmed!! Your ${order?._id} order`,
+      subject: `Reservation made!! Your ${order?._id} reservation`,
       html: `<div
   style="
     display: block;
@@ -77,11 +77,11 @@ export async function sendOrderMessage(order: IReservation) {
   <div style="width: 100%; display: block; color: #777777; font-size: 14px">
     <div style="margin-bottom: 40px">Hello, ${order?.name},</div>
     <div style="margin-bottom: 20px">
-      Thank you for your purchase! We are excited to let you know that your
-      order has been placed successfully.
+      We are excited to let you know that your
+      reservation has been made successfully. Please note that reservation becomes invalid after 3 days if payment is not made to out physial office.
     </div>
     <div style="margin-bottom:">
-      <h5 style="color: #fd755a; font: 14px; margin-bottom: 8px">Order Summary</h5>
+      <h5 style="color: #fd755a; font: 14px; margin-bottom: 8px">Reservation Summary</h5>
       <div
         style="
           background-color: rgb(49, 49, 49);
@@ -108,7 +108,7 @@ export async function sendOrderMessage(order: IReservation) {
       </div>
     </div>
     <div style="margin-bottom: 20px">
-      <h5 style="color: #fd755a; font: 14px; margin-bottom: 8px">Items Ordered</h5>
+      <h5 style="color: #fd755a; font: 14px; margin-bottom: 8px">Items Reserved</h5>
       <div
         style="
           background-color: rgb(49, 49, 49);

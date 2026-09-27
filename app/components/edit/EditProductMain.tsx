@@ -150,7 +150,7 @@ const EditProductMain = ({ product }: ChildProps) => {
               {pages.map((page, index) => (
                 <div
                   key={index}
-                  className={`h-1 w-full rounded-full ${pageNumber >= index + 1 ? "bg-primary-400" : "bg-[#f2f2f2]"}`}
+                  className={`h-1 w-full mb-2 rounded-full ${pageNumber >= index + 1 ? "bg-primary-400" : "bg-[#f2f2f2]"}`}
                 />
               ))}
             </section>
@@ -207,6 +207,7 @@ const EditProductMain = ({ product }: ChildProps) => {
                 />
               </div>
               <button
+                type="button"
                 onClick={() => nextPage({ name, type, category } as FormFields)}
                 className="w-full text-[14px] flex justify-center gap-2 mt-3 items-center bg-text h-[46px] lg:hidden bg-black text-white rounded-[32px]"
               >
@@ -262,6 +263,7 @@ const EditProductMain = ({ product }: ChildProps) => {
 
               <div className="flex gap-2">
                 <button
+                  type="button"
                   onClick={() => setPageNumber(1)}
                   className="flex lg:hidden justify-center w-[60px] mt-3 items-center bg-text h-[46px] bg-black text-white rounded-[32px]"
                 >
@@ -277,6 +279,7 @@ const EditProductMain = ({ product }: ChildProps) => {
                   </div>
                 </button>
                 <button
+                  type="submit"
                   className={`w-full flex justify-center mt-3 items-center bg-primary-400 text-[14px] h-[46px] bg-black ${isUploading ? "opacity-50 cursor-not-allowed" : "hover:bg-opacity-90"} text-white rounded-[32px]`}
                   disabled={isUploading} // Disable the button when uploading
                 >

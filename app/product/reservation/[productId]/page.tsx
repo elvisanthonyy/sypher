@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import ThirdNav from "@/app/components/profile/ThirdNav";
 import ReservationMain from "@/app/components/reservation/ReservationMain";
+
 const baseURL = process.env.BASE_URL;
 
 export const metadata = {
