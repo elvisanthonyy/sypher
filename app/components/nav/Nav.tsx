@@ -19,7 +19,7 @@ const Nav = async ({ name }: ChildProps) => {
   const session = await getServerSession(authOptions);
 
   return (
-    <div className=" z-30 fixed bg-white top-0 text-text left-0 flex items-center justify-between px-4 md:px-[128px] w-full h-16 border-b border-b-border">
+    <div className=" z-110 fixed bg-white top-0 text-text left-0 flex items-center justify-between px-4 md:px-[128px] w-full h-16 border-b border-b-border">
       <div className="flex items-center gap-4">
         <Menu name={name} />
 

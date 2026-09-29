@@ -4,17 +4,19 @@ import { redirect } from "next/navigation";
 import AdminNav from "@/app/components/admin/AdminNav";
 import AdminMain from "@/app/components/admin/AdminMain";
 import { cookies } from "next/headers";
+import dbConnect from "@/libs/dbConnect";
 
 const baseURL = process.env.BASE_URL;
 
 const page = async () => {
+  await dbConnect();
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    redirect("/auth/signin");
+    return redirect("/auth/signin");
   }
   if (session?.user?.role === "user") {
-    redirect("/auth/admin/redirect");
+    return redirect("/auth/admin/redirect");
   }
 
   const res = await fetch(`${baseURL}/api/admin/getdetails`, {

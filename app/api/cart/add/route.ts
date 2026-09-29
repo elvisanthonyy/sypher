@@ -42,26 +42,31 @@ const handler = async (req: Request) => {
       (i: any) => i.productId.toString() === productId,
     );
     if (existingItem) {
-      console.log("it exist");
       existingItem.qty += qty;
-    } else {
-      cart.items.push({
-        productId: productId,
-        name: name,
-        type: type,
-        category: category,
-        price: price,
-        qty: qty,
-        unitsAvailable: unitsAvailable,
-        image: {
-          url: imageURL?.toString(),
-        },
-      } as any);
+      return NextResponse.json({
+        status: "error",
+        message: "Item is already in cart",
+      });
     }
+    cart.items.push({
+      productId: productId,
+      name: name,
+      type: type,
+      category: category,
+      price: price,
+      qty: 1,
+      unitsAvailable: unitsAvailable,
+      image: {
+        url: imageURL?.toString(),
+      },
+    } as any);
 
     await cart.save();
 
-    return NextResponse.json({ message: "item added or updated" });
+    return NextResponse.json({
+      status: "Okay",
+      message: "Item is already in cart",
+    });
   } catch (error) {
     console.error("error", error);
     return NextResponse.json({ status: "error", message: error });

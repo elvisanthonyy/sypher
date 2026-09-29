@@ -3,17 +3,18 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import ThirdNav from "@/app/components/profile/ThirdNav";
 import ReservationMain from "@/app/components/reservation/ReservationMain";
+import dbConnect from "@/libs/dbConnect";
 
 const baseURL = process.env.BASE_URL;
 
 export const metadata = {
-  title: "Order Product",
+  title: "Reserve Product",
 };
 
 const page = async ({ params }: { params: { productId: string } }) => {
+  await dbConnect();
   const req = await params;
   const session = await getServerSession(authOptions);
-  console.log(req);
 
   if (!session) {
     redirect(`/auth/signin?redirectUrl=/product/reservation/${req.productId}`);

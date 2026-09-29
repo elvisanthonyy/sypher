@@ -11,7 +11,7 @@ const specs = ["Core i5", "6th Gen", "500GB SSD", "Keyboard light"];
 const OneProduct = () => {
   const router = useRouter();
   const { product } = useProductContext();
-  const { addToCart, cart } = useCart();
+  const { addToCart, cart, increaseQty, reduceQty } = useCart();
   const [isInCart, setIsInCart] = useState(false);
   const [qty, setQty] = useState<number | undefined>(1);
 
@@ -28,7 +28,7 @@ const OneProduct = () => {
     } else {
       setIsInCart(false);
     }
-  }, [product]);
+  }, [product, cart]);
   return (
     <div className="flex p-3 my-3 gap-2 w-full bg-white rounded-[16px] text-black border border-border justify-start pb-4 lg:flex-row items-center flex-col h-fit">
       <section className="shrink-0 rounded-[4px] overflow-hidden border-b border-b-sypher-light-border w-full lg:w-[375px] lg:h-[333px] h-50 bg-gray-300">
@@ -51,15 +51,24 @@ const OneProduct = () => {
             <div className="w-full text-[14px] text-[#77777] flex-col flex mb-1 justify-between">
               <div>{product?.name}</div>
               <div className="">{product?.category}</div>
-              <div className="">{`Units Available - ${product?.unitsAvailable}`}</div>
+              <div className="">
+                {product?.unitsAvailable &&
+                  `Units Available - ${product?.unitsAvailable}`}
+              </div>
             </div>
           </div>
           <div className="fixed bg-white z-60 lg:absolute lg:bottom-0 lg:translate-x-0 lg:left-0 -translate-x-[50%] bottom-0 bg-white left-[50%] lg:px-0 px-5 pt-3 pb-5 w-full">
             {isInCart ? (
               <div className="w-full h-18 rounded-lg flex justify-between items-center ">
                 <div
-                  onClick={() => (qty ?? 0) > 1 && setQty((qty ?? 0) - 1)}
-                  className="flex justify-center items-center text-lg aspect-square rounded-[8px] h-[36px] aspect-square bg-primary-400 text-white"
+                  onClick={() => {
+                    const newQty = (qty ?? 0) - 1;
+                    if ((qty ?? 0) > 1) {
+                      setQty(newQty);
+                      reduceQty(product?._id, newQty);
+                    }
+                  }}
+                  className="flex cursor-pointer justify-center items-center text-lg aspect-square rounded-[8px] h-[36px] aspect-square bg-primary-400 text-white"
                 >
                   -
                 </div>
@@ -74,11 +83,14 @@ const OneProduct = () => {
                   disabled
                 />
                 <div
-                  onClick={() =>
-                    (qty ?? 0) < (product?.unitsAvailable ?? 0) &&
-                    setQty((qty ?? 0) + 1)
-                  }
-                  className="flex justify-center items-center text-lg aspect-square rounded-[8px] h-[36px] aspect-square border border-border"
+                  onClick={() => {
+                    const newQty = (qty ?? 0) + 1;
+                    if (newQty <= (product?.unitsAvailable ?? 0)) {
+                      setQty(newQty);
+                      increaseQty(product?._id, newQty);
+                    }
+                  }}
+                  className="flex cursor-pointer justify-center items-center text-lg aspect-square rounded-[8px] h-[36px] aspect-square border border-border"
                 >
                   +
                 </div>

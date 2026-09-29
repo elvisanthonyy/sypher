@@ -3,6 +3,7 @@ import { createContext, useContext } from "react";
 import { useState, useEffect, ReactNode } from "react";
 import api from "@/libs/api";
 import { useSession } from "next-auth/react";
+import { toast } from "react-toastify";
 
 export interface CartItem {
   _id?: string | undefined;
@@ -22,6 +23,8 @@ export interface CartItem {
 interface CartContextType {
   cart: CartItem[];
   addToCart: (item: CartItem) => void;
+  reduceQty: (itemId: string, newQty: number) => void;
+  increaseQty: (itemId: string, newQty: number) => void;
   removeFromCart: (
     id: string | undefined,
     productId: string | undefined,
@@ -34,25 +37,40 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const { data: session, status } = useSession();
+  const userId = session?.user?.id;
   const [mounted, setMounted] = useState(true);
   const [cookie, setCookie] = useState<string | undefined>();
   const [cart, setCart] = useState<CartItem[]>([]);
 
-  const addToCart = (item: CartItem) => {
+  //reduce item quantity
+  const reduceQty = (itemId: string, newQty: number) => {
+    if (cookie || session) {
+      return api
+        .post("/api/cart/decreaseqty", { itemId, userId })
+        .then((res) => {})
+        .catch((error) => console.error(error));
+    }
     setCart((prev) => {
-      const existing = prev.find(
-        (i) => i.productId === item._id || i._id === item._id,
-      );
-
-      if (existing) {
-        return prev.map((i) =>
-          i._id === item._id
-            ? { ...i, qty: (i.qty ?? 0) + (item.qty ?? 0) }
-            : i,
-        );
-      }
-      return [...prev, item];
+      return prev.map((i) => (i._id === itemId ? { ...i, qty: newQty } : i));
     });
+  };
+
+  // increase item quantity
+  const increaseQty = (itemId: string, newQty: number) => {
+    if (cookie || session) {
+      return api
+        .post("/api/cart/increaseqty", { itemId, userId })
+        .then((res) => {})
+        .catch((error) => console.error(error));
+    }
+    setCart((prev) => {
+      return prev.map((i) => (i._id === itemId ? { ...i, qty: newQty } : i));
+    });
+  };
+
+  //add item to cart
+  const addToCart = (item: CartItem) => {
+    //if user accepts cookies or is logged in
     if (cookie || session) {
       api
         .post("/api/cart/add", {
@@ -63,18 +81,51 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
           type: item?.type,
           category: item?.category,
           price: item.price,
-          qty: item.qty,
+          qty: 1,
           imageURL: item?.image?.url,
         })
         .then((res) => {
-          window.location.reload();
+          if (res.data.status === "okay") {
+            toast.success(res.data.message, {
+              theme: "dark",
+              position: "top-center",
+            });
+          } else {
+            toast.error(res.data.message, {
+              theme: "dark",
+              position: "top-center",
+            });
+          }
         })
         .catch((error) => {
           console.error("error", error);
         });
     }
 
-    window.location.reload();
+    //if user does not accept cookies or is not logged in
+    setCart((prev) => {
+      const existing = prev.find(
+        (i) => i.productId === item._id || i._id === item._id,
+      );
+
+      if (existing) {
+        toast.error("Product is already in cart", {
+          theme: "dark",
+          position: "top-center",
+        });
+
+        return prev.map((i) =>
+          i._id === item._id
+            ? { ...i, qty: (i.qty ?? 0) + (item.qty ?? 0) }
+            : i,
+        );
+      }
+      toast.success("Product has been added to cart", {
+        theme: "dark",
+        position: "top-center",
+      });
+      return [...prev, item];
+    });
   };
 
   // id for localstorage || productId for database
@@ -83,7 +134,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     productId: string | undefined,
   ) => {
     if (cookie || session) {
-      api
+      return api
         .post("/api/cart/delete", {
           userId: session?.user?.id,
           cartId: cookie,
@@ -155,11 +206,19 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     if (!cookie && !session) {
       localStorage.setItem("cart", JSON.stringify(cart));
     }
-  }, [cart]);
+  }, [cart, cookie, session]);
 
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, removeFromCart, updateQuantity, clearCart }}
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        updateQuantity,
+        clearCart,
+        reduceQty,
+        increaseQty,
+      }}
     >
       {children}
     </CartContext.Provider>

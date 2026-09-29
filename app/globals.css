@@ -101,3 +101,7 @@ body {
     text-align: center !important;
   }
 }
+
+.Toastify__toast {
+  border-radius: 32px !important;
+}
