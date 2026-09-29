@@ -76,7 +76,6 @@ export async function sendOTP(email: string, otp: string) {
     <div
       style="
         width: 100%;
-        border: 1px solid #777777;
         border-radius: 32px;
         margin-bottom: 20px;
         padding: 16px 0;

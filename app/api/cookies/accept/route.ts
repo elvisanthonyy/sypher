@@ -8,6 +8,7 @@ interface ReqBody {
   cartItems: IItem[];
 }
 
+// for accepting cookies
 const handler = async (req: Request) => {
   const userCartID = randomUUID();
   const { cartItems } = (await req.json()) as ReqBody;
@@ -15,11 +16,12 @@ const handler = async (req: Request) => {
 
   try {
     if (cartItems) {
+      //create cart when user accepts cookies
       const newCart = await Cart.create({
         cartId: userCartID,
       });
 
-      console.log(cartItems);
+      //Adding local storage cart Items to new sessions cart
       cartItems.forEach((cartItem) => {
         newCart.items.push({
           productId: cartItem._id,

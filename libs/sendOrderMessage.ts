@@ -81,10 +81,10 @@ export async function sendOrderMessage(order: IReservation) {
       reservation has been made successfully. Please note that reservation becomes invalid after 3 days if payment is not made to out physial office.
     </div>
     <div style="margin-bottom:">
-      <h5 style="color: #fd755a; font: 14px; margin-bottom: 8px">Reservation Summary</h5>
+      <h5 style="color: #fd755a; font: 16px; margin-bottom: 8px">Reservation Summary</h5>
       <div
         style="
-          background-color: rgb(49, 49, 49);
+          background-color: #2e2e2e;
           padding: 4px 0;
           border-radius: 8px;
         "
@@ -92,15 +92,15 @@ export async function sendOrderMessage(order: IReservation) {
         <ul>
           <li style="margin-bottom: 20px">
             Order Id:
-            <span style="font-weight: 600; color: #cecece">${order?._id}</span>
+            <span style="font-weight: 600; color: white">${order?._id}</span>
           </li>
           <li style="margin-bottom: 4px">
             Order Date:
-            <span style="font-weight: 600; color: #cecece">${formartedDate}</span>
+            <span style="font-weight: 600; color: white;">${formartedDate}</span>
           </li>
           <li style="margin-bottom: 4px">
             Address:
-            <span style="font-weight: 600; color: #cecece"
+            <span style="font-weight: 600; color: white;"
               >${order?.location ? order?.location : "Not specified"}</span
             >
           </li>
@@ -108,10 +108,10 @@ export async function sendOrderMessage(order: IReservation) {
       </div>
     </div>
     <div style="margin-bottom: 20px">
-      <h5 style="color: #fd755a; font: 14px; margin-bottom: 8px">Items Reserved</h5>
+      <h5 style="color: #fd755a; font: 16px; margin-bottom: 8px">Items Reserved</h5>
       <div
         style="
-          background-color: rgb(49, 49, 49);
+          background-color: #2e2e2e;
           padding: 4px 0;
           border-radius: 8px;
         "
@@ -119,20 +119,20 @@ export async function sendOrderMessage(order: IReservation) {
         <ul>
           <li style="margin-bottom: 4px">
             Product Name:
-            <span style="font-weight: 600; color: #cecece"
+            <span style="font-weight: 600; color: white;"
               >${order?.productName} X ${order?.qty}</span
             >
           </li>
           <li style="margin-bottom: 4px">
             Total Amound:
-            <span style="font-weight: 600; color: #cecece">${order?.price?.toLocaleString()}</span>
+            <span style="font-weight: 600; color: white;">${order?.price?.toLocaleString()}</span>
           </li>
         </ul>
       </div>
     </div>
   </div>
   <div style="margin-bottom: 20px; color: #777777; font-size: 14px">
-    Prodduct has been reserved for you, kindly come to out office for payment
+    Product has been reserved for you, kindly come to our office for payment
     and pick-up.
   </div>
   <div style="width: 100%; display: block">

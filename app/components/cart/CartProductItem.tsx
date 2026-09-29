@@ -33,20 +33,20 @@ const CartProductItem = ({ cartItem, removeFromCart }: ChildProps) => {
         </div>
       </section>
 
-      <section className="w-[70%] ml-auto border-t border-border pt-2 flex gap-2 items-center">
+      <section className="w-[70%] mr-auto border-t border-border pt-2 flex gap-2 items-center">
         <button
           onClick={() =>
             router.push(
               `/product/reservation/${cartItem.productId ? cartItem.productId : cartItem._id}`,
             )
           }
-          className="w-full cursor-pointer h-[34px] bg-text text-[14px] text-white border rounded-[8px] lg:rounded-[8px]"
+          className="w-full cursor-pointer h-[34px] bg-text text-[14px] text-white  rounded-[8px] lg:rounded-[8px]"
         >
           Reserve
         </button>
         <button
           onClick={removeFromCart}
-          className="w-full cursor-pointer h-[34px] bg-primary-400 text-[14px] text-white border rounded-[8px] lg:rounded-[8px]"
+          className="w-full cursor-pointer h-[34px] bg-primary-400 text-[14px] text-white rounded-[8px] lg:rounded-[8px]"
         >
           Delete
         </button>

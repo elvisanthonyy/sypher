@@ -85,33 +85,36 @@ const Main = ({ session, products }: ChildProps) => {
       </div>
 
       {acceptCookiesModal && (
-        <div className="fixed flex-col justify-between start gap-4 p-5 left-0 bottom-0 flex w-full h-fit min-h-[226px] md:left-[50%] md:translate-x-[-50%] md:bottom-4 md:rounded-[16px] md:shadow-lg md:items-center md:py-[40px] md:px-[64px] md:w-[434px] bg-white">
-          <div className="flex flex-col gap-2">
-            <div className="text-text tracking-tight text-[24px] font-bold">
-              Cookies notification
+        <section className="fixed flex items-end justify-center bottom-0 w-full h-dvh bg-black/25">
+          <div className="flex-col justify-between start gap-4 p-5 left-0 flex w-full h-fit min-h-[226px] md:bottom-4 md:rounded-[16px] md:left-[50%] md:translate-x-[-50%]  md:shadow-lg md:items-center md:py-[40px] md:px-[64px] md:w-[434px] bg-white">
+            <div className="flex flex-col gap-2">
+              <div className="text-text tracking-tight text-[24px] font-bold">
+                Cookies notification
+              </div>
+              <div className="text-text space-x-[18px] text-[14px]">
+                We use cookies on our website to help us provide the best
+                internet experience, by click accept you accept our terms and
+                conditions
+              </div>
             </div>
-            <div className="text-text space-x-[18px] text-[14px]">
-              We use cookies on our website to help us provide the best internet
-              experience, by click accept you accept our terms and conditions
-            </div>
-          </div>
 
-          <div className="flex w-full gap-4 text-[14px] mb-5  items-center mt-3">
-            <button
-              onClick={acceptCookies}
-              className="bg-primary-400 text-white
+            <div className="flex w-full gap-4 text-[14px] mb-5  items-center mt-3">
+              <button
+                onClick={acceptCookies}
+                className="bg-primary-400 text-white
                h-[49px] w-[127px] rounded-[8px]"
-            >
-              Accept
-            </button>
-            <button
-              onClick={() => setAcceptCookiesModal(false)}
-              className="bg-text text-white h-[49px] w-[127px] rounded-[8px]"
-            >
-              Reject
-            </button>
+              >
+                Accept
+              </button>
+              <button
+                onClick={() => setAcceptCookiesModal(false)}
+                className="bg-text text-white h-[49px] w-[127px] rounded-[8px]"
+              >
+                Reject
+              </button>
+            </div>
           </div>
-        </div>
+        </section>
       )}
     </main>
   );

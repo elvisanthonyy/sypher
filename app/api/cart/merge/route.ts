@@ -16,7 +16,6 @@ const handler = async (req: Request) => {
   await dbConnect();
   const session = await getServerSession(authOptions);
   const { cartItems, cartId } = (await req.json()) as ReqBody;
-  console.log(cartItems);
 
   if (!session) {
     return NextResponse.json({ status: "error", message: "session not found" });
@@ -31,10 +30,18 @@ const handler = async (req: Request) => {
     //check if user already have a cart
     const userCart = await Cart.findOne({ userId: user._id });
 
+    // check forcart if user accepted cookies
     if (cartId) {
+      //check to avoid duplicate items when merging sessions cart items
       const guestCart = await Cart.findOne({ cartId: cartId });
+
       guestCart.items.forEach((item) => {
-        userCart.items.push(item);
+        const checkIfInUserCart = guestCart.items.find(
+          (item) => item.productId === item.productId,
+        );
+        if (!checkIfInUserCart) {
+          userCart.items.push(item);
+        }
       });
       await userCart.save();
       await guestCart.deleteOne();
@@ -43,17 +50,23 @@ const handler = async (req: Request) => {
 
     if (cartItems) {
       cartItems.forEach((cartItem) => {
-        userCart.items.push({
-          productId: cartItem._id,
-          name: cartItem?.name,
-          type: cartItem?.type,
-          category: cartItem?.category,
-          price: cartItem?.price,
-          qty: cartItem?.qty,
-          image: {
-            url: cartItem.image?.url.toString(),
-          },
-        });
+        //check to avoid duplicate items when merging localstorage cart items
+        const checkIfInUserCart = userCart.items.find(
+          (item) => item.productId === cartItem.productId,
+        );
+        if (!checkIfInUserCart) {
+          userCart.items.push({
+            productId: cartItem._id,
+            name: cartItem?.name,
+            type: cartItem?.type,
+            category: cartItem?.category,
+            price: cartItem?.price,
+            qty: cartItem?.qty,
+            image: {
+              url: cartItem.image?.url.toString(),
+            },
+          });
+        }
       });
 
       await userCart.save();
