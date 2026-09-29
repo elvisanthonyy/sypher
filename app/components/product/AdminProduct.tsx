@@ -74,20 +74,20 @@ const AdminProduct = ({
       </div>
       <div className="flex flex-col text-[14px] w-full ">
         <div className="h-full flex px-0">
-          <div
+          <button
             onClick={() => router.push(`/product/edit/${product._id}`)}
-            className="w-full mr-4 h-10 gap-2 h-[32px] rounded-[12px] flex justify-center items-center bg-text text-white"
+            className="w-full active:opacity-70 mr-4 h-10 gap-2 h-[32px] rounded-[12px] flex justify-center items-center bg-text text-white"
           >
             Edit{" "}
             <ButtonIcon size={16} icon="/icons/admin-product-edit-icon.svg" />
-          </div>
-          <div
+          </button>
+          <button
             onClick={() => setIsDeleteModalOpen(true)}
-            className="w-full h-[32px] rounded-[12px] flex justify-center items-center bg-primary-400 gap-2  text-white"
+            className="w-full h-[32px] rounded-[12px] flex justify-center items-center active:opacity-70 bg-primary-400 gap-2  text-white"
           >
             Delete{" "}
             <ButtonIcon size={16} icon="/icons/admin-product-delete-icon.svg" />
-          </div>
+          </button>
         </div>
       </div>
     </div>

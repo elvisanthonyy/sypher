@@ -243,7 +243,7 @@ const ReservationMain = ({ user, cartItem, product }: ChildProps) => {
                 {errorMessage}
               </p>
             )}
-            <button className="bg-primary-400 w-full cursor-pointer h-12 rounded-[8px] my-2 text-white">
+            <button className="bg-primary-400 active:opacity-70 w-full cursor-pointer h-12 rounded-[8px] my-2 text-white">
               Reserve
             </button>
           </div>

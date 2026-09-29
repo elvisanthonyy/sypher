@@ -205,7 +205,7 @@ const ProductUploadMain = () => {
             <button
               type="button"
               onClick={() => nextPage({ name, type, category } as FormFields)}
-              className="w-full text-[14px] flex justify-center gap-2 mt-3 items-center bg-text h-[46px] lg:hidden bg-black text-white rounded-[32px]"
+              className="w-full text-[14px] flex justify-center gap-2 mt-3 items-center active:opacity-70 bg-text h-[46px] lg:hidden bg-black text-white rounded-[32px]"
             >
               Next
               <div className="w-[20px] rotate-180 aspect-square">
@@ -262,7 +262,7 @@ const ProductUploadMain = () => {
               <button
                 type="button"
                 onClick={() => setPageNumber(1)}
-                className="flex lg:hidden justify-center w-[60px] mt-3 items-center bg-text h-[46px] bg-black text-white rounded-[32px]"
+                className="flex lg:hidden justify-center w-[60px] mt-3 items-center bg-text h-[46px] active:opacity-70 bg-black text-white rounded-[32px]"
               >
                 <div className="w-[20px] aspect-square">
                   <Image
@@ -277,7 +277,7 @@ const ProductUploadMain = () => {
               </button>
               <button
                 type="submit"
-                className={`w-full flex justify-center mt-3 items-center bg-primary-400 text-[14px] h-[46px] bg-black ${isUploading ? "opacity-50 cursor-not-allowed" : "hover:bg-opacity-90"} text-white rounded-[32px]`}
+                className={`w-full flex justify-center mt-3 items-center bg-primary-400 active:opacity-70 text-[14px] h-[46px] bg-black ${isUploading ? "opacity-50 cursor-not-allowed" : "hover:bg-opacity-90"} text-white rounded-[32px]`}
                 disabled={isUploading} // Disable the button when uploading
               >
                 {loading ? (

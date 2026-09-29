@@ -127,7 +127,7 @@ const ProfileMain = ({ user }: ChildProps) => {
               <div className="w-full flex flex-col gap-4">
                 <button
                   disabled={loading ? true : false}
-                  className="w-full h-[46px] flex justify-center text-[14px] items-center text-md bg-text rounded-[32px] text-white my2"
+                  className="w-full h-[46px] flex justify-center text-[14px] items-center active:opacity-70 text-md bg-text rounded-[32px] text-white my2"
                 >
                   {loading ? <Loading /> : "Change Password"}
                 </button>
@@ -206,7 +206,7 @@ const ProfileMain = ({ user }: ChildProps) => {
             </div>
             <button
               onClick={() => router.push(`/profile/${user?.name}/edit`)}
-              className="h-13 flex text-[14px] gap-2 items-center justify-center mt-8 rounded-[32px] cursor-pointer text-white w-full bg-primary-400"
+              className="h-13 flex text-[14px] gap-2 items-center justify-center mt-8 rounded-[32px] active:opacity-70 cursor-pointer text-white w-full bg-primary-400"
             >
               Edit{" "}
               <div className="w-4 aspect-square">
@@ -219,15 +219,15 @@ const ProfileMain = ({ user }: ChildProps) => {
                 />
               </div>
             </button>
-            <div
+            <button
               onClick={() =>
                 router.push(`/profile/${user?.name}?change-password=true`)
               }
-              className="cursor-pointer mt-3 lg:text-white text-[14px] gap-2 text-text w-full justify-end flex items-center"
+              className="cursor-pointer active:opacity-70 mt-3 lg:text-white text-[14px] gap-2 text-text w-full justify-end flex items-center"
             >
               Change Password{" "}
               <FaArrowRight className="text-[14px] text-primary-400" />
-            </div>
+            </button>
           </div>
         </section>
       )}

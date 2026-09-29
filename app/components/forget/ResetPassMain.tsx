@@ -68,7 +68,7 @@ const ResetPassMain = ({ token }: ChildProps) => {
         <div>00:00</div>
         <button
           disabled={loading ? true : false}
-          className="w-full cursor-pointer flex justify-center items-center text-white rounded-2xl my-4 h-13 bg-black"
+          className="w-full active:opacity-70 cursor-pointer flex justify-center items-center text-white rounded-2xl my-4 h-13 bg-black"
         >
           {loading ? <Loading /> : "Reset"}
         </button>

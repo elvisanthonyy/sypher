@@ -85,6 +85,7 @@ export async function sendOrderMessage(order: IReservation) {
       <div
         style="
           background-color: #2e2e2e;
+          color: white;
           padding: 4px 0;
           border-radius: 8px;
         "
@@ -112,6 +113,7 @@ export async function sendOrderMessage(order: IReservation) {
       <div
         style="
           background-color: #2e2e2e;
+          color: white;
           padding: 4px 0;
           border-radius: 8px;
         "

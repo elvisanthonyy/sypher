@@ -72,7 +72,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const addToCart = (item: CartItem) => {
     //if user accepts cookies or is logged in
     if (cookie || session) {
-      api
+      return api
         .post("/api/cart/add", {
           cartId: cookie,
           userId: session?.user?.id,

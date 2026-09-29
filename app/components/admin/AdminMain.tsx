@@ -42,20 +42,20 @@ const AdminMain = ({ details }: ChildProps) => {
         </h1>
         <div className="flex w-full text-[14px] flex-col gap-3 p-4 bg-white border border-border rounded-[20px]">
           <Link className={``} href={`/product/allproducts`}>
-            <div className="w-fit text-white px-6 gap-2 shrink-0 h-10 bg-text rounded-[8px] flex items-center">
+            <div className="w-fit active:opacity-70 text-white px-6 gap-2 shrink-0 h-10 bg-text rounded-[8px] flex items-center">
               <p>View all Products</p>
 
               <ButtonIcon size={20} icon="/icons/all-product-icon.svg" />
             </div>
           </Link>
           <Link className={`w-full flex`} href={`/product/upload`}>
-            <div className="w-fit text-text px-6 gap-2 shrink-0 h-10 border border-text rounded-[8px] flex items-center">
+            <div className="w-fit active:opacity-70 text-text px-6 gap-2 shrink-0 h-10 border border-text rounded-[8px] flex items-center">
               <p>Upload Product</p>
               <ButtonIcon size={20} icon="/icons/upload-product-icon.svg" />
             </div>
           </Link>
           <Link className={`w-full flex`} href={`/user/admin/reservations`}>
-            <div className="w-fit text-white px-6 gap-2 shrink-0 h-10 bg-gradient-to-r from-[#19AECC] to-[#14879F] rounded-[8px] flex items-center">
+            <div className="w-fit active:opacity-70 text-white px-6 gap-2 shrink-0 h-10 bg-gradient-to-r from-[#19AECC] to-[#14879F] rounded-[8px] flex items-center">
               <p>View all Reservations</p>
               <ButtonIcon size={20} icon="/icons/all-orders-icon.svg" />
             </div>

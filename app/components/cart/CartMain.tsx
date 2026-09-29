@@ -10,12 +10,12 @@ const CartMain = () => {
   return (
     <div className="w-full flex-col min-h-[80dvh] flex pt-[64px]">
       <section className="w-full md:px-[128px] bg-white h-[52px] justify-between px-4 border-b flex border-border items-center">
-        <div
+        <button
           onClick={clearCart}
-          className="text-[14px] rounded-[32px] bg-text text-white px-4 py-1 flex justify-center items-center"
+          className="text-[14px] active:opacity-70 rounded-[32px] bg-text text-white px-4 py-1 flex justify-center items-center"
         >
           Clear
-        </div>
+        </button>
       </section>
 
       {cart?.length > 0 ? (

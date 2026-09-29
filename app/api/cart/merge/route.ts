@@ -37,7 +37,7 @@ const handler = async (req: Request) => {
 
       guestCart.items.forEach((item) => {
         const checkIfInUserCart = guestCart.items.find(
-          (item) => item.productId === item.productId,
+          (item) => item.productId?.toString() === item?.productId.toString(),
         );
         if (!checkIfInUserCart) {
           userCart.items.push(item);
@@ -52,8 +52,9 @@ const handler = async (req: Request) => {
       cartItems.forEach((cartItem) => {
         //check to avoid duplicate items when merging localstorage cart items
         const checkIfInUserCart = userCart.items.find(
-          (item) => item.productId === cartItem.productId,
+          (item) => item?.productId.toString() === cartItem?._id.toString(),
         );
+
         if (!checkIfInUserCart) {
           userCart.items.push({
             productId: cartItem._id,
@@ -70,7 +71,10 @@ const handler = async (req: Request) => {
       });
 
       await userCart.save();
-      return NextResponse.json({ status: "okay", message: "cart merged" });
+      return NextResponse.json({
+        status: "okay",
+        message: "cart merged",
+      });
     }
   } catch (error) {
     console.error("error", error);

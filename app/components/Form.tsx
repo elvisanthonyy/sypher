@@ -49,7 +49,7 @@ const Form = () => {
     }
   };
   return (
-    <div className="w-full lg:order-1 lg:flex lg:flex-col lg:h-dvh lg:items-center lg:justify-center lg:static lg:top-0 lg:translate-y-0 lg:w-[50%] px-5 absolute top-[50%] translate-y-[-50%]">
+    <div className="w-full md:w-[404px] lg:order-1 lg:flex lg:flex-col lg:h-dvh lg:items-center lg:justify-center lg:static lg:top-0 lg:translate-y-0 lg:w-[50%] px-5 absolute top-[50%] translate-y-[-50%]">
       <div className="flex gap-1 items-center lg:justify-center w-full mb-7">
         <div className="w-[40px] aspect-square">
           <Image

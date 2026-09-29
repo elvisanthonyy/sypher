@@ -40,13 +40,13 @@ const CartProductItem = ({ cartItem, removeFromCart }: ChildProps) => {
               `/product/reservation/${cartItem.productId ? cartItem.productId : cartItem._id}`,
             )
           }
-          className="w-full cursor-pointer h-[34px] bg-text text-[14px] text-white  rounded-[8px] lg:rounded-[8px]"
+          className="w-full cursor-pointer active:opacity-70 h-[34px] bg-text text-[14px] text-white  rounded-[8px] lg:rounded-[8px]"
         >
           Reserve
         </button>
         <button
           onClick={removeFromCart}
-          className="w-full cursor-pointer h-[34px] bg-primary-400 text-[14px] text-white rounded-[8px] lg:rounded-[8px]"
+          className="w-full cursor-pointer  active:opacity-70 h-[34px] bg-primary-400 text-[14px] text-white rounded-[8px] lg:rounded-[8px]"
         >
           Delete
         </button>

@@ -23,7 +23,7 @@ const NoItemComponenet = ({
       {buttonText && buttonLink && (
         <Link
           href={buttonLink}
-          className="flex items-center text-[14px] bg-primary-400 text-white h-[33px] px-5 rounded-[32px] hover:bg-primary-300"
+          className="flex active:opacity-70 items-center text-[14px] bg-primary-400 text-white h-[33px] px-5 rounded-[32px] hover:bg-primary-300"
         >
           {buttonText}
         </Link>
