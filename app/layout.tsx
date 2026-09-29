@@ -31,7 +31,12 @@ export default function RootLayout({
         <ProductProvider>
           <Providers>{children}</Providers>
         </ProductProvider>
-        <ToastContainer limit={1} hideProgressBar={true} autoClose={1000} />
+        <ToastContainer
+          closeButton={false}
+          limit={1}
+          hideProgressBar={true}
+          autoClose={2000}
+        />
       </body>
     </html>
   );

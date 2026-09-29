@@ -35,7 +35,7 @@ const Menu = ({ name }: ChildProps) => {
           ${
             isMenuOpen
               ? "translate-x-0 opacity-100"
-              : "-translate-x-100 opacity-0"
+              : "-translate-x-1000 opacity-0"
           }
         `}
       >

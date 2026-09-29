@@ -16,7 +16,7 @@ const CartProductItem = ({ cartItem, removeFromCart }: ChildProps) => {
   return (
     <div className="flex rounded-[20px] mx-auto p-3 gap-4 shrink-0 bg-white justify-start border border-border text-black items-center flex-col w-full bg-sypher-compGray">
       <section className="h-[94px] border-border rounded-[8px] bg-[#fafafa] flex w-full items-center gap-4">
-        <div className="h-full aspect-square rounded-[8px] overflow-hidden border-b border-b-sypher-light-darkBorder bg-sypher-light-border h-45 ">
+        <div className="h-full aspect-square shrink-0 rounded-[8px] overflow-hidden border-b border-b-sypher-light-darkBorder bg-sypher-light-border ">
           {cartItem?.image?.url && (
             <Image
               height={100}
@@ -33,7 +33,7 @@ const CartProductItem = ({ cartItem, removeFromCart }: ChildProps) => {
         </div>
       </section>
 
-      <section className="w-[70%] mr-auto border-t border-border pt-2 flex gap-2 items-center">
+      <section className="w-[70%] ml-auto flex gap-2 items-center">
         <button
           onClick={() =>
             router.push(

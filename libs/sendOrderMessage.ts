@@ -81,7 +81,7 @@ export async function sendOrderMessage(order: IReservation) {
       reservation has been made successfully. Please note that reservation becomes invalid after 3 days if payment is not made to out physial office.
     </div>
     <div style="margin-bottom:">
-      <h5 style="color: #fd755a; font: 16px; margin-bottom: 8px">Reservation Summary</h5>
+      <h5 style="color: #fd755a; font: 18px; margin-bottom: 8px">Reservation Summary</h5>
       <div
         style="
           background-color: #2e2e2e;
@@ -109,7 +109,7 @@ export async function sendOrderMessage(order: IReservation) {
       </div>
     </div>
     <div style="margin-bottom: 20px">
-      <h5 style="color: #fd755a; font: 16px; margin-bottom: 8px">Items Reserved</h5>
+      <h5 style="color: #fd755a; font: 18px; margin-bottom: 8px">Items Reserved</h5>
       <div
         style="
           background-color: #2e2e2e;

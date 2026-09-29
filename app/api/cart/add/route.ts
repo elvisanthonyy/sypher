@@ -41,6 +41,7 @@ const handler = async (req: Request) => {
     const existingItem = cart?.items.find(
       (i: any) => i.productId.toString() === productId,
     );
+
     if (existingItem) {
       existingItem.qty += qty;
       return NextResponse.json({
@@ -48,6 +49,7 @@ const handler = async (req: Request) => {
         message: "Item is already in cart",
       });
     }
+
     cart.items.push({
       productId: productId,
       name: name,
@@ -64,8 +66,8 @@ const handler = async (req: Request) => {
     await cart.save();
 
     return NextResponse.json({
-      status: "Okay",
-      message: "Item is already in cart",
+      status: "okay",
+      message: "Item has been added to cart",
     });
   } catch (error) {
     console.error("error", error);

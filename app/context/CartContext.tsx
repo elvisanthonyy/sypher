@@ -85,7 +85,13 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
           imageURL: item?.image?.url,
         })
         .then((res) => {
+          setCart((prev) => {
+            return [...prev, item];
+          });
           if (res.data.status === "okay") {
+            setTimeout(() => {
+              //window.location.reload();
+            }, 1000);
             toast.success(res.data.message, {
               theme: "dark",
               position: "top-center",
